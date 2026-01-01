@@ -13,14 +13,16 @@ export default function Header() {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-6 text-sm font-medium text-gray-700">
+         <nav className="hidden md:flex space-x-6 text-sm font-medium text-gray-700">
           <a href="/" className="hover:text-orange-600">Home</a>
-         <a href="/#about" className="hover:text-orange-600">About</a>
-          <a href="/#vision" className="hover:text-orange-600">Vision</a>
+          <a href="#about" className="hover:text-orange-600">About</a>
+          <a href="#vision" className="hover:text-orange-600">Vision</a>
+          <a href="/articles" className="hover:text-orange-600">Articles</a>
           <a href="/volunteer" className="hover:text-orange-600">Volunteer</a>
-         <a href="/events" className="hover:text-orange-600">Events</a>
-         <a href="/media" className="hover:text-orange-600">Media</a>
-      </nav>
+          <a href="/events" className="hover:text-orange-600">Events</a>
+          <a href="/media" className="hover:text-orange-600">Media</a>
+        </nav>
+
 
 
         {/* Mobile Menu Button */}
@@ -38,6 +40,7 @@ export default function Header() {
           <a href="/" className="block">Home</a>
           <a href="/#about" className="block">About</a>
           <a href="/#vision" className="block">Vision</a>
+          <a href="/articles" className="block">Articles</a>
           <a href="/volunteer" className="block">Volunteer</a>
           <a href="/events" className="block">Events</a>
           <a href="/media" className="block">Media</a>
