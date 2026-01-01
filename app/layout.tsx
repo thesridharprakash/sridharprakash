@@ -3,14 +3,21 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export const metadata = {
-  title: "Sridhar Prakash | Public Service & Development",
+  metadataBase: new URL("https://sridharprakash.vercel.app"),
+
+  title: {
+    default: "Sridhar Prakash | Public Service & Development",
+    template: "%s | Sridhar Prakash",
+  },
+
   description:
     "Sridhar Prakash is a public servant from Bengaluru, Karnataka, committed to nation-first development, clean governance, and grassroots leadership.",
+
   openGraph: {
     title: "Sridhar Prakash | Public Service & Development",
     description:
       "Public service, development-led leadership, and citizen engagement from Bengaluru, Karnataka.",
-    url: "https://your-domain.vercel.app",
+    url: "https://sridharprakash.vercel.app",
     siteName: "Sridhar Prakash",
     images: [
       {
@@ -24,6 +31,7 @@ export const metadata = {
     type: "website",
   },
 };
+
 
 
 export default function RootLayout({ 

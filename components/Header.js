@@ -15,12 +15,13 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 text-sm font-medium text-gray-700">
           <a href="/" className="hover:text-orange-600">Home</a>
-          <a href="#about" className="hover:text-orange-600">About</a>
-          <a href="#vision" className="hover:text-orange-600">Vision</a>
+         <a href="/#about" className="hover:text-orange-600">About</a>
+          <a href="/#vision" className="hover:text-orange-600">Vision</a>
           <a href="/volunteer" className="hover:text-orange-600">Volunteer</a>
-          <a href="/events" className="hover:text-orange-600">Events</a>
-          <a href="/media" className="hover:text-orange-600">Media</a>
-        </nav>
+         <a href="/events" className="hover:text-orange-600">Events</a>
+         <a href="/media" className="hover:text-orange-600">Media</a>
+      </nav>
+
 
         {/* Mobile Menu Button */}
         <button
@@ -35,13 +36,14 @@ export default function Header() {
       {open && (
         <div className="md:hidden px-6 pb-4 space-y-3 text-sm font-medium text-gray-700">
           <a href="/" className="block">Home</a>
-          <a href="#about" className="block">About</a>
-          <a href="#vision" className="block">Vision</a>
+          <a href="/#about" className="block">About</a>
+          <a href="/#vision" className="block">Vision</a>
           <a href="/volunteer" className="block">Volunteer</a>
           <a href="/events" className="block">Events</a>
           <a href="/media" className="block">Media</a>
         </div>
       )}
+
     </header>
   );
 }
