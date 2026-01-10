@@ -85,7 +85,7 @@ export default function Home() {
           Vision & Ideology
        </h2>
 
-
+        
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
   <div className="bg-white p-8 rounded-lg border border-gray-200 hover:shadow-md transition">
@@ -130,9 +130,8 @@ export default function Home() {
       Strengthening communities by listening to citizens and working
       from the ground up in Karnataka and Bengaluru.
     </p>
-  </div>
+    </div>
 </div>
-
         </div>
       </section>
     </main>

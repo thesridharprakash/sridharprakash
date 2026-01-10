@@ -1,3 +1,10 @@
+import Hero from "@/components/Hero";
+
+<Hero
+  title="Events & Community Engagements"
+  subtitle="Public meetings, grassroots interactions, and citizen-first initiatives."
+/>
+
 export const metadata = {
   title: "Media | Sridhar Prakash",
   description:

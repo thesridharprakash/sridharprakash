@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ClientLayout from "../components/ClientLayout";
 
 export const metadata = {
   metadataBase: new URL("https://sridharprakash.vercel.app"),
@@ -32,21 +33,23 @@ export const metadata = {
   },
 };
 
-
-
-export default function RootLayout({ 
+export default function RootLayout({
   children,
- }: {
-    children: React.ReactNode;
+}: {
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="antialiased bg-white text-gray-900">
         <Header />
-        {children}
+
+        {/* Page transitions */}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
+
         <Footer />
-      </body> 
-      
+      </body>
     </html>
   );
 }

@@ -1,168 +1,169 @@
 "use client";
+import Hero from "@/components/Hero";
+
+<Hero
+  title="Events & Community Engagements"
+  subtitle="Public meetings, grassroots interactions, and citizen-first initiatives."
+/>
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  UserGroupIcon,
+  HandRaisedIcon,
+  BuildingOffice2Icon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Volunteer() {
   const [submitted, setSubmitted] = useState(false);
 
- async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  const form = e.target;
+    const form = e.target;
 
-  const data = {
-    name: form.name.value,
-    mobile: form.mobile.value,
-    email: form.email.value,
-    area: form.area.value,
-    interest: form.interest.value,
-    consent: form.consent.checked,
-  };
+    const data = {
+      name: form.name.value,
+      mobile: form.mobile.value,
+      email: form.email.value,
+      area: form.area.value,
+      interest: form.interest.value,
+      consent: form.consent.checked,
+    };
 
-  await fetch("https://script.google.com/macros/s/AKfycbx97Uh4XJPeK_NhAEl9KhwF05l129gJlNXcD8_PLhpXA-psrEuFfRGPyibJDkXpT9jkPA/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbzSt7eCHxSPV_QHcbY7GpKIXnXVHVLyBA6txMMhCJmk7CzMBqx6gmFbXisAMbEnm3-8LQ/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
 
-  setSubmitted(true);
-}
-
+    setSubmitted(true);
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 px-6 py-16">
-      <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-sm">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight text-center">
-          Volunteer With Me
-        </h1>
+      <div className="max-w-5xl mx-auto">
 
-        <p className="mt-4 text-gray-700 text-center">
-          Join me in serving the people of Bengaluru and contributing to
-          nation-building through disciplined, grassroots public service.
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-900">
+            Volunteer With Purpose
+          </h1>
+
+          <div className="w-16 h-1 bg-orange-600 mx-auto my-6"></div>
+
+          <p className="text-gray-700">
+            Join me in serving the people of Bengaluru and contributing to
+            nation-building through disciplined, grassroots public service.
+          </p>
+        </motion.div>
+
+        {/* Why Volunteer */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.15 }}
+          className="mt-16 grid gap-8 md:grid-cols-3"
+        >
+          {[
+            {
+              title: "Community Impact",
+              text: "Contribute directly to local initiatives and grassroots efforts.",
+              icon: UserGroupIcon,
+            },
+            {
+              title: "Meaningful Engagement",
+              text: "Participate in development-focused programs and events.",
+              icon: HandRaisedIcon,
+            },
+            {
+              title: "Nation Building",
+              text: "Be part of initiatives that put citizens and country first.",
+              icon: BuildingOffice2Icon,
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.4 }}
+              className="bg-white border border-gray-200 p-6 rounded-lg text-center hover:shadow-md transition"
+            >
+              <item.icon className="h-8 w-8 text-orange-600 mx-auto" />
+              <h3 className="mt-4 font-semibold text-gray-900">{item.title}</h3>
+              <p className="mt-2 text-sm text-gray-600">{item.text}</p>
+            </motion.div>
+          ))}
+        </motion.section>
+
+        {/* Form */}
+        <section className="mt-20">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="bg-white border border-gray-200 rounded-xl shadow-sm p-8 max-w-3xl mx-auto"
+          >
+            {!submitted ? (
+              <>
+                <h2 className="text-xl font-semibold text-gray-900 text-center">
+                  Volunteer Registration
+                </h2>
+
+                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                  <input name="name" required placeholder="Full Name" className="input" />
+                  <input name="mobile" required placeholder="Mobile Number" className="input" />
+                  <input name="email" placeholder="Email (optional)" className="input" />
+                  <input name="area" placeholder="Area / Ward" className="input" />
+
+                  <select name="interest" className="input">
+                    <option>Ground-level volunteering</option>
+                    <option>Event support</option>
+                    <option>Social media & outreach</option>
+                    <option>Professional expertise</option>
+                  </select>
+
+                  <label className="flex gap-2 text-sm text-gray-600">
+                    <input type="checkbox" name="consent" required />
+                    I consent to being contacted for volunteer activities.
+                  </label>
+
+                  <button className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-md font-medium transition">
+                    Register as Volunteer
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="text-center">
+                <CheckCircleIcon className="h-12 w-12 text-green-600 mx-auto" />
+                <h2 className="mt-4 text-xl font-semibold text-gray-900">
+                  Thank you for volunteering
+                </h2>
+                <p className="mt-2 text-gray-700">
+                  Our team will connect with you shortly.
+                </p>
+              </div>
+            )}
+          </motion.div>
+        </section>
+
+        {/* Privacy */}
+        <p className="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
+          Your information is used only for volunteer coordination and public engagement.
         </p>
 
-        {!submitted ? (
-          <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-            {/* Full Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Full Name
-              </label>
-              <input
-               type="text"
-                name="name"
-                required
-                placeholder="Your full name"
-                className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-400
-                focus:border-orange-600 focus:outline-none"
-              />
-
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Mobile Number
-              </label>
-              <input
-               type="tel"
-               name="mobile"
-               required
-               placeholder="10-digit mobile number"
-              className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-400
-               focus:border-orange-600 focus:outline-none"
-            />
-
-            </div>
-
-            {/* Email */}
-             <div>
-             <label className="block text-sm font-medium text-gray-700">
-               Email Address (optional)
-             </label>
-               <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                 className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-400
-                  focus:border-orange-600 focus:outline-none"
-               />
-
-             </div>
-
-            {/* Location */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Area / Ward (Bengaluru)
-              </label>
-              <input
-               type="text"
-               name="area"
-               placeholder="Your area or ward"
-               className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-400
-                focus:border-orange-600 focus:outline-none"
-             />
-
-            </div>
-
-            {/* Interest */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                How would you like to contribute?
-              </label>
-              <select
-               name="interest"
-               className="mt-1 w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder-gray-400
-               focus:border-orange-600 focus:outline-none"
-              >
-
-                <option>Ground-level volunteering</option>
-                <option>Event support</option>
-                <option>Social media & outreach</option>
-                <option>Professional expertise</option>
-              </select>
-            </div>
-
-            {/* Consent */}
-            <div className="flex items-start gap-2">
-              <input
-              type="checkbox"
-              name="consent"
-              required
-              className="mt-1 accent-orange-600"
-             />
-
-                <p className="text-sm text-gray-600">
-                I consent to being contacted via phone, email, or messaging platforms
-                regarding volunteer activities and public initiatives.
-              </p>
-            </div>
-
-
-            <button
-              type="submit"
-              className="w-full bg-orange-600 text-white py-3 rounded-md font-medium hover:bg-orange-700 transition"
-            >
-              Register as Volunteer
-            </button>
-            <p className="mt-6 text-xs text-gray-500 text-center">
-             Your personal information is used only for volunteer coordination and
-             public initiatives. We respect your privacy and do not share your data
-             with third parties.
-            </p>
-
-          </form>
-        ) : (
-          <div className="mt-10 text-center">
-            <div className="text-4xl">🙏</div>
-            <h2 className="mt-4 text-xl font-semibold text-gray-900">
-              Thank you for volunteering
-            </h2>
-            <p className="mt-2 text-gray-700">
-              Your willingness to serve is appreciated. Our team will
-              connect with you shortly.
-            </p>
-          </div>
-        )}
       </div>
     </main>
   );

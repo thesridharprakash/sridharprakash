@@ -5,6 +5,15 @@
   --foreground: #171717;
 }
 
+.input {
+  @apply w-full border rounded-md px-4 py-3 text-gray-900
+  transition-all duration-200
+  focus:outline-none focus:ring-2 focus:ring-orange-600
+  hover:border-orange-400;
+}
+
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -6,7 +6,10 @@ export default function Footer() {
           © {new Date().getFullYear()} Sridhar Prakash. All rights reserved.
         </p>
         <p className="mt-2 text-xs text-gray-500">
-          This website is for public engagement and volunteer coordination.
+         
+          This website is intended
+          for public engagement, information sharing, and volunteer coordination.
+
         </p>
       </div>
     </footer>
