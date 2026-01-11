@@ -92,7 +92,7 @@ export default function ContactPage() {
               </a>
 
               <a
-                href="https://facebook.com/"
+                href="https://facebook.com/sridhar.praksah"
                 target="_blank"
                 className="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition"
               >
