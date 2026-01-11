@@ -1,52 +1,65 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/articles", label: "Articles" },
+    { href: "/events", label: "Events" },
+    { href: "/volunteer", label: "Volunteer" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
-    <header className="w-full border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="font-bold text-lg text-orange-600">
+    <header className="sticky top-0 z-50 bg-white border-b">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="font-bold text-lg text-blue-900">
           Sridhar Prakash
-        </div>
+        </Link>
 
         {/* Desktop Nav */}
-         <nav className="hidden md:flex space-x-6 text-sm font-medium text-gray-700">
-          <a href="/" className="hover:text-orange-600">Home</a>
-          <a href="#about" className="hover:text-orange-600">About</a>
-          <a href="#vision" className="hover:text-orange-600">Vision</a>
-          <a href="/articles" className="hover:text-orange-600">Articles</a>
-          <a href="/volunteer" className="hover:text-orange-600">Volunteer</a>
-          <a href="/events" className="hover:text-orange-600">Events</a>
-          <a href="/media" className="hover:text-orange-600">Media</a>
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-gray-700 hover:text-orange-600 transition"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-
-
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden text-gray-700"
           onClick={() => setOpen(!open)}
+          className="md:hidden text-gray-700"
         >
           ☰
         </button>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden px-6 pb-4 space-y-3 text-sm font-medium text-gray-700">
-          <a href="/" className="block">Home</a>
-          <a href="/#about" className="block">About</a>
-          <a href="/#vision" className="block">Vision</a>
-          <a href="/articles" className="block">Articles</a>
-          <a href="/volunteer" className="block">Volunteer</a>
-          <a href="/events" className="block">Events</a>
-          <a href="/media" className="block">Media</a>
+        <div className="md:hidden bg-white border-t px-6 py-4 space-y-3">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="block text-gray-700"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       )}
-
     </header>
   );
 }
