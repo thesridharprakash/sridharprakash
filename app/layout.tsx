@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import ClientLayout from "../components/ClientLayout";
 
 export const metadata = {
-  metadataBase: new URL("https://sridharprakash.vercel.app"),
+  metadataBase: new URL("https://www.sridharprakash.in"),
 
   title: {
     default: "Sridhar Prakash | Public Service & Development",
@@ -18,18 +18,26 @@ export const metadata = {
     title: "Sridhar Prakash | Public Service & Development",
     description:
       "Public service, development-led leadership, and citizen engagement from Bengaluru, Karnataka.",
-    url: "https://sridharprakash.vercel.app",
+    url: "https://www.sridharprakash.in",
     siteName: "Sridhar Prakash",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://www.sridharprakash.in/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Sridhar Prakash",
+        alt: "Sridhar Prakash – Public Service & Development",
       },
     ],
     locale: "en_IN",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Sridhar Prakash | Public Service & Development",
+    description:
+      "Public service, development-led leadership, and citizen engagement from Bengaluru, Karnataka.",
+    images: ["https://www.sridharprakash.in/og-image.png"],
   },
 };
 
@@ -44,9 +52,7 @@ export default function RootLayout({
         <Header />
 
         {/* Page transitions */}
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <ClientLayout>{children}</ClientLayout>
 
         <Footer />
       </body>
