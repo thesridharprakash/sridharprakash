@@ -16,7 +16,7 @@ type PageProps = {
 
 type ArticleMeta = {
   title: string;
-  link: string;
+  slug: string; // Must match ArticlePageClient type
   date: string;
 };
 
@@ -35,8 +35,7 @@ function formatDate(date: string) {
  * Uses 225 WPM as the industry standard for online articles.
  */
 function calculateReadTime(text: string) {
-  const wordsPerMinute = 225; 
-  // Strip common markdown characters to get a cleaner word count
+  const wordsPerMinute = 225;
   const cleanText = text.replace(/[#*`_\[\]()]/g, "");
   const wordCount = cleanText.trim().split(/\s+/).length;
   const minutes = Math.ceil(wordCount / wordsPerMinute);
@@ -46,8 +45,7 @@ function calculateReadTime(text: string) {
 /* ---------------- PAGE ---------------- */
 
 export default async function ArticlePage({ params }: PageProps) {
-  // Await params in Next.js 15+ environments
-  const { slug } = await params;
+  const { slug } = params;
 
   const articlesDir = path.join(process.cwd(), "content/articles");
   const filePath = path.join(articlesDir, `${slug}.md`);
@@ -62,7 +60,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const contentHtml = (await remark().use(html).process(content)).toString();
   const formattedDate = formatDate(data.date);
-  
+
   // Calculate read time from the raw markdown content
   const readTimeLabel = calculateReadTime(content);
 
@@ -79,20 +77,16 @@ export default async function ArticlePage({ params }: PageProps) {
 
       return {
         title: data.title,
-        link: `/articles/${file.replace(".md", "")}`,
-        date: data.date, // Pass raw date for sorting
+        slug: file.replace(".md", ""), // <-- Fix here: use slug
+        date: data.date,
       };
     })
-    .sort((a, b) =>
-      new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  const currentIndex = allArticles.findIndex(
-    (a) => a.link === `/articles/${slug}`
-  );
+  const currentIndex = allArticles.findIndex((a) => a.slug === slug);
 
-  const prevArticle = allArticles[currentIndex + 1] || undefined;
-  const nextArticle = allArticles[currentIndex - 1] || undefined;
+  const prevArticle = allArticles[currentIndex + 1] || null;
+  const nextArticle = allArticles[currentIndex - 1] || null;
 
   const siteUrl = "https://www.sridharprakash.in";
   const articleUrl = `${siteUrl}/articles/${slug}`;
@@ -103,7 +97,7 @@ export default async function ArticlePage({ params }: PageProps) {
       title={data.title}
       summary={data.summary}
       date={formattedDate}
-      readTime={readTimeLabel} // New prop passed to client
+      readTime={readTimeLabel}
       contentHtml={contentHtml}
       prevArticle={prevArticle}
       nextArticle={nextArticle}
