@@ -1,70 +1,61 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Heading = {
   id: string;
   text: string;
-  level: number;
 };
 
-export default function MobileTOC() {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+type Props = {
+  headings: Heading[];
+  activeId: string | null;
+};
+
+export default function MobileTOC({ headings, activeId }: Props) {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll("article h2, article h3")
-    ) as HTMLHeadingElement[];
-
-    const mapped: Heading[] = elements.map((el, index) => {
-      if (!el.id) {
-        el.id = `heading-${index}`;
-      }
-
-      return {
-        id: el.id,
-        text: el.textContent ?? "",
-        level: Number(el.tagName.replace("H", "")),
-      };
-    });
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHeadings(mapped);
-  }, []);
-
-  if (!headings.length) return null;
+  if (headings.length === 0) return null;
 
   return (
-    <div className="xl:hidden fixed bottom-4 right-4 z-50">
+    <div className="xl:hidden">
+      {/* Floating Orange Button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="rounded-full bg-orange-600 text-white px-4 py-2 shadow-lg"
+        className="fixed bottom-6 right-6 z-50 bg-orange-600 text-white px-4 py-3 rounded-full shadow-lg text-sm font-medium"
+        aria-label="Open table of contents"
       >
-        Contents
+        On this page
       </button>
 
+      {/* Floating TOC Panel */}
       {open && (
-        <div className="absolute bottom-14 right-0 w-72 max-h-[60vh] overflow-auto rounded-lg border bg-white shadow-xl p-4">
-          <p className="mb-3 font-semibold text-sm text-gray-700">
-            On this page
-          </p>
+        <div className="fixed bottom-20 right-6 z-50 w-72 max-h-[60vh] overflow-y-auto bg-white rounded-xl shadow-xl border">
+          <div className="flex justify-between items-center px-4 py-3 border-b">
+            <span className="font-semibold text-sm">On this page</span>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-gray-500 text-lg leading-none"
+              aria-label="Close"
+            >
+              ×
+            </button>
+          </div>
 
-          <ul className="space-y-2 text-sm">
+          <ul className="px-4 py-3 space-y-2 text-sm">
             {headings.map((h) => (
-              <li
-                key={h.id}
-                className={`cursor-pointer text-gray-700 hover:text-orange-600 ${
-                  h.level === 3 ? "ml-4" : ""
-                }`}
-                onClick={() => {
-                  document
-                    .getElementById(h.id)
-                    ?.scrollIntoView({ behavior: "smooth" });
-                  setOpen(false);
-                }}
-              >
-                {h.text}
+              <li key={h.id}>
+                <a
+                  href={`#${h.id}`}
+                  onClick={() => setOpen(false)}
+                  className={`block ${
+                    activeId === h.id
+                      ? "text-orange-600 font-medium"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {h.text}
+                </a>
               </li>
             ))}
           </ul>

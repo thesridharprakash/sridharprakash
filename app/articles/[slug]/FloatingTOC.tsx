@@ -1,84 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Heading = {
   id: string;
   text: string;
-  level: number;
 };
 
-export default function FloatingTOC() {
-  const [headings, setHeadings] = useState<Heading[]>([]);
-  const [activeId, setActiveId] = useState<string>("");
+type Props = {
+  headings: Heading[];
+  activeId: string | null;
+};
 
-  useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll("article h2, article h3")
-    ) as HTMLHeadingElement[];
+export default function FloatingTOC({ headings, activeId }: Props) {
+  const [open, setOpen] = useState(false);
 
-    const mapped: Heading[] = elements.map((el, index) => {
-      if (!el.id) {
-        el.id = `heading-${index}`;
-      }
-
-      return {
-        id: el.id,
-        text: el.textContent ?? "",
-        level: Number(el.tagName.replace("H", "")),
-      };
-    });
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHeadings(mapped);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-30% 0px -60% 0px",
-      }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
-  if (!headings.length) return null;
+  if (headings.length === 0) return null;
 
   return (
-    <aside className="hidden xl:block fixed right-6 top-32 w-64">
-      <div className="rounded-lg border p-4 bg-white shadow-sm">
-        <p className="mb-3 text-sm font-semibold text-gray-700">
-          On this page
-        </p>
+    <div className="hidden xl:block">
+      {/* Floating Orange Button */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="fixed bottom-6 right-6 z-50 bg-orange-600 text-white px-4 py-3 rounded-full shadow-lg text-sm font-medium"
+        aria-label="Open table of contents"
+      >
+        content
+      </button>
 
-        <ul className="space-y-2 text-sm">
-          {headings.map((h) => (
-            <li
-              key={h.id}
-              className={`cursor-pointer transition-colors ${
-                activeId === h.id
-                  ? "text-orange-600 font-medium"
-                  : "text-gray-600 hover:text-gray-900"
-              } ${h.level === 3 ? "ml-4" : ""}`}
-              onClick={() =>
-                document
-                  .getElementById(h.id)
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+      {/* Floating TOC Panel */}
+      {open && (
+        <div className="fixed bottom-20 right-6 z-50 w-80 max-h-[60vh] overflow-y-auto bg-white rounded-xl shadow-xl border">
+          <div className="flex justify-between items-center px-4 py-3 border-b">
+            <span className="font-semibold text-sm">On this page</span>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-gray-500 text-lg leading-none"
+              aria-label="Close"
             >
-              {h.text}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </aside>
+              ×
+            </button>
+          </div>
+
+          <ul className="px-4 py-3 space-y-2 text-sm">
+            {headings.map((h) => (
+              <li key={h.id}>
+                <a
+                  href={`#${h.id}`}
+                  onClick={() => setOpen(false)}
+                  className={`block ${
+                    activeId === h.id
+                      ? "text-orange-600 font-medium"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }

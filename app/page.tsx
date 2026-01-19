@@ -55,18 +55,20 @@ export default function Home() {
        id="about-content"
        className="scroll-mt-24 mt-6 text-gray-700 leading-relaxed text-base md:text-lg"
      >
-      I am a public servant from Bengaluru, deeply committed to
-      public service, clean governance, and nation-building. Inspired by
-      the leadership and vision of the Bharatiya Janata Party, my journey
-      in public life is driven by a strong belief in development-led
-      politics and citizen-first governance.
+      I am a public servant from Bengaluru, driven by a simple belief: 
+      that meaningful change begins with listening, serving, and empowering
+      the people around us. Every day, I strive to turn this belief into
+      action—working for clean governance, development that touches lives,
+      and a stronger, more inclusive community.
     </p>
 
     <p className="mt-4 text-gray-700 leading-relaxed text-base md:text-lg">
-      Karnataka, and Bengaluru in particular, represents India’s potential
-      when innovation, infrastructure, and inclusive growth come together.
-      My focus is to contribute meaningfully at the grassroots level while
-      upholding the values of integrity, discipline, and service.
+      Bengaluru has always inspired me. Its energy, innovation, and diversity
+      show what India can achieve when opportunity meets determination. My focus 
+      is on making a difference at the grassroots, guided by integrity, discipline, 
+      and a genuine commitment to service. For me, public life is not just a role—it 
+      is a responsibility, a privilege, and a chance to build a future that we can all
+      be proud of.
     </p>
   </div>
 </section>

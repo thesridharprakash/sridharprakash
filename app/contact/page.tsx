@@ -1,4 +1,10 @@
 import Hero from "@/components/Hero";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaYoutube,
+  FaXTwitter,
+} from "react-icons/fa6";
 
 export const metadata = {
   title: "Contact | Sridhar Prakash",
@@ -22,25 +28,18 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-blue-900">
               Get in Touch
             </h2>
-
             <div className="w-12 h-1 bg-orange-600 my-4"></div>
-
             <p className="text-gray-700 max-w-2xl">
               For public service initiatives, community engagement, or official
-              communication, please use the contact details below. Our team
-              reviews all messages and responds where appropriate.
+              communication, please use the contact details below.
             </p>
           </section>
 
           {/* DETAILS */}
           <section className="grid gap-8 md:grid-cols-2">
-
-            {/* EMAIL */}
             <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-              <h3 className="font-semibold text-gray-900">
-                Email
-              </h3>
-              <p className="mt-2 text-gray-700">
+              <h3 className="font-semibold text-gray-900">Email</h3>
+              <p className="mt-2">
                 <a
                   href="mailto:thesridharprakash@gmail.com"
                   className="text-orange-600 font-medium hover:underline"
@@ -53,58 +52,82 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* LOCATION */}
             <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-              <h3 className="font-semibold text-gray-900">
-                Location
-              </h3>
-              <p className="mt-2 text-gray-700">
-                Bengaluru, Karnataka
-              </p>
-              <p className="mt-2 text-sm text-gray-500">
-                India
-              </p>
+              <h3 className="font-semibold text-gray-900">Location</h3>
+              <p className="mt-2 text-gray-700">Bengaluru, Karnataka</p>
+              <p className="mt-2 text-sm text-gray-500">India</p>
             </div>
-
           </section>
 
-          {/* SOCIAL */}
+          {/* SOCIAL MEDIA – SUBTLE BRAND HOVER */}
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
               Follow on Social Media
             </h2>
 
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+              {/* Instagram */}
               <a
                 href="https://instagram.com/sridhar_prakash"
                 target="_blank"
-                className="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition"
+                rel="noopener noreferrer"
+                className="
+                  group border border-gray-200 rounded-xl p-6 text-center
+                  transition hover:shadow-md hover:border-pink-400
+                "
               >
-                Instagram
+                <FaInstagram className="mx-auto h-7 w-7 text-gray-700 group-hover:text-pink-500 transition" />
+                <p className="mt-3 font-medium text-gray-900">
+                  Instagram
+                </p>
               </a>
 
+              {/* X */}
               <a
                 href="https://x.com/"
                 target="_blank"
-                className="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition"
+                rel="noopener noreferrer"
+                className="
+                  group border border-gray-200 rounded-xl p-6 text-center
+                  transition hover:shadow-md hover:border-gray-800
+                "
               >
-                X (Twitter)
+                <FaXTwitter className="mx-auto h-7 w-7 text-gray-700 group-hover:text-black transition" />
+                <p className="mt-3 font-medium text-gray-900">
+                  X (Twitter)
+                </p>
               </a>
 
+              {/* Facebook */}
               <a
                 href="https://facebook.com/sridhar.praksah"
                 target="_blank"
-                className="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition"
+                rel="noopener noreferrer"
+                className="
+                  group border border-gray-200 rounded-xl p-6 text-center
+                  transition hover:shadow-md hover:border-blue-500
+                "
               >
-                Facebook
+                <FaFacebookF className="mx-auto h-7 w-7 text-gray-700 group-hover:text-blue-600 transition" />
+                <p className="mt-3 font-medium text-gray-900">
+                  Facebook
+                </p>
               </a>
 
+              {/* YouTube */}
               <a
                 href="https://youtube.com/@sridhar_prakash"
                 target="_blank"
-                className="border border-gray-200 rounded-lg p-4 text-center hover:shadow-md transition"
+                rel="noopener noreferrer"
+                className="
+                  group border border-gray-200 rounded-xl p-6 text-center
+                  transition hover:shadow-md hover:border-red-500
+                "
               >
-                YouTube
+                <FaYoutube className="mx-auto h-7 w-7 text-gray-700 group-hover:text-red-600 transition" />
+                <p className="mt-3 font-medium text-gray-900">
+                  YouTube
+                </p>
               </a>
             </div>
           </section>

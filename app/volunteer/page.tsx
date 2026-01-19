@@ -88,12 +88,24 @@ export default function Volunteer() {
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-white border border-gray-200 rounded-xl p-6 text-center shadow-sm"
+              className="
+                bg-white
+                border border-gray-200
+                rounded-xl
+                p-6
+                text-center
+                shadow-sm
+                transition-shadow transition-border
+                hover:shadow-md
+                hover:border-gray-300
+              "
             >
               <item.icon className="h-8 w-8 text-orange-600 mx-auto" />
+
               <h3 className="mt-4 text-lg font-semibold text-gray-900">
                 {item.title}
               </h3>
+
               <p className="mt-2 text-sm text-gray-600">{item.text}</p>
             </div>
           ))}

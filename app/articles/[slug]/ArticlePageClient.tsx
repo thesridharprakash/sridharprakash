@@ -1,109 +1,133 @@
 "use client";
 
-import Link from "next/link";
+import { useState, useLayoutEffect } from "react";
 import ArticleShareButtons from "../ArticleShareButtons";
 import StickyShareButtons from "../StickyShareButtons";
-import ReadingProgress from "./ReadingProgressBar";
+import ReadingProgressBar from "./ReadingProgressBar";
 import FloatingTOC from "./FloatingTOC";
 import MobileTOC from "./MobileTOC";
 
+type ArticleMeta = {
+  title: string;
+  slug: string;
+};
+
 type Props = {
   title: string;
-  summary?: string;
+  summary: string;
   date: string;
+  readTime: string;
   contentHtml: string;
-  prevArticle?: { title: string; link: string };
-  nextArticle?: { title: string; link: string };
+  prevArticle: ArticleMeta | null;
+  nextArticle: ArticleMeta | null;
   url: string;
+};
+
+type Heading = {
+  id: string;
+  text: string;
 };
 
 export default function ArticlePageClient({
   title,
   summary,
   date,
+  readTime,
   contentHtml,
   prevArticle,
   nextArticle,
   url,
 }: Props) {
+  const [headings, setHeadings] = useState<Heading[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Collect headings safely after DOM mounts
+  useLayoutEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const els = Array.from(
+      document.querySelectorAll("article h2, article h3")
+    ) as HTMLHeadingElement[];
+
+    const mapped = els.map((el, index) => ({
+      id: el.id || `heading-${index}`,
+      text: el.innerText,
+    }));
+
+    // ✅ Avoid cascading renders warning
+    requestAnimationFrame(() => setHeadings(mapped));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -80% 0px", threshold: 0.1 }
+    );
+
+    els.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      {/* Reading Progress */}
-      <ReadingProgress />
+      {/* Reading Progress Bar */}
+      <ReadingProgressBar />
 
-      {/* Sticky Share (Desktop) */}
-      <StickyShareButtons title={title} url={url} />
+      <div className="relative max-w-5xl mx-auto px-6">
+        {/* Sticky Share Buttons */}
+        <StickyShareButtons url={url} title={title} />
 
-      <main className="bg-white px-6 py-16">
-        <article className="max-w-3xl mx-auto relative">
-          {/* Floating TOC */}
-          <FloatingTOC />
+        {/* TOCs */}
+        {headings.length > 0 && (
+          <>
+            <FloatingTOC headings={headings} activeId={activeId} />
+            <MobileTOC headings={headings} activeId={activeId} />
+          </>
+        )}
 
-          {/* Mobile TOC */}
-          <MobileTOC />
+        {/* Article Content */}
+        <article className="prose lg:prose-xl mx-auto py-16">
+          <h1>{title}</h1>
 
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 leading-tight">
-            {title}
-          </h1>
+          {/* ✅ Summary now used */}
+          <p className="text-lg text-gray-600 mt-2 mb-4">{summary}</p>
 
-          {/* Meta */}
-          <p className="mt-3 text-sm text-gray-500">
-            <time>{date}</time> · ⏱️ min read
+          <p className="text-sm text-gray-500 mb-8">
+            {date} • ⏱️ {readTime} min read
           </p>
 
-          {/* Summary */}
-          {summary && (
-            <p className="mt-6 text-lg text-gray-700 font-medium">
-              {summary}
-            </p>
-          )}
-
-          {/* Divider */}
-          <div className="w-16 h-1 bg-orange-600 my-8"></div>
-
-          {/* Article Content */}
-          <div
-            className="prose prose-lg max-w-none prose-headings:text-blue-900 prose-a:text-orange-600"
-            dangerouslySetInnerHTML={{ __html: contentHtml }}
-          />
-
-          {/* Prev / Next */}
-          <div className="flex justify-between mt-12">
-            {prevArticle ? (
-              <Link
-                href={prevArticle.link}
-                className="text-orange-600 hover:underline"
-              >
-                ← {prevArticle.title}
-              </Link>
-            ) : (
-              <div />
-            )}
-
-            {nextArticle ? (
-              <Link
-                href={nextArticle.link}
-                className="text-orange-600 hover:underline"
-              >
-                {nextArticle.title} →
-              </Link>
-            ) : (
-              <div />
-            )}
-          </div>
-
-          {/* Back */}
-          <div className="mt-6">
-            <Link href="/articles" className="text-blue-900 hover:underline">
-              ← Back to All Articles
-            </Link>
-          </div>
-
-          {/* Bottom Share */}
-          <ArticleShareButtons title={title} url={url} />
+          <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
         </article>
-      </main>
+
+        {/* Share Buttons */}
+        <ArticleShareButtons url={url} title={title} />
+
+        {/* Prev / Next Navigation */}
+        <div className="flex justify-between py-10">
+          {prevArticle ? (
+            <a
+              href={`/articles/${prevArticle.slug}`}
+              className="text-blue-600 hover:underline"
+            >
+              ← {prevArticle.title}
+            </a>
+          ) : <span />}
+
+          {nextArticle && (
+            <a
+              href={`/articles/${nextArticle.slug}`}
+              className="text-blue-600 hover:underline"
+            >
+              {nextArticle.title} →
+            </a>
+          )}
+        </div>
+      </div>
     </>
   );
 }
