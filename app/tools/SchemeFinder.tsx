@@ -42,11 +42,16 @@ export default function SchemeFinder() {
   const [eligibleSchemes, setEligibleSchemes] = useState<Scheme[]>([]);
   const [copiedScheme, setCopiedScheme] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setInput((prev) => ({
       ...prev,
-      [name]: name === "age" || name === "income" ? Number(value) : value,
+      [name]:
+        name === "age" || name === "income"
+          ? value === "" ? "" : Number(value)
+          : value,
     }));
   };
 
@@ -56,23 +61,31 @@ export default function SchemeFinder() {
     const filtered = schemes.filter((scheme) => {
       let isEligible = true;
 
-      if (scheme.eligibility.includes("age")) {
+      if (scheme.eligibility.includes("age") && input.age !== "") {
         if (scheme.eligibility.includes(">=")) {
-          const minAge = Number(scheme.eligibility.match(/age >= (\d+)/)?.[1]);
+          const minAge = Number(
+            scheme.eligibility.match(/age >= (\d+)/)?.[1]
+          );
           if (input.age < minAge) isEligible = false;
         } else if (scheme.eligibility.includes("<=")) {
-          const maxAge = Number(scheme.eligibility.match(/age <= (\d+)/)?.[1]);
+          const maxAge = Number(
+            scheme.eligibility.match(/age <= (\d+)/)?.[1]
+          );
           if (input.age > maxAge) isEligible = false;
         }
       }
 
-      if (scheme.eligibility.includes("income")) {
-        const maxIncome = Number(scheme.eligibility.match(/income <= (\d+)/)?.[1]);
+      if (scheme.eligibility.includes("income") && input.income !== "") {
+        const maxIncome = Number(
+          scheme.eligibility.match(/income <= (\d+)/)?.[1]
+        );
         if (input.income > maxIncome) isEligible = false;
       }
 
-      if (scheme.eligibility.includes("category")) {
-        const requiredCategory = scheme.eligibility.match(/category === '(\w+)'/)?.[1];
+      if (scheme.eligibility.includes("category") && input.category !== "") {
+        const requiredCategory = scheme.eligibility.match(
+          /category === '(\w+)'/
+        )?.[1];
         if (input.category !== requiredCategory) isEligible = false;
       }
 
@@ -90,7 +103,10 @@ export default function SchemeFinder() {
     setTimeout(() => setCopiedScheme(null), 2000);
   };
 
-  const shareScheme = (scheme: Scheme, platform: "whatsapp" | "x" | "facebook") => {
+  const shareScheme = (
+    scheme: Scheme,
+    platform: "whatsapp" | "x" | "facebook"
+  ) => {
     const text = encodeURIComponent(`${scheme.name}: ${scheme.description}`);
     const url = encodeURIComponent(window.location.href);
 
@@ -113,7 +129,9 @@ export default function SchemeFinder() {
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold text-blue-900 mb-4">Government Scheme Finder</h2>
+      <h2 className="text-2xl font-bold text-blue-900 mb-4">
+        Government Scheme Finder
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700 font-medium mb-1">Age</label>
@@ -127,7 +145,9 @@ export default function SchemeFinder() {
         </div>
 
         <div>
-          <label className="block text-gray-700 font-medium mb-1">Annual Income (₹)</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            Annual Income (₹)
+          </label>
           <input
             type="number"
             name="income"
@@ -161,10 +181,15 @@ export default function SchemeFinder() {
 
       {eligibleSchemes.length > 0 && (
         <div className="mt-6">
-          <h3 className="text-xl font-semibold text-blue-900 mb-3">Eligible Schemes:</h3>
+          <h3 className="text-xl font-semibold text-blue-900 mb-3">
+            Eligible Schemes:
+          </h3>
           <ul className="space-y-3">
             {eligibleSchemes.map((scheme, idx) => (
-              <li key={idx} className="border border-gray-200 p-3 rounded bg-gray-50">
+              <li
+                key={idx}
+                className="border border-gray-200 p-3 rounded bg-gray-50"
+              >
                 <h4 className="font-semibold">{scheme.name}</h4>
                 <p className="text-gray-700">{scheme.description}</p>
 
