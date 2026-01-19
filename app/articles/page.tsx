@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import ArticlesClient from "./ArticlesClient";
 
 export const metadata = {
@@ -7,22 +10,29 @@ export const metadata = {
 };
 
 export default function ArticlesPage() {
-  const articles = [
-    {
-      title: "Why Public Service Matters",
-      summary:
-        "Public service is about integrity, responsibility, and putting citizens first. This article explores why ethical leadership matters today.",
-      date: "15 January 2025",
-      link: "https://www.ndtv.com/india-news/why-ajit-doval-does-not-use-a-mobile-phone-internet-10647819?pfrom=home-ndtv_topstories_lastestImg",
-    },
-    {
-      title: "Nation-First Development",
-      summary:
-        "Development must empower citizens, strengthen institutions, and focus on long-term national interest.",
-      date: "10 January 2025",
-      link: "https://docs.google.com/document/d/YOUR_GOOGLE_DOC_ID",
-    },
-  ];
+  const articlesDir = path.join(process.cwd(), "content/articles");
+  const files = fs.existsSync(articlesDir) ? fs.readdirSync(articlesDir) : [];
+
+  const articles = files
+    .map((file) => {
+      const filePath = path.join(articlesDir, file);
+      const fileContent = fs.readFileSync(filePath, "utf8");
+      const { data } = matter(fileContent);
+
+      return {
+        title: data.title,
+        summary: data.summary,
+        date: typeof data.date === "string"
+          ? data.date
+          : new Date(data.date).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            }),
+        slug: file.replace(".md", ""),
+      };
+    })
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 
   return <ArticlesClient articles={articles} />;
 }

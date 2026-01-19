@@ -1,6 +1,6 @@
 ---
 title: Why Public Service 
-date: 2025-06-01
+date: 20-06-2025
 summary: Reflections on governance, grassroots leadership, and responsibility.
 ---
 

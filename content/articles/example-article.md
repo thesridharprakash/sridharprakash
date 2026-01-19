@@ -1,6 +1,6 @@
 ---
 title: "Why Grassroots Leadership Matters"
-date: "2025-01-05"
+date: "20-01-2025"
 summary: "Why real change starts at the local level and citizen engagement matters."
 ---
 
