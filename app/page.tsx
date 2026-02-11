@@ -87,7 +87,7 @@ export default function HomePage() {
             I am starting from zero and building my story in public.
           </h1>
           <p className="mt-6 max-w-xl text-base text-slate-200 md:text-lg">
-            I am Sridhar Prakash. I have not posted yet, but this is where the journey begins. My goal is to create honest travel, street, food, and moto stories with real energy and real people.
+            I am Sridhar Prakash. This is where the journey begins. My goal is to create honest travel, street, food, and moto stories with real energy and real people.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
