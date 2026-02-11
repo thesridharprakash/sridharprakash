@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Community Interaction Meet",
+    "description": "Open discussion with citizens on local development priorities.",
+    "date": "2025-06-15",
+    "time": "10:00 AM – 12:00 PM",
+    "location": "Bengaluru South"
+  },
+  {
+    "title": "Volunteer Orientation Program",
+    "description": "Orientation session for new volunteers and community leaders.",
+    "date": "2025-06-30",
+    "time": "11:00 AM – 1:00 PM",
+    "location": "Central Bengaluru"
+  },
+  {
+    "title": "Ward-Level Public Meeting",
+    "description": "Review of civic issues and citizen feedback session.",
+    "date": "2025-05-10",
+    "time": "5:00 PM – 7:00 PM",
+    "location": "Jayanagar"
+  }
+]

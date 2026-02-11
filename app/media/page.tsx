@@ -1,0 +1,183 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+const featuredSeries = [
+  {
+    title: "Monsoon Ride Diaries",
+    type: "Moto Vlog Series",
+    image: "/images/img1.jpg",
+    description: "Road stories, route highlights, and gear-focused riding episodes.",
+  },
+  {
+    title: "48 Hours in Goa",
+    type: "Travel Episode",
+    image: "/images/img2.png",
+    description: "Fast-paced city and coast storytelling with cinematic transitions.",
+  },
+  {
+    title: "Street Eats After Dark",
+    type: "Food Feature",
+    image: "/images/img3.jpg",
+    description: "Authentic late-night food trails with crowd-first recommendations.",
+  },
+];
+
+const mediaKit = [
+  { label: "Primary Formats", value: "Reels, Shorts, Long-form" },
+  { label: "Content Focus", value: "Travel, IRL, Food, Moto" },
+  { label: "Delivery Speed", value: "Draft in 48-72 hours" },
+  { label: "Audience Mix", value: "Gen Z + Young Professionals" },
+];
+
+const deliverables = [
+  "Short-form reels with hook-first editing",
+  "Live IRL streams and on-ground event coverage",
+  "Brand storytelling integrations in vlog episodes",
+  "Photo + thumbnail package for campaign rollout",
+];
+
+const featuredBrands = [
+  "WanderFuel",
+  "MotoCore",
+  "SpiceRoute Eats",
+  "TrailLens",
+  "StreetWave",
+  "RoamX",
+];
+
+export default function MediaPage() {
+  return (
+    <main className="relative overflow-hidden pt-28 text-[var(--foreground)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_12%,rgba(245,158,11,0.14),transparent_30%),radial-gradient(circle_at_12%_82%,rgba(56,189,248,0.14),transparent_35%)]" />
+
+      <section className="mx-auto max-w-6xl px-6 pb-12 pt-10">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65 }}
+          className="max-w-4xl"
+        >
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Media Portfolio</p>
+          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
+            Campaign-ready creator content with energy, personality, and strong retention.
+          </h1>
+          <p className="mt-6 max-w-3xl text-base text-slate-300 md:text-lg">
+            This page features selected work from travel storytelling, IRL streaming highlights, food discoveries, and moto vlogs. Built for audience attention and brand outcomes.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/media-kit.pdf"
+              download
+              className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--accent-strong)]"
+            >
+              Download 1-Page Media Kit (PDF)
+            </a>
+            <Link
+              href="/contact"
+              className="rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
+            >
+              Start a Collaboration
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="grid gap-4 md:grid-cols-4">
+          {mediaKit.map((item, index) => (
+            <motion.article
+              key={item.label}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: index * 0.07, duration: 0.45 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
+            >
+              <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">{item.label}</p>
+              <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="font-display text-3xl text-white md:text-4xl">Featured Brands</h2>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Partnership Highlights</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {featuredBrands.map((brand, index) => (
+            <motion.div
+              key={brand}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.06, duration: 0.35 }}
+              className="rounded-xl border border-white/10 bg-black/20 px-4 py-4 text-center"
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-100">{brand}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="font-display text-3xl text-white md:text-4xl">Featured Series</h2>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Recent Work</p>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {featuredSeries.map((item, index) => (
+            <motion.article
+              key={item.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-black/20"
+            >
+              <div className="relative h-52 w-full">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <div className="p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{item.type}</p>
+                <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.description}</p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-24">
+        <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.9),rgba(30,41,59,0.88))] p-8 md:p-10">
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Brand Deliverables</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What you can book</h2>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {deliverables.map((item) => (
+              <p key={item} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
+                {item}
+              </p>
+            ))}
+          </div>
+          <Link
+            href="/contact"
+            className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+          >
+            Start a Collaboration
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}
