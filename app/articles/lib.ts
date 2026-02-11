@@ -11,7 +11,7 @@ export function getAllArticles(): ArticleMeta[] {
   const files = fs.readdirSync(articlesDir).filter((f) => f.endsWith(".md"));
 
   return files
-    .map((file) => {
+    .map((file, index) => {
       const filePath = path.join(articlesDir, file);
       const fileContent = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContent);
@@ -20,11 +20,15 @@ export function getAllArticles(): ArticleMeta[] {
       const readTime = `${Math.ceil(words / 225)} min read`;
 
       return {
+        id: Number(data.id ?? index + 1),
+        type: "article" as const,
         title: String(data.title ?? "Untitled"),
         summary: String(data.summary ?? ""),
         date: String(data.date ?? ""),
         slug: file.replace(/\.md$/, ""),
         readTime,
+        img: String(data.img ?? "/images/og-image.jpg"),
+        videoUrl: String(data.videoUrl ?? ""),
       };
     })
     .sort(
