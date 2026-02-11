@@ -112,7 +112,7 @@ export default function HomePage() {
           className="space-y-4"
         >
           <div className="glass-card overflow-hidden rounded-3xl border border-white/15 bg-black/30">
-            <div className="relative h-[340px] w-full">
+            <div className="relative h-[340px] w-full md:h-[420px]">
               <Image
                 src="/images/og-image.jpg"
                 alt="Portrait of Sridhar Prakash"

@@ -39,15 +39,6 @@ const deliverables = [
   "Photo + thumbnail package for campaign rollout",
 ];
 
-const featuredBrands = [
-  "WanderFuel",
-  "MotoCore",
-  "SpiceRoute Eats",
-  "TrailLens",
-  "StreetWave",
-  "RoamX",
-];
-
 export default function MediaPage() {
   return (
     <main className="relative overflow-hidden pt-28 text-[var(--foreground)]">
@@ -105,27 +96,6 @@ export default function MediaPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl text-white md:text-4xl">Featured Brands</h2>
-          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Partnership Highlights</p>
-        </div>
-        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-          {featuredBrands.map((brand, index) => (
-            <motion.div
-              key={brand}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: index * 0.06, duration: 0.35 }}
-              className="rounded-xl border border-white/10 bg-black/20 px-4 py-4 text-center"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-100">{brand}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-14">
-        <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl text-white md:text-4xl">Featured Series</h2>
           <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Recent Work</p>
         </div>
@@ -156,6 +126,36 @@ export default function MediaPage() {
               </div>
             </motion.article>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2 className="font-display text-3xl text-white md:text-4xl">Open to Partnerships</h2>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Let’s Collaborate</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+          <p className="text-base text-slate-200 md:text-lg">
+            I’m currently open to brand collaborations across travel, food, moto, and IRL storytelling. If
+            you’re looking for fast, audience-first content with strong retention, let’s build something together.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
+            <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
+              Launch-ready deliverables
+            </span>
+            <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
+              Flexible creative formats
+            </span>
+            <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
+              Rapid turnaround
+            </span>
+          </div>
+          <Link
+            href="/contact"
+            className="mt-6 inline-flex rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
+          >
+            Start a Collaboration
+          </Link>
         </div>
       </section>
 
