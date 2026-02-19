@@ -17,6 +17,8 @@ type TelegramSendResult = {
   errorCode?: number;
 };
 
+const TELEGRAM_MAX_MESSAGE_LENGTH = 4000;
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -88,32 +90,89 @@ export async function sendTelegramMessage(
     };
   }
 
-  const response = await fetchWithRetry(
-    `https://api.telegram.org/bot${token}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        disable_web_page_preview: true,
-      }),
-      cache: "no-store",
-    },
-    { attempts: 2, timeoutMs: 6000, retryDelayMs: 300 }
-  );
+  const chunks = chunkTelegramMessage(message);
+  let lastStatus = 200;
+  let lastDescription: string | undefined;
 
-  let payload: TelegramApiResponse | null = null;
-  try {
-    payload = (await response.json()) as TelegramApiResponse;
-  } catch {
-    payload = null;
+  for (const chunk of chunks) {
+    const response = await fetchWithRetry(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: chunk,
+          disable_web_page_preview: true,
+        }),
+        cache: "no-store",
+      },
+      { attempts: 2, timeoutMs: 6000, retryDelayMs: 300 }
+    );
+
+    let payload: TelegramApiResponse | null = null;
+    try {
+      payload = (await response.json()) as TelegramApiResponse;
+    } catch {
+      payload = null;
+    }
+
+    const ok = response.ok && payload?.ok !== false;
+    if (!ok) {
+      return {
+        ok: false,
+        httpStatus: response.status,
+        description: payload?.description,
+        errorCode: payload?.error_code,
+      };
+    }
+
+    lastStatus = response.status;
+    lastDescription = payload?.description;
   }
 
   return {
-    ok: response.ok && payload?.ok !== false,
-    httpStatus: response.status,
-    description: payload?.description,
-    errorCode: payload?.error_code,
+    ok: true,
+    httpStatus: lastStatus,
+    description: lastDescription,
   };
+}
+
+function chunkTelegramMessage(message: string) {
+  const normalized = message.trim() || "(empty message)";
+  if (normalized.length <= TELEGRAM_MAX_MESSAGE_LENGTH) {
+    return [normalized];
+  }
+
+  const lines = normalized.split("\n");
+  const chunks: string[] = [];
+  let current = "";
+
+  for (const line of lines) {
+    const candidate = current ? `${current}\n${line}` : line;
+    if (candidate.length <= TELEGRAM_MAX_MESSAGE_LENGTH) {
+      current = candidate;
+      continue;
+    }
+
+    if (current) {
+      chunks.push(current);
+    }
+
+    if (line.length <= TELEGRAM_MAX_MESSAGE_LENGTH) {
+      current = line;
+      continue;
+    }
+
+    for (let i = 0; i < line.length; i += TELEGRAM_MAX_MESSAGE_LENGTH) {
+      chunks.push(line.slice(i, i + TELEGRAM_MAX_MESSAGE_LENGTH));
+    }
+    current = "";
+  }
+
+  if (current) {
+    chunks.push(current);
+  }
+
+  return chunks;
 }
