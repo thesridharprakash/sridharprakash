@@ -82,7 +82,10 @@ export async function sendTelegramMessage(
   token?: string,
   chatId?: string
 ): Promise<TelegramSendResult> {
-  if (!token || !chatId) {
+  const normalizedToken = token?.trim();
+  const normalizedChatId = chatId?.trim();
+
+  if (!normalizedToken || !normalizedChatId) {
     return {
       ok: false,
       httpStatus: 500,
@@ -96,12 +99,12 @@ export async function sendTelegramMessage(
 
   for (const chunk of chunks) {
     const response = await fetchWithRetry(
-      `https://api.telegram.org/bot${token}/sendMessage`,
+      `https://api.telegram.org/bot${normalizedToken}/sendMessage`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: chatId,
+          chat_id: normalizedChatId,
           text: chunk,
           disable_web_page_preview: true,
         }),

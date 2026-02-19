@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchWithRetry, notifyTelegram } from "@/lib/server/leadOps";
+import { fetchWithRetry, sendTelegramMessage } from "@/lib/server/leadOps";
 
 type VolunteerPayload = {
   name?: string;
@@ -150,7 +150,7 @@ export async function POST(request: Request) {
       );
     }
 
-    notifyTelegram(
+    await sendTelegramMessage(
       [
         "New Volunteer Lead",
         `Name: ${name}`,
