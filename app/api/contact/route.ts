@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { fetchWithRetry, sendTelegramMessage } from "@/lib/server/leadOps";
 
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 type ContactPayload = {
   leadType?: "contact" | "booking";
   name?: string;
@@ -204,6 +207,12 @@ export async function POST(request: Request) {
 
     const telegramConfigured =
       Boolean(process.env.TELEGRAM_BOT_TOKEN) && Boolean(process.env.TELEGRAM_CHAT_ID);
+
+    if (!telegramConfigured) {
+      console.warn(
+        "Contact Telegram notification skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing."
+      );
+    }
 
     if (!upstreamOk && (!telegramConfigured || !telegramResult.ok)) {
       return NextResponse.json(

@@ -69,6 +69,8 @@ TELEGRAM_BOT_TOKEN=123456:ABCDEF
 TELEGRAM_CHAT_ID=-1001234567890
 ```
 
+Important for deployment: add these variables in your hosting provider's project settings (for Vercel: `Settings -> Environment Variables`) and redeploy after saving changes.
+
 The volunteer endpoint now includes:
 
 - Request timeout + retry when forwarding to upstream
@@ -111,4 +113,10 @@ Browser test is also supported with `GET`:
 
 ```bash
 http://localhost:3000/api/telegram/test?message=Hello%20from%20browser&secret=your-random-secret
+```
+
+For deployed environments, call the same endpoint on your production domain:
+
+```bash
+https://your-domain.com/api/telegram/test?message=Prod%20test&secret=your-random-secret
 ```
