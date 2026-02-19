@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <p className="font-display text-2xl text-white">Sridhar Prakash</p>
             <p className="mt-3 max-w-sm text-sm text-slate-300">
-              Travel creator and IRL storyteller documenting roads, food culture, and moto life.
+              Political campaign and IRL storyteller creating social media content, travel vlogs, and on-ground public coverage.
             </p>
           </div>
 
@@ -30,6 +30,7 @@ export default function Footer() {
               <Link href="/about" className="block text-slate-300 transition hover:text-white">Story</Link>
               <Link href="/media" className="block text-slate-300 transition hover:text-white">Media</Link>
               <Link href="/articles" className="block text-slate-300 transition hover:text-white">Journal</Link>
+              <Link href="/volunteer" className="block text-slate-300 transition hover:text-white">Volunteer</Link>
               <Link href="/contact" className="block text-slate-300 transition hover:text-white">Contact</Link>
             </div>
           </div>

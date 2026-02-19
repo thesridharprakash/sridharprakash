@@ -12,8 +12,8 @@ import {
 const storyFacts = [
   { label: "Born", value: "1991" },
   { label: "City", value: "Bengaluru, Karnataka" },
-  { label: "Path", value: "Unscripted" },
-  { label: "Chapter", value: "Nomad Beginning" },
+  { label: "Path", value: "On-Ground Storytelling" },
+  { label: "Chapter", value: "Political + IRL Coverage" },
 ];
 
 const journeySteps = [
@@ -23,28 +23,28 @@ const journeySteps = [
     icon: MapPinIcon,
   },
   {
-    title: "No template",
-    text: "I never followed the usual work script. No office ladder, no polished plan, no borrowed identity.",
+    title: "Creator focus",
+    text: "I create content around real people and public spaces, with an approach built on consistency and trust.",
     icon: Cog6ToothIcon,
   },
   {
-    title: "Open road",
-    text: "Now I begin a nomad journey to explore, create, and respond to life exactly as it arrives.",
+    title: "Current mission",
+    text: "I am actively covering political campaigns on the ground while continuing travel, IRL, and social media projects.",
     icon: FireIcon,
   },
 ];
 
 const manifesto = [
-  "I choose movement over comfort.",
-  "I choose stories over status.",
+  "I choose people over performance.",
+  "I choose real context over scripted clips.",
   "I choose honesty over performance.",
-  "I choose life as it is, not life as it should look.",
+  "I choose on-ground work over distant commentary.",
 ];
 
 const timeline = [
-  { phase: "Now", text: "Beginning from zero with full commitment." },
-  { phase: "Next", text: "Traveling city to city and documenting real moments." },
-  { phase: "Then", text: "Building a body of work that feels raw, human, and alive." },
+  { phase: "Now", text: "Publishing political and IRL field content consistently." },
+  { phase: "Next", text: "Expanding campaign collaborations and audience engagement formats." },
+  { phase: "Then", text: "Building a trusted identity in political coverage and social media promotion." },
 ];
 
 export default function AboutPage() {
@@ -76,35 +76,34 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.65, delay: 0.2 }}
-              className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/35 px-4 py-2 text-[10px] uppercase tracking-[0.2em] text-slate-100 md:left-6 md:top-6"
+              className="absolute right-4 top-4 z-20 whitespace-nowrap rounded-full border border-white/20 bg-black/35 px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-slate-100 md:right-6 md:top-6 md:px-4"
             >
-              Story Film | Chapter 01
+              Story Film | Current Chapter
             </motion.div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-6 pt-40 md:p-10 md:pt-24 lg:pt-10">
               <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">The Story</p>
               <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-white md:text-7xl">
                 Born in Bengaluru, 1991.
                 <br />
-                Starting late, but finally starting true.
+                Building my voice through political and IRL storytelling.
               </h1>
               <p className="mt-5 max-w-3xl text-sm text-slate-200 md:text-lg">
-                I have not worked in life till now in the usual way. I am about to begin a nomad journey and let the road
-                shape me. I want to live fully, explore deeply, and create from whatever life throws at me.
+                I create on-ground political campaign coverage, travel stories, and social media content that helps people stay connected to real public conversations.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/contact"
+                  href="/book"
                   className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--accent-strong)]"
                 >
-                  Travel With Me
+                  Collaborate With Me
                   <ArrowLongRightIcon className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/media"
                   className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
                 >
-                  Watch Visual Journal
+                  View Media Portfolio
                 </Link>
               </div>
             </div>
@@ -135,7 +134,7 @@ export default function AboutPage() {
           <h2 className="font-display text-3xl text-white md:text-4xl">Journey Markers</h2>
           <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
             <SparklesIcon className="h-4 w-4" />
-            Visual Storyline
+            Creator Storyline
           </p>
         </div>
 
@@ -167,9 +166,9 @@ export default function AboutPage() {
         >
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Manifesto</p>
           <p className="mt-4 max-w-4xl font-display text-3xl leading-tight text-white md:text-5xl">
-            I am not behind.
+            I am building with intent.
             <br />
-            I am becoming, on my own timing.
+            Every upload serves a larger public conversation.
           </p>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {manifesto.map((line) => (

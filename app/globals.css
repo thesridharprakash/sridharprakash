@@ -112,6 +112,35 @@ h6,
   overflow-x: auto;
 }
 
+.article-prose.prose {
+  color: #292524;
+}
+
+.article-prose.prose p,
+.article-prose.prose li {
+  color: #44403c;
+}
+
+.article-prose.prose h2,
+.article-prose.prose h3 {
+  color: #1c1917;
+}
+
+.article-prose.prose blockquote {
+  border-left-color: #f97316;
+  color: #57534e;
+}
+
+.article-prose.prose code {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.article-prose.prose pre {
+  background: #111827;
+  color: #e5e7eb;
+}
+
 .section-divider {
   width: 4rem;
   height: 0.25rem;

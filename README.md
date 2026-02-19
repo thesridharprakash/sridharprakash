@@ -34,3 +34,81 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Analytics Setup (GA4)
+
+Set this environment variable to enable analytics:
+
+```bash
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+Tracked events currently include:
+
+- `page_view` on route changes
+- `cta_click` on key homepage CTAs
+- `lead_click` on contact email click
+- `social_click` on social profile clicks
+- `volunteer_submit_attempt`
+- `volunteer_submit_success`
+- `volunteer_submit_error`
+- `contact_submit_attempt`
+- `contact_submit_success`
+- `contact_submit_error`
+
+Attribution data (`utm_*`, `gclid`, `fbclid`) is captured from the URL and persisted as first-touch and last-touch in browser local storage.
+
+## Lead Ops (Volunteer API)
+
+Optional environment variables for volunteer lead delivery and notifications:
+
+```bash
+GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/your-script-id/exec
+CONTACT_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/your-contact-script-id/exec
+TELEGRAM_BOT_TOKEN=123456:ABCDEF
+TELEGRAM_CHAT_ID=-1001234567890
+```
+
+The volunteer endpoint now includes:
+
+- Request timeout + retry when forwarding to upstream
+- Basic rate limiting per IP
+- Honeypot spam field check (`website`)
+- Optional Telegram alert on successful lead capture
+
+## Telegram Bot Linking
+
+1. Create a bot with `@BotFather` and copy the bot token.
+2. Add your bot to the target chat/channel.
+3. Send at least one message in that chat (or mention the bot once for groups).
+4. Get the chat id from:
+
+```bash
+https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
+```
+
+5. Set env vars:
+
+```bash
+TELEGRAM_BOT_TOKEN=123456:ABCDEF
+TELEGRAM_CHAT_ID=-1001234567890
+# optional: protects test endpoint
+TELEGRAM_TEST_SECRET=your-random-secret
+```
+
+6. Test delivery from this app:
+
+```bash
+curl -X POST http://localhost:3000/api/telegram/test ^
+  -H "Content-Type: application/json" ^
+  -H "x-telegram-test-secret: your-random-secret" ^
+  -d "{\"message\":\"Test message from local app\"}"
+```
+
+If `TELEGRAM_TEST_SECRET` is not set, you can omit the `x-telegram-test-secret` header.
+
+Browser test is also supported with `GET`:
+
+```bash
+http://localhost:3000/api/telegram/test?message=Hello%20from%20browser&secret=your-random-secret
+```

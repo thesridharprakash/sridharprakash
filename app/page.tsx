@@ -7,56 +7,57 @@ import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaTwitch } from "react-icons/fa6";
 import { SiKick } from "react-icons/si";
 import { socialProfiles } from "@/constants/socials";
+import { trackEvent } from "@/lib/analytics";
 
 const storyBeats = [
   {
-    title: "Starting line",
-    body: "I am beginning from zero, building a creator journey in public and learning as I go.",
+    title: "New direction",
+    body: "I am expanding into political content to connect with politically interested audiences and communities.",
   },
   {
-    title: "What I care about",
-    body: "Real people, real streets, real stories. I want every upload to feel honest and alive.",
+    title: "What I cover",
+    body: "Political campaign ground reports, travel vlogs, IRL streams, and day-to-day social media storytelling.",
   },
   {
     title: "Why now",
-    body: "This is the moment I start documenting the work, the travel, and the growth.",
+    body: "This is the right time to build a strong on-ground voice and deliver promotion that feels real and human.",
   },
 ];
 
 const futurePlans = [
-  "Travel mini-series across cities with cinematic storytelling.",
-  "IRL streams that show unfiltered street life and culture.",
-  "Food trails focused on local stalls and hidden kitchens.",
-  "Moto rides that mix adventure with practical tips for riders.",
+  "On-ground political campaign coverage and field updates.",
+  "Social media promotion support for candidates and campaign teams.",
+  "Travel and IRL vlogging across cities and political events.",
+  "Consistent short-form and long-form content across platforms.",
 ];
 
 const values = [
   {
-    title: "Honesty over hype",
-    body: "If it is not real, it does not belong on this page.",
+    title: "Real over scripted",
+    body: "I document what is happening on the ground, not studio-only narratives.",
   },
   {
-    title: "Respect the people",
-    body: "The street is the main character. I show it with care.",
+    title: "Respect every voice",
+    body: "People, workers, volunteers, and local communities are represented with dignity.",
   },
   {
-    title: "Progress in public",
-    body: "You will see the messy drafts and the wins, side by side.",
+    title: "Consistency in public",
+    body: "You will see regular updates from campaign trails, travel days, and live interactions.",
   },
 ];
 
 const timeline = [
   {
     title: "Now",
-    body: "Building the foundation: story, identity, and first shoots.",
+    body: "Producing political and IRL content while expanding my network.",
   },
   {
     title: "Next 90 days",
-    body: "First travel and food episodes, plus short-form experiments.",
+    body: "Scaling campaign coverage, collaborations, and platform growth.",
   },
   {
     title: "This year",
-    body: "Regular uploads, live sessions, and real community moments.",
+    body: "Becoming a trusted creator for political promotion and on-ground storytelling.",
   },
 ];
 
@@ -69,6 +70,14 @@ const socialIcons = {
 };
 
 export default function HomePage() {
+  function handleCtaClick(label: string) {
+    trackEvent("cta_click", { section: "home", label });
+  }
+
+  function handleSocialClick(platform: string) {
+    trackEvent("social_click", { section: "home", platform });
+  }
+
   return (
     <main className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(249,115,22,0.2),transparent_38%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.15),transparent_35%),radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.15),transparent_32%)]" />
@@ -81,26 +90,35 @@ export default function HomePage() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--muted)] backdrop-blur">
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[var(--accent)]" />
-            New Creator Journey
+            Political + IRL Creator
           </div>
           <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">
-            I am starting from zero and building my story in public.
+            Covering politics on the ground while building a strong social media brand.
           </h1>
           <p className="mt-6 max-w-xl text-base text-slate-200 md:text-lg">
-            I am Sridhar Prakash. This is where the journey begins. My goal is to create honest travel, street, food, and moto stories with real energy and real people.
+            I am Sridhar Prakash. I create political campaign coverage, social media promotion content, travel vlogs, and IRL videos that connect with real people.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/contact"
+              href="/volunteer"
+              onClick={() => handleCtaClick("join_volunteer_team")}
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+            >
+              Volunteer With Us
+            </Link>
+            <Link
+              href="/book"
+              onClick={() => handleCtaClick("start_collaboration")}
               className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:translate-y-[-1px] hover:bg-[var(--accent-strong)]"
             >
-              Start a Collaboration
+              Work With Me
             </Link>
             <Link
               href="/articles"
+              onClick={() => handleCtaClick("follow_build")}
               className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
             >
-              Follow the Build
+              Follow Updates
             </Link>
           </div>
         </motion.div>
@@ -123,9 +141,9 @@ export default function HomePage() {
             </div>
             <div className="p-5">
               <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Home Base</p>
-              <h2 className="mt-2 text-xl font-semibold text-white">A new chapter starts here.</h2>
+              <h2 className="mt-2 text-xl font-semibold text-white">Politics, travel, and IRL stories from the ground.</h2>
               <p className="mt-2 text-sm text-slate-200">
-                This space will document every step, from the first upload to the first live stream.
+                This space tracks my campaign coverage work, creator collaborations, and day-to-day field content.
               </p>
             </div>
           </div>
@@ -135,9 +153,9 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur md:p-8">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Status</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">No posts yet. The story begins now.</h2>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Active now: political coverage + social media storytelling.</h2>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-            Social profiles will go live soon. Until then, this page is the roadmap of what I am about to build.
+            I am taking political and creator collaborations focused on campaign visibility, on-ground documentation, and audience engagement.
           </p>
         </div>
       </section>
@@ -146,7 +164,7 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">The Story</p>
-            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Why I am doing this.</h2>
+            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Why I am doing this now.</h2>
             <div className="mt-6 space-y-4">
               {storyBeats.map((beat) => (
                 <article key={beat.title} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -159,7 +177,7 @@ export default function HomePage() {
 
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Next Up</p>
-            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What I am about to build.</h2>
+            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What I am building next.</h2>
             <div className="mt-6 space-y-3">
               {futurePlans.map((plan) => (
                 <div key={plan} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -211,6 +229,7 @@ export default function HomePage() {
                 <a
                   key={platform.name}
                   href={platform.href}
+                  onClick={() => handleSocialClick(platform.name)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-[var(--accent)]/55"
@@ -228,17 +247,27 @@ export default function HomePage() {
         <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.85),rgba(30,41,59,0.88))] p-8 md:p-12">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Open Invite</p>
           <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">
-            Want to be part of the first chapter?
+            Want to collaborate or volunteer for on-ground support?
           </h2>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-            If you believe in real storytelling and early-stage collaboration, let us build something meaningful together.
+            Join as a volunteer for campaign support, or connect for creator collaboration and social media promotion.
           </p>
-          <Link
-            href="/contact"
-            className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
-          >
-            Say Hello
-          </Link>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link
+              href="/volunteer"
+              onClick={() => handleCtaClick("open_invite_volunteer")}
+              className="inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+            >
+              Join as Volunteer
+            </Link>
+            <Link
+              href="/book"
+              onClick={() => handleCtaClick("say_hello")}
+              className="inline-flex rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
+            >
+              Start Collaboration
+            </Link>
+          </div>
         </div>
       </section>
     </main>

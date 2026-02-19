@@ -6,37 +6,37 @@ import { motion } from "framer-motion";
 
 const featuredSeries = [
   {
-    title: "Monsoon Ride Diaries",
-    type: "Moto Vlog Series",
+    title: "Campaign Trail Diaries",
+    type: "Political Coverage Series",
     image: "/images/img1.jpg",
-    description: "Road stories, route highlights, and gear-focused riding episodes.",
+    description: "On-ground political campaign moments, local voices, and rally-day storytelling.",
   },
   {
-    title: "48 Hours in Goa",
-    type: "Travel Episode",
+    title: "City Voices: Election Season",
+    type: "IRL Public Conversation",
     image: "/images/img2.png",
-    description: "Fast-paced city and coast storytelling with cinematic transitions.",
+    description: "Street interviews and city-level political pulse captured in short and long formats.",
   },
   {
-    title: "Street Eats After Dark",
-    type: "Food Feature",
+    title: "Road + Report",
+    type: "Travel and Ground Report",
     image: "/images/img3.jpg",
-    description: "Authentic late-night food trails with crowd-first recommendations.",
+    description: "Travel vlogging blended with on-location political updates and audience engagement.",
   },
 ];
 
 const mediaKit = [
   { label: "Primary Formats", value: "Reels, Shorts, Long-form" },
-  { label: "Content Focus", value: "Travel, IRL, Food, Moto" },
+  { label: "Content Focus", value: "Politics, Campaigns, Travel, IRL" },
   { label: "Delivery Speed", value: "Draft in 48-72 hours" },
-  { label: "Audience Mix", value: "Gen Z + Young Professionals" },
+  { label: "Audience Mix", value: "Politically Active Youth + General Audience" },
 ];
 
 const deliverables = [
-  "Short-form reels with hook-first editing",
-  "Live IRL streams and on-ground event coverage",
-  "Brand storytelling integrations in vlog episodes",
-  "Photo + thumbnail package for campaign rollout",
+  "Political campaign reels and short-form social edits",
+  "IRL streams and on-ground campaign event coverage",
+  "Travel vlog integration with public-interest storytelling",
+  "Photo + thumbnail package for promotion rollouts",
 ];
 
 export default function MediaPage() {
@@ -56,7 +56,7 @@ export default function MediaPage() {
             Campaign-ready creator content with energy, personality, and strong retention.
           </h1>
           <p className="mt-6 max-w-3xl text-base text-slate-300 md:text-lg">
-            This page features selected work from travel storytelling, IRL streaming highlights, food discoveries, and moto vlogs. Built for audience attention and brand outcomes.
+            This page features work across political campaign coverage, IRL field storytelling, and travel content built for audience attention and measurable impact.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -67,7 +67,7 @@ export default function MediaPage() {
               Download 1-Page Media Kit (PDF)
             </a>
             <Link
-              href="/contact"
+              href="/book"
               className="rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
             >
               Start a Collaboration
@@ -132,12 +132,12 @@ export default function MediaPage() {
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl text-white md:text-4xl">Open to Partnerships</h2>
-          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Let’s Collaborate</p>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Let&apos;s Collaborate</p>
         </div>
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
           <p className="text-base text-slate-200 md:text-lg">
-            I’m currently open to brand collaborations across travel, food, moto, and IRL storytelling. If
-            you’re looking for fast, audience-first content with strong retention, let’s build something together.
+            I am currently open to collaborations with political campaign teams, public-interest initiatives, and brands that need on-ground storytelling. If
+            you are looking for fast, audience-first content with strong retention, let&apos;s build something together.
           </p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
             <span className="rounded-full border border-white/15 bg-black/30 px-4 py-2">
@@ -151,7 +151,7 @@ export default function MediaPage() {
             </span>
           </div>
           <Link
-            href="/contact"
+            href="/book"
             className="mt-6 inline-flex rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
           >
             Start a Collaboration
@@ -171,7 +171,7 @@ export default function MediaPage() {
             ))}
           </div>
           <Link
-            href="/contact"
+            href="/book"
             className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
           >
             Start a Collaboration

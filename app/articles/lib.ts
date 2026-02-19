@@ -5,6 +5,16 @@ import { ArticleMeta } from "./types/types";
 
 const articlesDir = path.join(process.cwd(), "content/articles");
 
+type ArticleDetail = {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  img: string;
+  content: string;
+  readTime: string;
+};
+
 export function getAllArticles(): ArticleMeta[] {
   if (!fs.existsSync(articlesDir)) return [];
 
@@ -47,11 +57,24 @@ export function getArticleBySlug(slug: string) {
   const words = content.split(/\s+/).length;
   const readTime = `${Math.ceil(words / 225)} min read`;
 
-  return {
+  const detail: ArticleDetail = {
+    slug,
     title: String(data.title ?? "Untitled"),
     summary: String(data.summary ?? ""),
     date: String(data.date ?? ""),
+    img: String(data.img ?? "/images/og-image.jpg"),
     content,
     readTime,
   };
+
+  return detail;
+}
+
+export function getAllArticleSlugs(): string[] {
+  if (!fs.existsSync(articlesDir)) return [];
+
+  return fs
+    .readdirSync(articlesDir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(/\.md$/, ""));
 }

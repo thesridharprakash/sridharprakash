@@ -1,9 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Manrope, Playfair_Display } from "next/font/google";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
+import Analytics from "../components/Analytics";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -20,11 +22,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sridharprakash.vercel.app"),
   title: {
-    default: "Sridhar Prakash | Travel, IRL & Moto Vlogs",
+    default: "Sridhar Prakash | Political Campaign Coverage & IRL Vlogs",
     template: "%s | Sridhar Prakash",
   },
   description:
-    "Travel stories, IRL streaming moments, food discoveries, and moto vlogs by Sridhar Prakash.",
+    "Political campaign coverage, social media promotion, travel stories, and IRL vlogs by Sridhar Prakash.",
   openGraph: {
     images: ["/images/og-image.jpeg"],
   },
@@ -44,6 +46,9 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${playfair.variable} bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-[var(--accent)] selection:text-black`}
       >
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <Header />
         {children}
         <ScrollToTop />

@@ -1,0 +1,12 @@
+Create files in this folder with the .md extension to publish them.
+
+Example:
+
+---
+title: "My First Journal Entry"
+summary: "A short 1-2 line teaser for the list page."
+date: "2026-02-13"
+img: "/images/og-image.jpg"
+---
+
+Write your markdown content here.

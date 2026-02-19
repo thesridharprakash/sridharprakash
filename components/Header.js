@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/about", label: "Story" },
   { href: "/media", label: "Media" },
   { href: "/articles", label: "Journal" },
+  { href: "/volunteer", label: "Volunteer" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -52,10 +53,10 @@ export default function Header() {
           })}
 
           <Link
-            href="/contact"
+            href="/book"
             className="rounded-full bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[var(--accent-strong)]"
           >
-            Book Me
+            Work With Me
           </Link>
         </nav>
 
@@ -64,6 +65,7 @@ export default function Header() {
           onClick={() => setOpen((prev) => !prev)}
           className="space-y-1.5 p-2 md:hidden"
           aria-label="Toggle menu"
+          suppressHydrationWarning
         >
           <span className="block h-0.5 w-6 bg-white" />
           <span className="block h-0.5 w-6 bg-white" />
@@ -90,11 +92,11 @@ export default function Header() {
               );
             })}
             <Link
-              href="/contact"
+              href="/book"
               onClick={() => setOpen(false)}
               className="mt-3 block rounded-lg bg-[var(--accent)] px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-black"
             >
-              Book Me
+              Work With Me
             </Link>
           </div>
         </div>
