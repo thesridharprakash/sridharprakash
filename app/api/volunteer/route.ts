@@ -150,7 +150,7 @@ export async function POST(request: Request) {
       );
     }
 
-    await sendTelegramMessage(
+    const telegramResult = await sendTelegramMessage(
       [
         "New Volunteer Lead",
         `Name: ${name}`,
@@ -164,9 +164,23 @@ export async function POST(request: Request) {
       ].join("\n"),
       process.env.TELEGRAM_BOT_TOKEN,
       process.env.TELEGRAM_CHAT_ID
-    ).catch(() => {
-      // Non-blocking notification path.
+    ).catch((error) => {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      console.error("Volunteer Telegram notification failed:", message);
+      return {
+        ok: false as const,
+        httpStatus: 500,
+        description: message,
+      };
     });
+
+    if (!telegramResult.ok) {
+      console.error(
+        "Volunteer Telegram notification failed:",
+        telegramResult.httpStatus,
+        telegramResult.description || "Telegram API request failed."
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
