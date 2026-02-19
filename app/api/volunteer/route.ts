@@ -150,36 +150,42 @@ export async function POST(request: Request) {
       );
     }
 
-    const telegramResult = await sendTelegramMessage(
-      [
-        "New Volunteer Lead",
-        `Name: ${name}`,
-        `Mobile: ${mobile}`,
-        `Email: ${email || "-"}`,
-        `Area: ${area || "-"}`,
-        `Interest: ${interest || "-"}`,
-        `UTM Source: ${utmSource || "-"}`,
-        `UTM Medium: ${utmMedium || "-"}`,
-        `UTM Campaign: ${utmCampaign || "-"}`,
-      ].join("\n"),
-      process.env.TELEGRAM_BOT_TOKEN,
-      process.env.TELEGRAM_CHAT_ID
-    ).catch((error) => {
-      const message = error instanceof Error ? error.message : "Unknown error";
-      console.error("Volunteer Telegram notification failed:", message);
-      return {
-        ok: false as const,
-        httpStatus: 500,
-        description: message,
-      };
-    });
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN?.trim() || "";
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID?.trim() || "";
+    const telegramConfigured = Boolean(telegramToken) && Boolean(telegramChatId);
 
-    if (!telegramResult.ok) {
-      console.error(
-        "Volunteer Telegram notification failed:",
-        telegramResult.httpStatus,
-        telegramResult.description || "Telegram API request failed."
-      );
+    if (telegramConfigured) {
+      const telegramResult = await sendTelegramMessage(
+        [
+          "New Volunteer Lead",
+          `Name: ${name}`,
+          `Mobile: ${mobile}`,
+          `Email: ${email || "-"}`,
+          `Area: ${area || "-"}`,
+          `Interest: ${interest || "-"}`,
+          `UTM Source: ${utmSource || "-"}`,
+          `UTM Medium: ${utmMedium || "-"}`,
+          `UTM Campaign: ${utmCampaign || "-"}`,
+        ].join("\n"),
+        telegramToken,
+        telegramChatId
+      ).catch((error) => {
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error("Volunteer Telegram notification failed:", message);
+        return {
+          ok: false as const,
+          httpStatus: 500,
+          description: message,
+        };
+      });
+
+      if (!telegramResult.ok) {
+        console.error(
+          "Volunteer Telegram notification failed:",
+          telegramResult.httpStatus,
+          telegramResult.description || "Telegram API request failed."
+        );
+      }
     }
 
     return NextResponse.json({ ok: true });
