@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { fetchWithRetry, sendTelegramMessage } from "@/lib/server/leadOps";
 
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 type VolunteerPayload = {
   name?: string;
   mobile?: string;
@@ -186,6 +189,10 @@ export async function POST(request: Request) {
           telegramResult.description || "Telegram API request failed."
         );
       }
+    } else {
+      console.warn(
+        "Volunteer Telegram notification skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing."
+      );
     }
 
     return NextResponse.json({ ok: true });
