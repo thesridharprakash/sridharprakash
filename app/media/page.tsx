@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import YouTubeLiveSection from "@/components/YouTubeLiveSection";
 
 const featuredSeries = [
   {
@@ -128,6 +129,8 @@ export default function MediaPage() {
           ))}
         </div>
       </section>
+
+      <YouTubeLiveSection />
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="mb-6 flex items-end justify-between gap-4">

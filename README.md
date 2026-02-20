@@ -78,6 +78,20 @@ The volunteer endpoint now includes:
 - Honeypot spam field check (`website`)
 - Optional Telegram alert on successful lead capture
 
+## YouTube Live Feed
+
+To auto-show active YouTube live streams on the homepage, set:
+
+```bash
+YOUTUBE_API_KEY=your-youtube-data-api-key
+YOUTUBE_CHANNEL_ID=your-channel-id
+```
+
+Notes:
+
+- `YOUTUBE_API_KEY` must have access to YouTube Data API v3.
+- `YOUTUBE_CHANNEL_ID` is your channel's ID (for example: `UC...`), not the `@handle`.
+
 ## Telegram Bot Linking
 
 1. Create a bot with `@BotFather` and copy the bot token.

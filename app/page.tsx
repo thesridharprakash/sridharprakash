@@ -8,6 +8,7 @@ import { FaTwitch } from "react-icons/fa6";
 import { SiKick } from "react-icons/si";
 import { socialProfiles } from "@/constants/socials";
 import { trackEvent } from "@/lib/analytics";
+import YouTubeLiveSection from "@/components/YouTubeLiveSection";
 
 const storyBeats = [
   {
@@ -159,6 +160,8 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      <YouTubeLiveSection />
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <div className="grid gap-6 md:grid-cols-2">
