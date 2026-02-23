@@ -1,0 +1,61 @@
+{
+  "hero": {
+    "eyebrow": "Press & Mentions",
+    "title": "Interviews, media coverage, guest appearances, and milestones.",
+    "description": "A single place to track external mentions and public highlights. Replace placeholder entries below with verified links as new features are published."
+  },
+  "interviews": [
+    {
+      "title": "Interview slot available",
+      "outlet": "Podcast / Newsroom",
+      "date": "Add date",
+      "note": "Add your interview link and a one-line summary."
+    },
+    {
+      "title": "Creator conversation feature",
+      "outlet": "YouTube / Digital Show",
+      "date": "Add date",
+      "note": "Highlight topic: political storytelling, campaign coverage, or creator journey."
+    }
+  ],
+  "mediaCoverage": [
+    {
+      "title": "Campaign coverage mention",
+      "outlet": "News Portal",
+      "date": "Add date",
+      "note": "Document third-party coverage of your on-ground reporting."
+    },
+    {
+      "title": "Public event media recap",
+      "outlet": "Local Press",
+      "date": "Add date",
+      "note": "Add link to article/video mention."
+    }
+  ],
+  "guestAppearances": [
+    "Panel discussions and youth townhalls",
+    "Campus and community conversations",
+    "Political event hosting and stage appearances"
+  ],
+  "awards": [
+    "Add awards, recognitions, or nominations here",
+    "Add platform milestones (subscribers/followers/watch-hours)",
+    "Add campaign outcomes or impact highlights"
+  ],
+  "milestones": [
+    {
+      "title": "Launched political + IRL storytelling focus",
+      "date": "2026",
+      "detail": "Positioned the platform around on-ground campaign coverage and public conversations."
+    },
+    {
+      "title": "Built multi-page campaign-ready website",
+      "date": "2026",
+      "detail": "Created dedicated pages for booking, volunteer onboarding, media portfolio, and field journal updates."
+    }
+  ],
+  "pressQueryCta": {
+    "label": "Submit Press Query",
+    "href": "/contact"
+  }
+}

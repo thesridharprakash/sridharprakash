@@ -4,8 +4,10 @@ import { Suspense } from "react";
 import { Manrope, Playfair_Display } from "next/font/google";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ScrollToTop from "../components/ScrollToTop";
 import Analytics from "../components/Analytics";
+import MotionProvider from "../components/MotionProvider";
+import ScrollToTopClient from "../components/ScrollToTopClient";
+import AccentBackground from "../components/AccentBackground";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -49,10 +51,15 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
-        <Header />
-        {children}
-        <ScrollToTop />
-        <Footer />
+        <MotionProvider>
+          <AccentBackground />
+          <Header />
+          <div id="main-content" tabIndex={-1}>
+            {children}
+          </div>
+          <ScrollToTopClient />
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

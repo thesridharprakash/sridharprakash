@@ -18,6 +18,7 @@ type ContactPayload = {
   preferredDate?: string;
   preferredTime?: string;
   brief?: string;
+  consent?: boolean;
   website?: string;
   attribution?: {
     first_touch?: Record<string, string | undefined>;
@@ -111,15 +112,16 @@ export async function POST(request: Request) {
     const preferredDate = sanitize(payload.preferredDate || "", 40);
     const preferredTime = sanitize(payload.preferredTime || "", 80);
     const brief = sanitize(payload.brief || "", 2000);
+    const consent = Boolean(payload.consent);
     const website = sanitize(payload.website || "", 120);
 
     if (website) {
       return NextResponse.json({ ok: true }, { status: 200 });
     }
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !consent) {
       return NextResponse.json(
-        { error: "Name, email, and message are required." },
+        { error: "Name, email, message, and consent are required." },
         { status: 400 }
       );
     }
@@ -163,6 +165,8 @@ export async function POST(request: Request) {
             preferredDate,
             preferredTime,
             brief,
+            consent,
+            consentText: consent ? "Yes" : "No",
             utmSource,
             utmMedium,
             utmCampaign,
@@ -195,6 +199,7 @@ export async function POST(request: Request) {
         `Preferred Time: ${preferredTime || "-"}`,
         `Budget: ${budget || "-"}`,
         `Timeline: ${timeline || "-"}`,
+        `Consent: ${consent ? "Yes" : "No"}`,
         `Brief: ${brief || "-"}`,
         `Message: ${message}`,
         `UTM Source: ${utmSource || "-"}`,

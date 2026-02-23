@@ -65,7 +65,10 @@ export default function YouTubeLiveSection() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
-              />
+              >
+                Your browser does not support embedded video.{" "}
+                <a href={data.watchUrl ?? channelUrl}>Open on YouTube</a>.
+              </iframe>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">

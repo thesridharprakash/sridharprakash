@@ -9,13 +9,19 @@ import { FaTwitch } from "react-icons/fa6";
 import { SiKick } from "react-icons/si";
 import { socialProfiles } from "@/constants/socials";
 import { getAttributionContext, trackEvent } from "@/lib/analytics";
+import contactContent from "@/data/pages/contact.json";
+import type { ContactPageContent } from "@/types/pageContent";
 
-const collaborationTypes = [
-  "Political campaign social media promotion",
-  "On-ground campaign trail coverage and reporting",
-  "IRL streaming and public event storytelling",
-  "Travel vlogging and creator-led outreach content",
-];
+const {
+  hero,
+  highlights,
+  brief,
+  collaborationTypes,
+  socialHeading,
+  socialCtaLabel,
+  socialCtaHref,
+  success,
+} = contactContent as ContactPageContent;
 
 const socialIcons = {
   YouTube: FaYoutube,
@@ -23,6 +29,12 @@ const socialIcons = {
   Instagram: FaInstagram,
   Twitch: FaTwitch,
   Kick: SiKick,
+};
+
+const highlightIcons = {
+  Email: EnvelopeIcon,
+  "Response Window": MegaphoneIcon,
+  "Base Location": MapPinIcon,
 };
 
 export default function ContactPage() {
@@ -46,6 +58,7 @@ export default function ContactPage() {
       budget: (form.elements.namedItem("budget") as HTMLInputElement).value,
       timeline: (form.elements.namedItem("timeline") as HTMLInputElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      consent: (form.elements.namedItem("consent") as HTMLInputElement).checked,
       website: (form.elements.namedItem("website") as HTMLInputElement).value,
       attribution,
     };
@@ -106,65 +119,52 @@ export default function ContactPage() {
           transition={{ duration: 0.7 }}
           className="max-w-4xl"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Contact & Bookings</p>
-          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
-            Let us build social media campaigns people actually connect with.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">
-            For political promotion, campaign coverage, event invites, and creator partnerships, reach out with your goals, timeline, and expected deliverables.
-          </p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{hero.eyebrow}</p>
+          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">{hero.title}</h1>
+          <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">{hero.description}</p>
         </motion.div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-4 px-6 pb-14 md:grid-cols-3">
-        <motion.article
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-        >
-          <EnvelopeIcon className="h-7 w-7 text-[var(--accent)]" />
-          <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Email</p>
-          <a
-            href="mailto:thesridharprakash@gmail.com"
-            onClick={() => trackEvent("lead_click", { type: "email", section: "contact" })}
-            className="mt-2 block break-all text-lg font-semibold text-white hover:text-[var(--accent)]"
-          >
-            thesridharprakash@gmail.com
-          </a>
-        </motion.article>
+        {highlights.map((highlight, index) => {
+          const Icon = highlightIcons[highlight.title] ?? EnvelopeIcon;
+          const isEmail = highlight.label.toLowerCase().includes("email");
+          const valueMarkup = isEmail ? (
+            <a
+              href={`mailto:${highlight.value}`}
+              onClick={() => trackEvent("lead_click", { type: "email", section: "contact" })}
+              className="mt-2 block break-all text-lg font-semibold text-white hover:text-[var(--accent)]"
+            >
+              {highlight.value}
+            </a>
+          ) : (
+            <p className="mt-2 text-lg font-semibold text-white">{highlight.value}</p>
+          );
 
-        <motion.article
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-        >
-          <MegaphoneIcon className="h-7 w-7 text-[var(--accent)]" />
-          <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Response Window</p>
-          <p className="mt-2 text-lg font-semibold text-white">Within 24-48 hours</p>
-          <p className="mt-2 text-sm text-slate-300">Please include budget range, campaign location, and timeline.</p>
-        </motion.article>
-
-        <motion.article
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65 }}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-        >
-          <MapPinIcon className="h-7 w-7 text-[var(--accent)]" />
-          <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Base Location</p>
-          <p className="mt-2 text-lg font-semibold text-white">Bengaluru, India</p>
-          <p className="mt-2 text-sm text-slate-300">Available for domestic and international travel.</p>
-        </motion.article>
+          return (
+            <motion.article
+              key={`${highlight.label}-${index}`}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 + index * 0.1 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+            >
+              <Icon className="h-7 w-7 text-[var(--accent)]" />
+              <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">{highlight.label}</p>
+              {valueMarkup}
+              <p className="mt-2 text-sm text-slate-300">{highlight.description}</p>
+            </motion.article>
+          );
+        })}
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/15 bg-black/25 p-8 md:p-10">
           {!submitted ? (
             <>
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Quick Brief</p>
-              <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Send collaboration details</h2>
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">{brief.label}</p>
+              <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">{brief.title}</h2>
+              <p className="mt-3 text-sm text-slate-300 md:text-base">{brief.description}</p>
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 <input
                   suppressHydrationWarning
@@ -175,44 +175,87 @@ export default function ContactPage() {
                   aria-hidden="true"
                 />
                 <div className="grid gap-4 md:grid-cols-2">
-                  <input
-                    suppressHydrationWarning
-                    name="name"
-                    required
-                    placeholder="Your Name"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
-                  <input
-                    suppressHydrationWarning
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Your Email"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
+                  <div>
+                    <label htmlFor="contact-name" className="sr-only">
+                      Your Name
+                    </label>
+                    <input
+                      id="contact-name"
+                      suppressHydrationWarning
+                      name="name"
+                      required
+                      placeholder="Your Name"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="sr-only">
+                      Your Email
+                    </label>
+                    <input
+                      id="contact-email"
+                      suppressHydrationWarning
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="Your Email"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
-                  <input
+                  <div>
+                    <label htmlFor="contact-budget" className="sr-only">
+                      Estimated Budget (optional)
+                    </label>
+                    <input
+                      id="contact-budget"
+                      suppressHydrationWarning
+                      name="budget"
+                      placeholder="Estimated Budget (optional)"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-timeline" className="sr-only">
+                      Campaign Timeline (optional)
+                    </label>
+                    <input
+                      id="contact-timeline"
+                      suppressHydrationWarning
+                      name="timeline"
+                      placeholder="Campaign Timeline (optional)"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="sr-only">
+                    Collaboration Message
+                  </label>
+                  <textarea
+                    id="contact-message"
                     suppressHydrationWarning
-                    name="budget"
-                    placeholder="Estimated Budget (optional)"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
-                  <input
-                    suppressHydrationWarning
-                    name="timeline"
-                    placeholder="Campaign Timeline (optional)"
+                    name="message"
+                    required
+                    rows={5}
+                    placeholder="Tell me about your political or social media campaign, expected deliverables, and goals."
                     className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   />
                 </div>
-                <textarea
-                  suppressHydrationWarning
-                  name="message"
-                  required
-                  rows={5}
-                  placeholder="Tell me about your political or social media campaign, expected deliverables, and goals."
-                  className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                />
+                <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
+                  <input
+                    suppressHydrationWarning
+                    type="checkbox"
+                    name="consent"
+                    required
+                    className="mt-0.5 h-4 w-4 accent-[var(--accent)]"
+                  />
+                  <span>
+                    I agree to the <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link> and{" "}
+                    <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms</Link>, and consent to being contacted about this inquiry.
+                  </span>
+                </label>
                 <button
                   suppressHydrationWarning
                   type="submit"
@@ -233,11 +276,9 @@ export default function ContactPage() {
               </form>
             </>
           ) : (
-            <div className="text-center">
-              <h2 className="font-display text-3xl text-white md:text-4xl">Brief received</h2>
-              <p className="mt-3 text-sm text-slate-300 md:text-base">
-                Thanks for sharing the details. I will get back to you within 24-48 hours with the next step.
-              </p>
+            <div className="text-center" role="status" aria-live="polite" aria-atomic="true">
+              <h2 className="font-display text-3xl text-white md:text-4xl">{success.title}</h2>
+              <p className="mt-3 text-sm text-slate-300 md:text-base">{success.description}</p>
             </div>
           )}
         </div>
@@ -259,15 +300,29 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl text-white md:text-4xl">Social Channels</h2>
-          <Link href="/about" className="text-xs uppercase tracking-[0.16em] text-[var(--muted)] hover:text-white">
-            View Creator Story
+          <h2 className="font-display text-3xl text-white md:text-4xl">{socialHeading}</h2>
+          <Link href={socialCtaHref} className="text-xs uppercase tracking-[0.16em] text-[var(--muted)] hover:text-white">
+            {socialCtaLabel}
           </Link>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
           {socialProfiles.map((social) => {
             const Icon = socialIcons[social.name];
+            if (!social.href) {
+              return (
+                <div
+                  key={social.name}
+                  aria-disabled="true"
+                  className="rounded-2xl border border-white/10 bg-black/20 p-6 opacity-75"
+                >
+                  <Icon className="h-7 w-7 text-slate-300" />
+                  <p className="mt-4 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">{social.name}</p>
+                  <p className="mt-2 text-lg font-semibold text-slate-300">{social.handle}</p>
+                </div>
+              );
+            }
+
             return (
             <a
               key={social.name}
@@ -275,6 +330,7 @@ export default function ContactPage() {
               onClick={() => handleSocialClick(social.name)}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${social.name} profile (opens in a new tab)`}
               className="group rounded-2xl border border-white/10 bg-black/20 p-6 transition hover:border-[var(--accent)]/55"
             >
               <Icon className="h-7 w-7 text-slate-200 group-hover:text-[var(--accent)]" />

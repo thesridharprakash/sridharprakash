@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "eyebrow": "Direct Booking",
+    "title": "Book political coverage, social media promotion, and creator partnerships.",
+    "description": "Share your campaign timeline, goals, and preferred date. This booking form goes directly to my team.",
+    "ctaLabel": "Prefer Email Instead",
+    "ctaHref": "mailto:thesridharprakash@gmail.com?subject=Booking%20Request"
+  },
+  "highlights": [
+    {
+      "label": "Scheduling",
+      "title": "Scheduling",
+      "description": "Tell us your preferred date and time window."
+    },
+    {
+      "label": "Campaign Fit",
+      "title": "Campaign Fit",
+      "description": "Choose your requirement so we can respond with an exact collaboration plan."
+    },
+    {
+      "label": "Response Time",
+      "title": "Response Time",
+      "description": "Expected response within 24-48 hours."
+    }
+  ],
+  "bookingTypes": [
+    "Political campaign promotion",
+    "On-ground campaign coverage",
+    "Public event appearance",
+    "Travel and IRL collaboration",
+    "Social media strategy support",
+    "Other"
+  ],
+  "bookingAreas": [
+    "Bengaluru",
+    "Karnataka (outside Bengaluru)",
+    "Other city in India",
+    "International",
+    "Not decided yet"
+  ],
+  "faqHeading": "Booking policies and expectations",
+  "bookingFaqs": [
+    {
+      "question": "How quickly will I get a response after submitting?",
+      "answer": "Booking inquiries are typically reviewed within 24-48 hours. Urgent requests should mention the exact event date and deadline in the brief."
+    },
+    {
+      "question": "What deliverables are included?",
+      "answer": "Deliverables depend on the package and campaign type, and can include reels/shorts, long-form edits, on-ground coverage clips, and rollout support."
+    },
+    {
+      "question": "Do you travel for projects?",
+      "answer": "Yes. Bengaluru, Karnataka, pan-India, and international travel are available. Travel, stay, and local logistics are scoped and approved before confirmation."
+    },
+    {
+      "question": "How does payment work?",
+      "answer": "Projects are confirmed with an advance payment, with remaining amounts tied to milestones or final delivery. Invoice and payment schedule are shared before kickoff."
+    },
+    {
+      "question": "What is your revision policy?",
+      "answer": "Each package includes a defined revision window. Minor edits are covered within scope; major creative changes or extra rounds are treated as additional work."
+    }
+  ],
+  "form": {
+    "heading": "Booking request form",
+    "introLinkLabel": "Prefer Email Instead",
+    "introLinkHref": "mailto:thesridharprakash@gmail.com?subject=Booking%20Request",
+    "buttonLabel": "Submit Booking Request",
+    "successTitle": "Booking request received",
+    "successDescription": "Thank you. We will reach out within 24-48 hours with next steps and collaboration options.",
+    "successLinkLabel": "View Media Portfolio",
+    "successLinkHref": "/media"
+  }
+}

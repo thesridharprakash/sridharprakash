@@ -83,20 +83,23 @@ export default function Volunteer() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_10%,rgba(56,189,248,0.16),transparent_34%),radial-gradient(circle_at_8%_80%,rgba(245,158,11,0.14),transparent_40%)]" />
 
       <section className="mx-auto max-w-6xl px-6 pb-12 pt-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-4xl"
-        >
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Volunteer Program</p>
-          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
-            Join the campaign and media volunteer team.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">
-            If you care about politics and public conversations, support on-ground coverage, event coordination, and social media execution.
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Volunteer Program</p>
+            <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
+              Join the campaign and media volunteer team.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">
+              If you care about politics and public conversations, support on-ground coverage, event coordination, and social media execution.
+            </p>
+            <p className="mt-2 max-w-2xl text-sm text-slate-400">
+              This form also handles press or partnership inquiries (we monitor the same inbox), so feel free to describe how you’d like to collaborate if you aren’t signing up as volunteer.
+            </p>
+          </motion.div>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-4 px-6 pb-12 md:grid-cols-3">
@@ -152,53 +155,84 @@ export default function Volunteer() {
                   aria-hidden="true"
                 />
                 <div className="grid gap-4 md:grid-cols-2">
-                  <input
-                    suppressHydrationWarning
-                    name="name"
-                    required
-                    placeholder="Full Name"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
-                  <input
-                    suppressHydrationWarning
-                    name="mobile"
-                    type="tel"
-                    required
-                    pattern="[6-9][0-9]{9}"
-                    title="Enter a valid 10-digit mobile number"
-                    inputMode="numeric"
-                    maxLength={10}
-                    placeholder="Mobile Number"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
+                  <div>
+                    <label htmlFor="volunteer-name" className="sr-only">
+                      Full Name
+                    </label>
+                    <input
+                      id="volunteer-name"
+                      suppressHydrationWarning
+                      name="name"
+                      required
+                      placeholder="Full Name"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="volunteer-mobile" className="sr-only">
+                      Mobile Number
+                    </label>
+                    <input
+                      id="volunteer-mobile"
+                      suppressHydrationWarning
+                      name="mobile"
+                      type="tel"
+                      required
+                      pattern="[6-9][0-9]{9}"
+                      title="Enter a valid 10-digit mobile number"
+                      inputMode="numeric"
+                      maxLength={10}
+                      placeholder="Mobile Number"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <input
-                    suppressHydrationWarning
-                    name="email"
-                    type="email"
-                    placeholder="Email Address (optional)"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
-                  <input
-                    suppressHydrationWarning
-                    name="area"
-                    placeholder="City / Area"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                  />
+                  <div>
+                    <label htmlFor="volunteer-email" className="sr-only">
+                      Email Address (optional)
+                    </label>
+                    <input
+                      id="volunteer-email"
+                      suppressHydrationWarning
+                      name="email"
+                      type="email"
+                      placeholder="Email Address (optional)"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="volunteer-area" className="sr-only">
+                      City or Area
+                    </label>
+                    <input
+                      id="volunteer-area"
+                      suppressHydrationWarning
+                      name="area"
+                      placeholder="City / Area"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    />
+                  </div>
                 </div>
 
-                <select
-                  suppressHydrationWarning
-                  name="interest"
-                  className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                >
-                  <option>Campaign trail support</option>
-                  <option>Event and crowd coordination</option>
-                  <option>Social media and digital outreach</option>
-                  <option>Video shooting/editing support</option>
-                </select>
+                <div>
+                  <label htmlFor="volunteer-interest" className="sr-only">
+                    Volunteer Interest
+                  </label>
+                  <select
+                    id="volunteer-interest"
+                    suppressHydrationWarning
+                    name="interest"
+                    className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                  >
+                <option>Campaign trail support</option>
+                <option>Event and crowd coordination</option>
+                <option>Social media and digital outreach</option>
+                <option>Video shooting/editing support</option>
+                <option>Press or partnership inquiry</option>
+              </select>
+            </div>
 
                 <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
                   <input
@@ -208,7 +242,11 @@ export default function Volunteer() {
                     required
                     className="mt-0.5 h-4 w-4 accent-[var(--accent)]"
                   />
-                  <span>I consent to being contacted for campaign and media volunteer activities.</span>
+                  <span>
+                    I agree to the <a href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</a> and{" "}
+                    <a href="/terms" className="text-[var(--accent)] hover:underline">Terms</a>, and consent to being contacted for campaign and volunteer
+                    activities.
+                  </span>
                 </label>
 
                 <motion.button
@@ -237,6 +275,9 @@ export default function Volunteer() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="text-center"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
             >
               <CheckCircleIcon className="mx-auto h-16 w-16 text-[var(--accent)]" />
               <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
@@ -249,6 +290,7 @@ export default function Volunteer() {
           )}
         </div>
       </section>
+
     </main>
   );
 }
