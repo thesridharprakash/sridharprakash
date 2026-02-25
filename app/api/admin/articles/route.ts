@@ -53,9 +53,11 @@ export async function POST(request: Request) {
     const body = (await request.json()) as CreateArticlePayload;
     const secretError = assertAdminSecret("publish", body.secret);
     if (secretError) return secretError;
-
-    const mfaError = assertAdminMfa("publish", request.headers.get("x-admin-otp"));
-    if (mfaError) return mfaError;
+    const status = body.status === "draft" ? "draft" : "published";
+    if (status === "published") {
+      const mfaError = assertAdminMfa("publish", request.headers.get("x-admin-otp"));
+      if (mfaError) return mfaError;
+    }
 
     const title = sanitizeText(body.title || "", 180);
     const summary = sanitizeText(body.summary || "", 320);
@@ -63,7 +65,6 @@ export async function POST(request: Request) {
     const rawImgValue = sanitizeText(body.img ?? "", 300);
     const content = (body.content || "").trim().replace(/\r\n/g, "\n");
     const rawSlug = sanitizeText(body.slug || "", 200);
-    const status = body.status === "draft" ? "draft" : "published";
     const videoUrl = sanitizeText(body.videoUrl || "", 400);
     const voiceUrl = sanitizeText(body.voiceUrl || "", 400);
     const category: CreateArticlePayload["category"] =

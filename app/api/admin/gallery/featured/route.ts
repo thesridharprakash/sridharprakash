@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
-import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { assertAdminSecret } from "@/lib/adminAuth";
 import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { readFeaturedGalleryId, writeFeaturedGalleryId } from "@/lib/galleryFeatured";
 
@@ -18,9 +18,6 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const mfaError = assertAdminMfa("gallery-featured", request.headers.get("x-admin-otp"));
-  if (mfaError) return mfaError;
-
   const payload = (await request.json().catch(() => null)) as
     | { id?: string | null; secret?: string }
     | null;

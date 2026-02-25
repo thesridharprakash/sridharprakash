@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
-import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { assertAdminSecret } from "@/lib/adminAuth";
 import { isAdminBlobEnabled, uploadBlobFromBuffer } from "@/lib/adminBlobUpload";
 import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 
@@ -31,9 +31,6 @@ function getExtensionFromType(type: string) {
 
 export async function POST(request: Request) {
   try {
-    const mfaError = assertAdminMfa("image-upload", request.headers.get("x-admin-otp"));
-    if (mfaError) return mfaError;
-
     const formData = await request.formData();
     const secret = String(formData.get("secret") || "").trim();
     const secretError = assertAdminSecret("image-upload", secret);

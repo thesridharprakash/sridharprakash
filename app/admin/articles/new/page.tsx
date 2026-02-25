@@ -640,7 +640,7 @@ function AdminNewArticlePageInner() {
               placeholder="6-digit code"
             />
             <p className="mt-2 text-xs text-slate-400">
-              Provide the TOTP from the <code>ADMIN_MFA_SECRET</code> entry configured in your authenticator app.
+              Google Authenticator code is required to publish. Draft saves and image uploads can use only the admin secret.
             </p>
           </div>
 

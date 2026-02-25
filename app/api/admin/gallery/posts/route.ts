@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
-import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { assertAdminSecret } from "@/lib/adminAuth";
 import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { readGalleryPosts, writeGalleryPosts, GalleryPost } from "@/lib/galleryPosts";
 import crypto from "crypto";
@@ -62,9 +62,6 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const mfaError = assertAdminMfa("gallery-post", request.headers.get("x-admin-otp"));
-  if (mfaError) return mfaError;
-
   const payload = (await request.json().catch(() => null)) as
     | (Partial<GalleryPost> & { secret?: string })
     | null;
@@ -135,9 +132,6 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const mfaError = assertAdminMfa("gallery-post-delete", request.headers.get("x-admin-otp"));
-  if (mfaError) return mfaError;
-
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
   if (!id) {
