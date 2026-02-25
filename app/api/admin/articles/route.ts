@@ -163,6 +163,7 @@ export async function POST(request: Request) {
       ok: true,
       slug: safeSlug,
       status,
+      storage: useRepoStorage ? "github" : "local",
       file: `content/articles/${fileName}`,
     });
   } catch (error) {

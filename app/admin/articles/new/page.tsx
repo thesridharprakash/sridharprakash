@@ -122,7 +122,7 @@ function AdminNewArticlePageInner() {
         });
 
         const payload = (await response.json().catch(() => null)) as
-          | { ok?: boolean; slug?: string; status?: string; error?: string }
+          | { ok?: boolean; slug?: string; status?: string; storage?: "github" | "local"; error?: string }
           | null;
 
         if (!response.ok) {
@@ -143,7 +143,14 @@ function AdminNewArticlePageInner() {
 
         setResult({
           ok: true,
-          message: targetStatus === "draft" ? "Draft saved successfully." : "Article published successfully.",
+          message:
+            payload?.storage === "github"
+              ? targetStatus === "draft"
+                ? "Draft saved to GitHub. It will appear in the admin list after Vercel deploys the new commit, and it stays hidden publicly until you publish."
+                : "Article published to GitHub. It will appear on the site after Vercel deploy completes."
+              : targetStatus === "draft"
+                ? "Draft saved successfully."
+                : "Article published successfully.",
           slug: publishedSlug,
         });
       } catch {
