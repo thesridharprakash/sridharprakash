@@ -5,6 +5,7 @@ import { createAdminSessionToken, getSessionTtl, SESSION_COOKIE_NAME } from "@/l
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
+const ADMIN_COOKIE_DOMAIN = process.env.ADMIN_COOKIE_DOMAIN?.trim() || undefined;
 
 export async function POST(request: Request) {
   const payload = (await request.json().catch(() => null)) as { secret?: string; otp?: string } | null;
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
+    domain: ADMIN_COOKIE_DOMAIN,
     path: "/",
     maxAge: getSessionTtl(),
   });
