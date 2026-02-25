@@ -12,9 +12,10 @@ type Props = {
 };
 
 export default function GalleryAdminIndexClient({ posts, featuredId }: Props) {
+  const [items, setItems] = useState<GalleryPost[]>(posts);
   const sorted = useMemo(
-    () => [...posts].sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0)),
-    [posts],
+    () => [...items].sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0)),
+    [items],
   );
   const [currentFeatured, setCurrentFeatured] = useState<string | null>(featuredId);
   const [secret, setSecret] = useState("");
@@ -22,6 +23,7 @@ export default function GalleryAdminIndexClient({ posts, featuredId }: Props) {
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const authFetch = useCallback(
     async (url: string, init: RequestInit = {}) => {
@@ -59,6 +61,34 @@ export default function GalleryAdminIndexClient({ posts, featuredId }: Props) {
       setError("Network error while updating featured story.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (post: GalleryPost) => {
+    const confirmed = window.confirm(`Delete gallery entry "${post.title}"?`);
+    if (!confirmed) return;
+
+    setDeletingId(post.id);
+    setStatus(null);
+    setError(null);
+    try {
+      const response = await authFetch(`/api/admin/gallery/posts?id=${encodeURIComponent(post.id)}`, {
+        method: "DELETE",
+      });
+      const payload = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!response.ok || !payload?.ok) {
+        setError(payload?.error || "Unable to delete gallery entry.");
+        return;
+      }
+      setItems((prev) => prev.filter((item) => item.id !== post.id));
+      if (currentFeatured === post.id) {
+        setCurrentFeatured(null);
+      }
+      setStatus("Gallery entry deleted.");
+    } catch {
+      setError("Network error while deleting gallery entry.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -142,12 +172,22 @@ export default function GalleryAdminIndexClient({ posts, featuredId }: Props) {
                 <p className="mt-2 text-sm text-slate-300 line-clamp-3">{post.description}</p>
                 <div className="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.3em] text-slate-400">
                   <span>{post.pieces}</span>
-                  <Link
-                    href={`/admin/gallery/new?id=${post.id}`}
-                    className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:border-white"
-                  >
-                    Edit
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href={`/admin/gallery/new?id=${post.id}`}
+                      className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white transition hover:border-white"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => void handleDelete(post)}
+                      disabled={deletingId === post.id || loading}
+                      className="rounded-full border border-rose-300/40 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-rose-200 transition hover:border-rose-200 disabled:opacity-50"
+                    >
+                      {deletingId === post.id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </div>
                 <ClientOnly
                   fallback={
