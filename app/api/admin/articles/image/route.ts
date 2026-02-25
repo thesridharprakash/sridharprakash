@@ -3,6 +3,8 @@ import path from "path";
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
 import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { isAdminBlobEnabled, uploadBlobFromBuffer } from "@/lib/adminBlobUpload";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -70,16 +72,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid file path." }, { status: 400 });
     }
 
-    fs.mkdirSync(uploadsDir, { recursive: true });
     const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(targetPath, buffer);
+    let publicPath = `/images/uploads/${fileName}`;
+    if (isAdminBlobEnabled()) {
+      const blob = await uploadBlobFromBuffer(`admin/articles/${fileName}`, buffer, file.type);
+      publicPath = blob.url;
+    } else {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+      fs.writeFileSync(targetPath, buffer);
+    }
     adminLog("image-upload-success", { file: fileName, size: file.size });
 
     return NextResponse.json({
       ok: true,
-      path: `/images/uploads/${fileName}`,
+      path: publicPath,
     });
-  } catch {
-    return NextResponse.json({ error: "Failed to upload image." }, { status: 400 });
+  } catch (error) {
+    adminLog("image-upload-error", { error: String(error) });
+    const storageError =
+      getAdminStorageWriteErrorMessage(error, "Article image upload") ||
+      (String(error).includes("Blob upload failed")
+        ? "Image upload to Vercel Blob failed. Check BLOB_READ_WRITE_TOKEN and Blob permissions."
+        : null);
+    return NextResponse.json(
+      { error: storageError || "Failed to upload image." },
+      { status: storageError ? 500 : 400 }
+    );
   }
 }

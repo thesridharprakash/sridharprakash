@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { readEventsArchive, writeEventsArchive, type EventsArchiveRecord } from "@/lib/youtubeEvents";
 
 export const runtime = "nodejs";
@@ -64,11 +65,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
-    const saved = writeEventsArchive(validation.items);
+    const saved = await writeEventsArchive(validation.items);
     adminLog("events-archive-save", { count: saved.length });
     return NextResponse.json({ ok: true, items: saved });
   } catch (error) {
     adminLog("events-archive-save-error", { error: String(error) });
-    return NextResponse.json({ error: "Unable to save events archive." }, { status: 500 });
+    return NextResponse.json(
+      { error: getAdminStorageWriteErrorMessage(error, "Events archive") || "Unable to save events archive." },
+      { status: 500 }
+    );
   }
 }

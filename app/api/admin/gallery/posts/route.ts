@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
 import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { readGalleryPosts, writeGalleryPosts, GalleryPost } from "@/lib/galleryPosts";
 import crypto from "crypto";
 
@@ -121,8 +122,16 @@ export async function POST(request: Request) {
     adminLog("gallery-post-created", { id: updatedPost.id });
   }
 
-  writeGalleryPosts(posts);
-  return NextResponse.json({ ok: true, post: updatedPost, posts });
+  try {
+    await writeGalleryPosts(posts);
+    return NextResponse.json({ ok: true, post: updatedPost, posts });
+  } catch (error) {
+    adminLog("gallery-post-save-error", { error: String(error) });
+    return NextResponse.json(
+      { error: getAdminStorageWriteErrorMessage(error, "Gallery posts") || "Unable to save gallery post." },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(request: Request) {
@@ -141,7 +150,15 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: "Post not found." }, { status: 404 });
   }
 
-  writeGalleryPosts(remaining);
-  adminLog("gallery-post-deleted", { id });
-  return NextResponse.json({ ok: true });
+  try {
+    await writeGalleryPosts(remaining);
+    adminLog("gallery-post-deleted", { id });
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    adminLog("gallery-post-delete-error", { id, error: String(error) });
+    return NextResponse.json(
+      { error: getAdminStorageWriteErrorMessage(error, "Gallery posts") || "Unable to delete gallery post." },
+      { status: 500 }
+    );
+  }
 }

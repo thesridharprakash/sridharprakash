@@ -3,6 +3,13 @@ import path from "path";
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
 import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import {
+  deleteRepoFile,
+  isAdminRepoStorageEnabled,
+  repoFileExists,
+  writeRepoFile,
+} from "@/lib/adminRepoStorage";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -91,8 +98,6 @@ export async function POST(request: Request) {
       );
     }
 
-    fs.mkdirSync(articlesDir, { recursive: true });
-
     const fileName = `${safeSlug}.md`;
     const filePath = path.join(articlesDir, fileName);
     if (!filePath.startsWith(articlesDir)) {
@@ -102,12 +107,25 @@ export async function POST(request: Request) {
       );
     }
 
-    if (fs.existsSync(filePath) && !body.overwrite) {
-      adminLog("publish-duplicate-slug", { slug: safeSlug });
-      return NextResponse.json(
-        { error: "An article with this slug already exists." },
-        { status: 409 }
-      );
+    const useRepoStorage = isAdminRepoStorageEnabled();
+    if (!useRepoStorage) {
+      fs.mkdirSync(articlesDir, { recursive: true });
+      if (fs.existsSync(filePath) && !body.overwrite) {
+        adminLog("publish-duplicate-slug", { slug: safeSlug });
+        return NextResponse.json(
+          { error: "An article with this slug already exists." },
+          { status: 409 }
+        );
+      }
+    } else if (!body.overwrite) {
+      const exists = await repoFileExists(`content/articles/${fileName}`);
+      if (exists) {
+        adminLog("publish-duplicate-slug", { slug: safeSlug });
+        return NextResponse.json(
+          { error: "An article with this slug already exists." },
+          { status: 409 }
+        );
+      }
     }
 
     const frontMatter = [
@@ -129,7 +147,15 @@ export async function POST(request: Request) {
     );
     const markdown = [...frontMatter, content, ""].join("\n");
 
-    fs.writeFileSync(filePath, markdown, "utf8");
+    if (useRepoStorage) {
+      await writeRepoFile(
+        `content/articles/${fileName}`,
+        markdown,
+        `${body.overwrite ? "Update" : "Create"} article ${safeSlug}`
+      );
+    } else {
+      fs.writeFileSync(filePath, markdown, "utf8");
+    }
     adminLog("publish-success", { slug: safeSlug, status, file: filePath });
 
     return NextResponse.json({
@@ -138,11 +164,13 @@ export async function POST(request: Request) {
       status,
       file: `content/articles/${fileName}`,
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Invalid request payload." },
-      { status: 400 }
-    );
+  } catch (error) {
+    adminLog("publish-error", { error: String(error) });
+    const storageError = getAdminStorageWriteErrorMessage(error, "Article");
+    if (storageError) {
+      return NextResponse.json({ error: storageError }, { status: 500 });
+    }
+    return NextResponse.json({ error: "Invalid request payload." }, { status: 400 });
   }
 }
 
@@ -183,7 +211,20 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: "Article not found." }, { status: 404 });
   }
 
-  fs.unlinkSync(filePath);
+  try {
+    if (isAdminRepoStorageEnabled()) {
+      await deleteRepoFile(`content/articles/${fileName}`, `Delete article ${safeSlug}`);
+    } else {
+      fs.unlinkSync(filePath);
+    }
+  } catch (error) {
+    adminLog("article-delete-error", { slug: safeSlug, error: String(error) });
+    const storageError = getAdminStorageWriteErrorMessage(error, "Article");
+    return NextResponse.json(
+      { error: storageError || "Unable to delete article." },
+      { status: storageError ? 500 : 400 }
+    );
+  }
   adminLog("article-delete-success", { slug: safeSlug, file: filePath });
   return NextResponse.json({ ok: true });
 }

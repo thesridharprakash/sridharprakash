@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { importRecentCompletedEventsIntoArchive } from "@/lib/youtubeEvents";
 
 export const runtime = "nodejs";
@@ -23,6 +24,13 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     adminLog("events-archive-import-error", { error: String(error) });
-    return NextResponse.json({ error: "Unable to import recent YouTube events." }, { status: 500 });
+    return NextResponse.json(
+      {
+        error:
+          getAdminStorageWriteErrorMessage(error, "Events archive import") ||
+          "Unable to import recent YouTube events.",
+      },
+      { status: 500 }
+    );
   }
 }

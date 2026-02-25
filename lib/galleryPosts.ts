@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { isAdminRepoStorageEnabled, writeRepoFile } from "@/lib/adminRepoStorage";
 
 export type GalleryPost = {
   id: string;
@@ -35,7 +36,12 @@ export function readGalleryPosts(): GalleryPost[] {
   }
 }
 
-export function writeGalleryPosts(posts: GalleryPost[]) {
+export async function writeGalleryPosts(posts: GalleryPost[]) {
   ensurePostsDir();
-  fs.writeFileSync(postsFile, JSON.stringify(posts, null, 2), "utf8");
+  const content = `${JSON.stringify(posts, null, 2)}\n`;
+  if (isAdminRepoStorageEnabled()) {
+    await writeRepoFile("data/gallery/posts.json", content, "Update gallery posts");
+    return;
+  }
+  fs.writeFileSync(postsFile, content, "utf8");
 }

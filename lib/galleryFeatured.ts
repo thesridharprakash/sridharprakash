@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { isAdminRepoStorageEnabled, writeRepoFile } from "@/lib/adminRepoStorage";
 
 const featuredFile = path.join(process.cwd(), "data", "gallery", "featured.json");
 
@@ -32,7 +33,12 @@ export function readFeaturedGalleryId(): string | null {
   }
 }
 
-export function writeFeaturedGalleryId(id: string | null) {
+export async function writeFeaturedGalleryId(id: string | null) {
   ensureDir();
-  fs.writeFileSync(featuredFile, JSON.stringify({ id }, null, 2), "utf8");
+  const content = `${JSON.stringify({ id }, null, 2)}\n`;
+  if (isAdminRepoStorageEnabled()) {
+    await writeRepoFile("data/gallery/featured.json", content, "Update featured gallery item");
+    return;
+  }
+  fs.writeFileSync(featuredFile, content, "utf8");
 }

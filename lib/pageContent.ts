@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { isAdminRepoStorageEnabled, writeRepoFile } from "@/lib/adminRepoStorage";
 
 const pagesDir = path.join(process.cwd(), "data/pages");
 
@@ -16,7 +17,12 @@ export function readPageContent<T = unknown>(slug: string): T {
   return JSON.parse(raw) as T;
 }
 
-export function writePageContent(slug: string, payload: unknown) {
+export async function writePageContent(slug: string, payload: unknown) {
   const filePath = resolvePagePath(slug);
-  fs.writeFileSync(filePath, JSON.stringify(payload, null, 2));
+  const content = `${JSON.stringify(payload, null, 2)}\n`;
+  if (isAdminRepoStorageEnabled()) {
+    await writeRepoFile(`data/pages/${slug}.json`, content, `Update ${slug} page content`);
+    return;
+  }
+  fs.writeFileSync(filePath, content);
 }

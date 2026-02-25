@@ -3,6 +3,8 @@ import path from "path";
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
 import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
+import { isAdminBlobEnabled, uploadBlobFromBuffer } from "@/lib/adminBlobUpload";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 
 export const runtime = "nodejs";
 
@@ -26,47 +28,67 @@ function getExtensionFromType(type: string) {
 }
 
 export async function POST(request: Request) {
-  const mfaError = assertAdminMfa("gallery-image-upload", request.headers.get("x-admin-otp"));
-  if (mfaError) return mfaError;
+  try {
+    const mfaError = assertAdminMfa("gallery-image-upload", request.headers.get("x-admin-otp"));
+    if (mfaError) return mfaError;
 
-  const formData = await request.formData();
-  const secret = String(formData.get("secret") || "").trim();
-  const secretError = assertAdminSecret("gallery-image-upload", secret);
-  if (secretError) return secretError;
+    const formData = await request.formData();
+    const secret = String(formData.get("secret") || "").trim();
+    const secretError = assertAdminSecret("gallery-image-upload", secret);
+    if (secretError) return secretError;
 
-  const file = formData.get("file");
-  if (!(file instanceof File)) {
-    return NextResponse.json({ error: "Image file is required." }, { status: 400 });
+    const file = formData.get("file");
+    if (!(file instanceof File)) {
+      return NextResponse.json({ error: "Image file is required." }, { status: 400 });
+    }
+
+    if (!allowedMimeTypes.has(file.type)) {
+      return NextResponse.json({ error: "Only JPG, PNG, or WEBP images are allowed." }, { status: 400 });
+    }
+
+    if (file.size <= 0 || file.size > MAX_UPLOAD_BYTES) {
+      return NextResponse.json({ error: "Image must be less than 5 MB." }, { status: 400 });
+    }
+
+    const ext = getExtensionFromType(file.type);
+    const baseName = sanitizeBaseName(String(formData.get("baseName") || "gallery-image"));
+    const fileName = `${Date.now()}-${baseName}.${ext}`;
+    const targetPath = path.join(uploadsDir, fileName);
+
+    if (!targetPath.startsWith(uploadsDir)) {
+      return NextResponse.json({ error: "Invalid file path." }, { status: 400 });
+    }
+
+    const data = Buffer.from(await file.arrayBuffer());
+    let publicPath = `/images/gallery/${fileName}`;
+    if (isAdminBlobEnabled()) {
+      const blob = await uploadBlobFromBuffer(`admin/gallery/${fileName}`, data, file.type);
+      publicPath = blob.url;
+    } else {
+      if (!fs.existsSync(uploadsDir)) {
+        fs.mkdirSync(uploadsDir, { recursive: true });
+      }
+      fs.writeFileSync(targetPath, data);
+    }
+
+    adminLog("gallery-image-upload-success", { file: fileName, size: file.size });
+
+    return NextResponse.json({
+      ok: true,
+      path: publicPath,
+    });
+  } catch (error) {
+    adminLog("gallery-image-upload-error", { error: String(error) });
+    return NextResponse.json(
+      {
+        error:
+          getAdminStorageWriteErrorMessage(error, "Gallery image upload") ||
+          (String(error).includes("Blob upload failed")
+            ? "Image upload to Vercel Blob failed. Check BLOB_READ_WRITE_TOKEN and Blob permissions."
+            : null) ||
+          "Failed to upload gallery image.",
+      },
+      { status: 500 }
+    );
   }
-
-  if (!allowedMimeTypes.has(file.type)) {
-    return NextResponse.json({ error: "Only JPG, PNG, or WEBP images are allowed." }, { status: 400 });
-  }
-
-  if (file.size <= 0 || file.size > MAX_UPLOAD_BYTES) {
-    return NextResponse.json({ error: "Image must be less than 5 MB." }, { status: 400 });
-  }
-
-  const ext = getExtensionFromType(file.type);
-  const baseName = sanitizeBaseName(String(formData.get("baseName") || "gallery-image"));
-  const fileName = `${Date.now()}-${baseName}.${ext}`;
-  const targetPath = path.join(uploadsDir, fileName);
-
-  if (!targetPath.startsWith(uploadsDir)) {
-    return NextResponse.json({ error: "Invalid file path." }, { status: 400 });
-  }
-
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-  }
-
-  const data = Buffer.from(await file.arrayBuffer());
-  fs.writeFileSync(targetPath, data);
-
-  adminLog("gallery-image-upload-success", { file: fileName, size: file.size });
-
-  return NextResponse.json({
-    ok: true,
-    path: `/images/gallery/${fileName}`,
-  });
 }

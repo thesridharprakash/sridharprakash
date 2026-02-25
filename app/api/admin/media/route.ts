@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
+import { getAdminStorageWriteErrorMessage } from "@/lib/adminStorageErrors";
 import { readPageContent, writePageContent } from "@/lib/pageContent";
 
 const PAGE_SLUG = "media";
@@ -19,11 +20,14 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as Record<string, unknown>;
-    writePageContent(PAGE_SLUG, payload);
+    await writePageContent(PAGE_SLUG, payload);
     adminLog("page-update", { page: PAGE_SLUG });
     return NextResponse.json({ ok: true, data: payload });
   } catch (error) {
     adminLog("page-update-error", { page: PAGE_SLUG, error: String(error) });
-    return NextResponse.json({ error: "Unable to save media content." }, { status: 500 });
+    return NextResponse.json(
+      { error: getAdminStorageWriteErrorMessage(error, "Media content") || "Unable to save media content." },
+      { status: 500 }
+    );
   }
 }

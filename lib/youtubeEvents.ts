@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { socialProfiles } from "@/constants/socials";
+import { isAdminRepoStorageEnabled, writeRepoFile } from "@/lib/adminRepoStorage";
 
 const YOUTUBE_SEARCH_API = "https://www.googleapis.com/youtube/v3/search";
 const YOUTUBE_CHANNELS_API = "https://www.googleapis.com/youtube/v3/channels";
@@ -318,7 +319,7 @@ function normalizeArchiveRecord(item: Partial<EventsArchiveRecord>): EventsArchi
   };
 }
 
-export function writeEventsArchive(items: EventsArchiveRecord[]) {
+export async function writeEventsArchive(items: EventsArchiveRecord[]) {
   ensureArchiveDir();
   const cleaned = items
     .map((item) => normalizeArchiveRecord(item))
@@ -328,7 +329,13 @@ export function writeEventsArchive(items: EventsArchiveRecord[]) {
     (item, index, arr) => arr.findIndex((entry) => entry.videoId === item.videoId) === index,
   );
 
-  fs.writeFileSync(archiveFile, `${JSON.stringify(deduped, null, 2)}\n`, "utf8");
+  const content = `${JSON.stringify(deduped, null, 2)}\n`;
+  if (isAdminRepoStorageEnabled()) {
+    await writeRepoFile("data/events/archive.json", content, "Update events archive");
+    return deduped;
+  }
+
+  fs.writeFileSync(archiveFile, content, "utf8");
   return deduped;
 }
 
@@ -361,7 +368,7 @@ export async function importRecentCompletedEventsIntoArchive(maxResults = 8) {
     ...existing.filter((item) => !importedRecords.some((imported) => imported.videoId === item.videoId)),
   ];
 
-  const saved = writeEventsArchive(merged);
+  const saved = await writeEventsArchive(merged);
   const importedIds = new Set(importedRecords.map((item) => item.videoId));
 
   return {
