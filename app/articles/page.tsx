@@ -9,7 +9,7 @@ import { getAllArticles } from "./lib";
 
 export default function ArticlesPage() {
   const articles = getAllArticles();
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://sridharprakash.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
 
   return (
     <main className="relative overflow-hidden pt-28 text-[var(--foreground)]">

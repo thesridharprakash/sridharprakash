@@ -19,7 +19,7 @@ export default function GalleryPage() {
   const featuredId = readFeaturedGalleryId();
   const featured =
     (featuredId ? posts.find((entry) => entry.id === featuredId) : null) ?? sortedPosts[0] ?? null;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://sridharprakash.vercel.app";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
   const featuredImages = featured ? [featured.image, ...(featured.images ?? [])].filter(Boolean) : [];
 
   return (

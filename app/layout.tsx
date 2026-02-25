@@ -22,7 +22,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sridharprakash.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in"),
   title: {
     default: "Sridhar Prakash | Political Campaign Coverage & IRL Vlogs",
     template: "%s | Sridhar Prakash",
