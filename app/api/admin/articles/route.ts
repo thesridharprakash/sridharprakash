@@ -208,13 +208,20 @@ export async function DELETE(request: Request) {
     );
   }
 
-  if (!fs.existsSync(filePath)) {
+  const useRepoStorage = isAdminRepoStorageEnabled();
+  if (useRepoStorage) {
+    const exists = await repoFileExists(`content/articles/${fileName}`);
+    if (!exists) {
+      adminLog("article-delete-missing-file", { slug: safeSlug });
+      return NextResponse.json({ error: "Article not found." }, { status: 404 });
+    }
+  } else if (!fs.existsSync(filePath)) {
     adminLog("article-delete-missing-file", { slug: safeSlug });
     return NextResponse.json({ error: "Article not found." }, { status: 404 });
   }
 
   try {
-    if (isAdminRepoStorageEnabled()) {
+    if (useRepoStorage) {
       await deleteRepoFile(`content/articles/${fileName}`, `Delete article ${safeSlug}`);
     } else {
       fs.unlinkSync(filePath);
