@@ -1,6 +1,6 @@
 ---
 title: "Dharwad Boils Over: Youth Storm the Streets Demanding Jobs, Not Promises"
-summary: "Dharwad witnessed a massive student protest as hundreds of government job aspirants took to the streets demanding that vacant government posts be filled immediately. Frustrated by years of delayed and irregular recruitment processes, educated youth questioned the Karnataka government’s priorities and transparency. The "
+summary: "Dharwad witnessed a massive student protest as hundreds of government job aspirants took to the streets demanding that vacant government posts be filled immediately. Frustrated by years of delayed and irregular recruitment processes, educated youth questioned the Karnataka government’s priorities and transparency. The"
 date: "2026-02-25"
 img: "https://kx12hvmszib4finu.public.blob.vercel-storage.com/admin/articles/1772018936128-article-image-VCuAB8LMw3USVgX8S0n2ZPzGjog0WL.png"
 videoUrl: ""
