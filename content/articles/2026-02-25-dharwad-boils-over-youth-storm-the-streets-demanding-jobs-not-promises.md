@@ -6,7 +6,7 @@ img: "https://kx12hvmszib4finu.public.blob.vercel-storage.com/admin/articles/177
 videoUrl: ""
 voiceUrl: ""
 category: "journal"
-status: "draft"
+status: "published"
 ---
 
 Dharwad witnessed intense protests as hundreds of students and government job aspirants took to the streets demanding immediate recruitment to vacant government posts across Karnataka. The demonstrators alleged that lakhs of positions remain unfilled, leaving educated youth waiting for years with little clarity on recruitment timelines.
