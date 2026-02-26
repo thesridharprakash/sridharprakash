@@ -22,9 +22,7 @@ export default function ArticlesPage() {
             Field Journal
           </p>
           <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
-            Ground reports, campaign notes,
-            <br />
-            and creator updates.
+            Where Footsteps Become Stories
           </h1>
           <p className="mt-5 max-w-3xl text-sm text-slate-300 md:text-lg">
             This journal tracks my political coverage, on-ground public conversations, travel logs, and social media experiments.
