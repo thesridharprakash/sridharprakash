@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LogoutButton from "@/components/admin/LogoutButton";
 import AdminHeaderNav from "@/components/admin/AdminHeaderNav";
+import AdminIdleLogout from "@/components/admin/AdminIdleLogout";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -17,6 +18,7 @@ export default function AdminLayout({
 }) {
   return (
     <>
+      <AdminIdleLogout />
       <header className="sticky top-0 z-10 border-b border-white/10 bg-black/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
           <div className="flex items-center gap-4">
