@@ -27,9 +27,26 @@ export const metadata: Metadata = {
     default: "Sridhar Prakash | Political Campaign Coverage & IRL Vlogs",
     template: "%s | Sridhar Prakash",
   },
+  applicationName: "Sridhar Prakash",
   description:
     "Political campaign coverage, social media promotion, travel stories, and IRL vlogs by Sridhar Prakash.",
+  keywords: [
+    "Sridhar Prakash",
+    "political campaign coverage",
+    "field reports",
+    "travel vlogs",
+    "IRL vlogs",
+    "social media promotion",
+  ],
+  authors: [{ name: "Sridhar Prakash" }],
+  creator: "Sridhar Prakash",
+  publisher: "Sridhar Prakash",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
   openGraph: {
+    type: "website",
+    siteName: "Sridhar Prakash",
     images: ["/images/og-image.jpeg"],
   },
   twitter: {

@@ -120,10 +120,10 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
             Trouble-free storyteller
           </div>
           <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">
-            Just a guy chilling with a camera, letting city streets write the script.
+            Sridhar Prakash: letting city streets write the story.
           </h1>
           <p className="mt-6 max-w-xl text-base text-slate-200 md:text-lg">
-            Sridhar Prakash here—chilling through lanes, recording sunsets, sidewalk conversations, spontaneous collabs, and whatever else feels fun enough to capture.
+            Sridhar Prakash is a creator sharing political campaign coverage, field reports, travel stories, and IRL vlogs from across cities and public spaces.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link

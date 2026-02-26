@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { remark } from "remark";
 import html from "remark-html";
+import ShareButton from "@/components/ShareButton";
 import { getAllArticleSlugs, getArticleBySlug } from "../lib";
 
 function getYouTubeEmbedUrl(input?: string) {
@@ -24,6 +25,32 @@ function getYouTubeEmbedUrl(input?: string) {
   } catch {
     return "";
   }
+}
+
+function addExternalLinkAttrs(contentHtml: string, siteUrl: string) {
+  const siteHost = new URL(siteUrl).host;
+
+  return contentHtml.replace(
+    /<a\s+([^>]*?)href=(["'])(.*?)\2([^>]*)>/gi,
+    (fullMatch, beforeHref, quote, href, afterHref) => {
+      const attrs = `${beforeHref}${afterHref}`;
+      if (/\btarget\s*=/.test(attrs)) return fullMatch;
+      if (!href || href.startsWith("/") || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+        return fullMatch;
+      }
+
+      try {
+        const parsed = new URL(href);
+        if (!/^https?:$/.test(parsed.protocol)) return fullMatch;
+        if (parsed.host === siteHost) return fullMatch;
+      } catch {
+        return fullMatch;
+      }
+
+      const relAttr = /\brel\s*=/.test(attrs) ? "" : ' rel="noopener noreferrer"';
+      return `<a ${beforeHref}href=${quote}${href}${quote}${afterHref} target="_blank"${relAttr}>`;
+    }
+  );
 }
 
 type PageProps = {
@@ -82,7 +109,8 @@ export default async function ArticleDetail({ params }: PageProps) {
   }
 
   const processed = await remark().use(html).process(article.content);
-  const contentHtml = processed.toString();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
+  const contentHtml = addExternalLinkAttrs(processed.toString(), baseUrl);
 
   return (
     <main className="min-h-screen bg-[#fcfaf8] pb-24 pt-12 text-[#1a1817] selection:bg-orange-100 md:pt-20">
@@ -109,6 +137,14 @@ export default async function ArticleDetail({ params }: PageProps) {
           </div>
           <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-500">
             Category: {article.category}
+          </div>
+          <div className="mt-6 flex justify-center">
+            <ShareButton
+              title={article.title}
+              description={article.summary}
+              url={`${baseUrl}/articles/${article.slug}`}
+              className="!border-stone-300 !bg-white !px-4 !py-2 !text-stone-700 hover:!border-stone-500"
+            />
           </div>
         </header>
 
@@ -171,7 +207,7 @@ export default async function ArticleDetail({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 
-        <nav className="pt-10">
+        <nav className="flex flex-col gap-4 pt-10 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/articles"
             className="group inline-flex items-center text-xs font-bold uppercase tracking-widest text-stone-400 transition-colors hover:text-orange-600"
@@ -179,6 +215,12 @@ export default async function ArticleDetail({ params }: PageProps) {
             <ChevronLeftIcon className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
             Back to Field Journal
           </Link>
+          <ShareButton
+            title={article.title}
+            description={article.summary}
+            url={`${baseUrl}/articles/${article.slug}`}
+            className="!border-stone-300 !bg-white !px-4 !py-2 !text-stone-700 hover:!border-stone-500"
+          />
         </nav>
       </article>
     </main>

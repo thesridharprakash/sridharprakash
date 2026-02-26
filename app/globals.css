@@ -126,6 +126,25 @@ h6,
   color: #1c1917;
 }
 
+.article-prose.prose a {
+  color: #b45309;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(245, 158, 11, 0.7);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  background: linear-gradient(to top, rgba(251, 191, 36, 0.22) 45%, transparent 45%);
+  border-radius: 0.2rem;
+  transition: color 160ms ease, text-decoration-color 160ms ease, background 160ms ease;
+}
+
+.article-prose.prose a:hover,
+.article-prose.prose a:focus-visible {
+  color: #9a3412;
+  text-decoration-color: rgba(249, 115, 22, 0.85);
+  background: linear-gradient(to top, rgba(251, 191, 36, 0.34) 50%, transparent 50%);
+}
+
 .article-prose.prose blockquote {
   border-left-color: #f97316;
   color: #57534e;
