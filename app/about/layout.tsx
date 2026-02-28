@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Story",
+  title: "About Sridhar Prakash",
   description:
-    "Learn about Sridhar Prakash's creator journey, on-ground political storytelling, and current mission.",
+    "About Sridhar Prakash, a Bengaluru, Karnataka creator focused on political campaign coverage, field reports, and IRL storytelling.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Story | Sridhar Prakash",
+    title: "About Sridhar Prakash",
     description:
-      "Learn about Sridhar Prakash's creator journey, on-ground political storytelling, and current mission.",
+      "About Sridhar Prakash, a Bengaluru, Karnataka creator focused on political campaign coverage, field reports, and IRL storytelling.",
     url: "/about",
     images: ["/images/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Story | Sridhar Prakash",
+    title: "About Sridhar Prakash",
     description:
-      "Learn about Sridhar Prakash's creator journey, on-ground political storytelling, and current mission.",
+      "About Sridhar Prakash, a Bengaluru, Karnataka creator focused on political campaign coverage, field reports, and IRL storytelling.",
     images: ["/images/og-image.jpg"],
   },
 };

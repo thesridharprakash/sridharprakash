@@ -111,6 +111,29 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-12">
+        <div className="rounded-3xl border border-white/15 bg-black/25 p-6 md:p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Search profile</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Sridhar Prakash</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">Full name</p>
+              <p className="mt-2 text-sm font-semibold text-white">Sridhar Prakash</p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">What I do</p>
+              <p className="mt-2 text-sm font-semibold text-white">
+                Creator focused on political campaign coverage, field reports, travel stories, and IRL content.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">City / State</p>
+              <p className="mt-2 text-sm font-semibold text-white">Bengaluru, Karnataka</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-12">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl text-white md:text-4xl">Journey Markers</h2>
           <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Creator Storyline</p>
