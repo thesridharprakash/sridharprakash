@@ -4,8 +4,10 @@ import { Suspense } from "react";
 import { Manrope, Playfair_Display } from "next/font/google";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ScrollToTop from "../components/ScrollToTop";
 import Analytics from "../components/Analytics";
+import MotionProvider from "../components/MotionProvider";
+import ScrollToTopClient from "../components/ScrollToTopClient";
+import AccentBackground from "../components/AccentBackground";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -20,14 +22,31 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sridharprakash.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in"),
   title: {
     default: "Sridhar Prakash | Political Campaign Coverage & IRL Vlogs",
     template: "%s | Sridhar Prakash",
   },
+  applicationName: "Sridhar Prakash",
   description:
     "Political campaign coverage, social media promotion, travel stories, and IRL vlogs by Sridhar Prakash.",
+  keywords: [
+    "Sridhar Prakash",
+    "political campaign coverage",
+    "field reports",
+    "travel vlogs",
+    "IRL vlogs",
+    "social media promotion",
+  ],
+  authors: [{ name: "Sridhar Prakash" }],
+  creator: "Sridhar Prakash",
+  publisher: "Sridhar Prakash",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
   openGraph: {
+    type: "website",
+    siteName: "Sridhar Prakash",
     images: ["/images/og-image.jpeg"],
   },
   twitter: {
@@ -49,10 +68,15 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
-        <Header />
-        {children}
-        <ScrollToTop />
-        <Footer />
+        <MotionProvider>
+          <AccentBackground />
+          <Header />
+          <div id="main-content" tabIndex={-1}>
+            {children}
+          </div>
+          <ScrollToTopClient />
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

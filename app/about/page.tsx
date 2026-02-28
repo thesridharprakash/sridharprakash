@@ -1,13 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowLongRightIcon,
-  Cog6ToothIcon,
-  FireIcon,
-  MapPinIcon,
-  SparklesIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowLongRightIcon, Cog6ToothIcon, FireIcon, MapPinIcon } from "@heroicons/react/24/outline";
 
 const storyFacts = [
   { label: "Born", value: "1991" },
@@ -32,19 +26,6 @@ const journeySteps = [
     text: "I am actively covering political campaigns on the ground while continuing travel, IRL, and social media projects.",
     icon: FireIcon,
   },
-];
-
-const manifesto = [
-  "I choose people over performance.",
-  "I choose real context over scripted clips.",
-  "I choose honesty over performance.",
-  "I choose on-ground work over distant commentary.",
-];
-
-const timeline = [
-  { phase: "Now", text: "Publishing political and IRL field content consistently." },
-  { phase: "Next", text: "Expanding campaign collaborations and audience engagement formats." },
-  { phase: "Then", text: "Building a trusted identity in political coverage and social media promotion." },
 ];
 
 export default function AboutPage() {
@@ -86,24 +67,24 @@ export default function AboutPage() {
               <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-white md:text-7xl">
                 Born in Bengaluru, 1991.
                 <br />
-                Building my voice through political and IRL storytelling.
+                Chilling, chasing storylines, and building a life worth filming.
               </h1>
               <p className="mt-5 max-w-3xl text-sm text-slate-200 md:text-lg">
-                I create on-ground political campaign coverage, travel stories, and social media content that helps people stay connected to real public conversations.
+                I’m just a guy wandering cityscapes, capturing curious people, and turning those moments into loud, honest stories that feel like a late-night chat with friends.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/book"
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--accent-strong)]"
+                  href="/volunteer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-[var(--accent-strong)]"
                 >
-                  Collaborate With Me
+                  Hangout & collab
                   <ArrowLongRightIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/media"
-                  className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
+                  href="/press"
+                  className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white backdrop-blur transition hover:border-white"
                 >
-                  View Media Portfolio
+                  See what I’ve been up to
                 </Link>
               </div>
             </div>
@@ -130,12 +111,32 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-12">
+        <div className="rounded-3xl border border-white/15 bg-black/25 p-6 md:p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Search profile</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Sridhar Prakash</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">Full name</p>
+              <p className="mt-2 text-sm font-semibold text-white">Sridhar Prakash</p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">What I do</p>
+              <p className="mt-2 text-sm font-semibold text-white">
+                Creator focused on political campaign coverage, field reports, travel stories, and IRL content.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">City / State</p>
+              <p className="mt-2 text-sm font-semibold text-white">Bengaluru, Karnataka</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-12">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl text-white md:text-4xl">Journey Markers</h2>
-          <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted)]">
-            <SparklesIcon className="h-4 w-4" />
-            Creator Storyline
-          </p>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Creator Storyline</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -156,50 +157,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="rounded-3xl border border-white/15 bg-[linear-gradient(130deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10"
-        >
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Manifesto</p>
-          <p className="mt-4 max-w-4xl font-display text-3xl leading-tight text-white md:text-5xl">
-            I am building with intent.
-            <br />
-            Every upload serves a larger public conversation.
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/15 bg-[linear-gradient(130deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10 text-center">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Approach</p>
+          <p className="mt-4 max-w-3xl text-xl text-slate-200 md:text-2xl">
+            I’m just here to vibe, chase sunsets, and capture the voices that make every city feel alive. Bring your idea or your curiosity—I’ll turn it into something loud and true.
           </p>
-          <div className="mt-6 grid gap-3 md:grid-cols-2">
-            {manifesto.map((line) => (
-              <p key={line} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
-                {line}
-              </p>
-            ))}
-          </div>
-        </motion.div>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl text-white md:text-4xl">Now, Next, Then</h2>
-          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Path In Motion</p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          {timeline.map((item, idx) => (
-            <motion.article
-              key={item.phase}
-              initial={{ opacity: 0, x: 16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: idx * 0.08, duration: 0.45 }}
-              className="rounded-2xl border border-white/10 bg-black/25 p-6"
-            >
-              <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{item.phase}</p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.text}</p>
-            </motion.article>
-          ))}
+      <section className="mx-auto max-w-6xl px-6 pb-20">
+        <div className="rounded-3xl border border-white/10 bg-black/20 p-6">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">Life log</p>
+          <div className="mt-4 grid gap-3 text-sm text-slate-300 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Today</p>
+              <p className="mt-2 font-semibold text-white">Coffee, chai, and a spontaneous drive out of the city.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Tonight</p>
+              <p className="mt-2 font-semibold text-white">Editing ambient sound reels while the streetlights hum.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Tomorrow</p>
+              <p className="mt-2 font-semibold text-white">Drop a new voice story and see who swings by with a fresh idea.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>

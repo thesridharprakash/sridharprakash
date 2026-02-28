@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "eyebrow": "Contact & Bookings",
+    "title": "Let us build social media campaigns people actually connect with.",
+    "description": "For political promotion, campaign coverage, event invites, and creator partnerships, reach out with your goals, timeline, and expected deliverables."
+  },
+  "highlights": [
+    {
+      "label": "Email",
+      "title": "Email",
+      "value": "thesridharprakash@gmail.com",
+      "description": "Click or copy to share campaign details, media kits, or partnership ideas."
+    },
+    {
+      "label": "Response Window",
+      "title": "Response Window",
+      "value": "Within 24-48 hours",
+      "description": "Include budget range, campaign location, and timeline to help us prioritize your request."
+    },
+    {
+      "label": "Base Location",
+      "title": "Base Location",
+      "value": "Bengaluru, India",
+      "description": "Available for domestic and international travel for events, shoots, and on-ground coverage."
+    }
+  ],
+  "brief": {
+    "label": "Quick Brief",
+    "title": "Send collaboration details",
+    "description": "Share your budget, audience target, and expected deliverables so I can respond with a custom plan."
+  },
+  "collaborationTypes": [
+    "Political campaign social media promotion",
+    "On-ground campaign trail coverage and reporting",
+    "IRL streaming and public event storytelling",
+    "Travel vlogging and creator-led outreach content"
+  ],
+  "socialHeading": "Social Channels",
+  "socialCtaLabel": "View Creator Story",
+  "socialCtaHref": "/about",
+  "success": {
+    "title": "Brief received",
+    "description": "Thanks for sharing the details. I will get back to you within 24-48 hours with next steps."
+  }
+}

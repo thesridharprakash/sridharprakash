@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "eyebrow": "Media Portfolio",
+    "title": "Campaign-ready creator content with energy, personality, and strong retention.",
+    "description": "This page features work across political campaign coverage, IRL field storytelling, and travel content built for audience attention and measurable impact.",
+    "primaryCta": {
+      "label": "Download 1-Page Media Kit (PDF)",
+      "href": "/media-kit.pdf",
+      "download": true
+    },
+    "secondaryCta": {
+      "label": "Start a Collaboration",
+      "href": "/book"
+    }
+  },
+  "mediaKit": [
+    {
+      "label": "Primary Formats",
+      "value": "Reels, Shorts, Long-form"
+    },
+    {
+      "label": "Content Focus",
+      "value": "Politics, Campaigns, Travel, IRL"
+    },
+    {
+      "label": "Delivery Speed",
+      "value": "Draft in 48-72 hours"
+    },
+    {
+      "label": "Audience Mix",
+      "value": "Politically Active Youth + General Audience"
+    }
+  ],
+  "featuredSeries": [
+    {
+      "title": "Campaign Trail Diaries",
+      "type": "Political Coverage Series",
+      "image": "/images/art1.jpg.png",
+      "description": "On-ground political campaign moments, local voices, and rally-day storytelling."
+    },
+    {
+      "title": "City Voices: Election Season",
+      "type": "IRL Public Conversation",
+      "image": "/images/img2.png",
+      "description": "Street interviews and city-level political pulse captured in short and long formats."
+    },
+    {
+      "title": "Road + Report",
+      "type": "Travel and Ground Report",
+      "image": "/images/hero.jpg",
+      "description": "Travel vlogging blended with on-location political updates and audience engagement."
+    }
+  ],
+  "deliverables": [
+    "Political campaign reels and short-form social edits",
+    "IRL streams and on-ground campaign event coverage",
+    "Travel vlog integration with public-interest storytelling",
+    "Photo + thumbnail package for promotion rollouts"
+  ],
+  "liveSectionHeading": "YouTube Live Coverage",
+  "partnership": {
+    "title": "Open to Partnerships",
+    "description": "I am currently open to collaborations with political campaign teams, public-interest initiatives, and brands that need on-ground storytelling. If you are looking for fast, audience-first content with strong retention, let’s build something together.",
+    "badges": [
+      "Launch-ready deliverables",
+      "Flexible creative formats",
+      "Rapid turnaround"
+    ],
+    "ctaLabel": "Start a Collaboration",
+    "ctaHref": "/book"
+  }
+}
