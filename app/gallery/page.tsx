@@ -80,10 +80,10 @@ export default function GalleryPage() {
         <div className="content-card p-6 text-center text-sm text-slate-100">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">General inquiry</p>
           <p className="mt-2 text-base text-white">
-            Want to turn one of these moments into a story, collab, or spontaneous shoot? Hit the same form that handles press, media, and volunteer notes.
+            Want to turn one of these moments into a story, collab, or spontaneous shoot? Send a quick note and I will get back to you.
           </p>
           <Link
-            href="/volunteer"
+            href="/contact"
             className="mt-4 inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-[var(--accent-strong)]"
           >
             Send a note

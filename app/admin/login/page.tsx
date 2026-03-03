@@ -1,9 +1,8 @@
-"use client";
+﻿"use client";
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { TotpSetupInfo } from "@/app/admin/types";
 
 function AdminLoginPageInner() {
@@ -31,9 +30,7 @@ function AdminLoginPageInner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ secret, otp: otpCode }),
       });
-      const payload = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string }
-        | null;
+      const payload = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
       if (!response.ok) {
         setError(payload?.error || "Invalid credentials or authenticator code.");
@@ -64,15 +61,13 @@ function AdminLoginPageInner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ secret }),
       });
-      const payload = (await response.json().catch(() => null)) as
-        | {
-            ok?: boolean;
-            secret?: string;
-            qrCode?: string;
-            provisioningUri?: string;
-            error?: string;
-          }
-        | null;
+      const payload = (await response.json().catch(() => null)) as {
+        ok?: boolean;
+        secret?: string;
+        qrCode?: string;
+        provisioningUri?: string;
+        error?: string;
+      } | null;
 
       if (!response.ok || !payload?.ok) {
         setTotpError(payload?.error || "Unable to load authenticator info.");
@@ -121,7 +116,7 @@ function AdminLoginPageInner() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#111827,_#050505)] py-16 px-4 text-white">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#111827,_#050505)] px-4 py-16 text-white">
       <section className="mx-auto max-w-2xl space-y-6 rounded-3xl border border-white/10 bg-black/50 p-8 shadow-2xl">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.4em] text-slate-400">Admin Access</p>
@@ -139,6 +134,7 @@ function AdminLoginPageInner() {
             </label>
             <input
               id="admin-login-secret"
+              suppressHydrationWarning
               type="password"
               value={secret}
               onChange={(event) => setSecret(event.target.value)}
@@ -153,6 +149,7 @@ function AdminLoginPageInner() {
             </label>
             <input
               id="admin-login-otp"
+              suppressHydrationWarning
               value={otpCode}
               onChange={(event) => setOtpCode(event.target.value)}
               className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
@@ -166,13 +163,14 @@ function AdminLoginPageInner() {
             </p>
           </div>
           <button
+            suppressHydrationWarning
             type="submit"
             disabled={loading}
             className={`w-full rounded-2xl px-4 py-3 text-sm font-semibold text-black transition ${
               loading ? "bg-white/30" : "bg-[var(--accent)] hover:bg-[var(--accent-strong)]"
             }`}
           >
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? "Signing in..." : "Sign in"}
           </button>
           {error ? <p className="text-xs text-rose-300">{error}</p> : null}
         </form>
@@ -184,6 +182,7 @@ function AdminLoginPageInner() {
               <h2 className="text-lg font-semibold">Google Authenticator</h2>
             </div>
             <button
+              suppressHydrationWarning
               type="button"
               onClick={() => void loadTotpInfo()}
               className="rounded-full border border-white/20 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white"
@@ -192,7 +191,7 @@ function AdminLoginPageInner() {
             </button>
           </div>
           {totpLoading ? (
-            <p className="mt-3 text-xs text-slate-400">Loading authenticator info…</p>
+            <p className="mt-3 text-xs text-slate-400">Loading authenticator info...</p>
           ) : totpError ? (
             <p className="mt-3 text-xs text-rose-300">{totpError}</p>
           ) : totpInfo ? (
@@ -215,6 +214,7 @@ function AdminLoginPageInner() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    suppressHydrationWarning
                     type="button"
                     onClick={() => void copyTotpSecret(totpInfo.secret)}
                     className="rounded-full border border-white/20 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white transition hover:border-white"
@@ -232,9 +232,7 @@ function AdminLoginPageInner() {
                     </a>
                   ) : null}
                 </div>
-                {totpCopyMessage ? (
-                  <p className="text-[11px] text-emerald-400">{totpCopyMessage}</p>
-                ) : null}
+                {totpCopyMessage ? <p className="text-[11px] text-emerald-400">{totpCopyMessage}</p> : null}
                 <p className="text-xs text-slate-400">
                   Google Authenticator is free. Scan or paste the secret once, then come back here to log in.
                 </p>
@@ -253,7 +251,15 @@ function AdminLoginPageInner() {
 
 export default function AdminLoginPage() {
   return (
-    <Suspense fallback={<main className="min-h-screen bg-[radial-gradient(circle_at_top,_#111827,_#050505)] py-16 px-4 text-white"><section className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-black/50 p-8"><p className="text-sm text-slate-300">Loading admin login...</p></section></main>}>
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#111827,_#050505)] px-4 py-16 text-white">
+          <section className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-black/50 p-8">
+            <p className="text-sm text-slate-300">Loading admin login...</p>
+          </section>
+        </main>
+      }
+    >
       <AdminLoginPageInner />
     </Suspense>
   );

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,52 +14,52 @@ import type { YouTubeEventsPayload } from "@/lib/youtubeEvents";
 const storyBeats = [
   {
     title: "New direction",
-    body: "I am expanding into political content to connect with politically interested audiences and communities.",
+    body: "I am documenting everyday life in Bengaluru with a simple, honest creator style.",
   },
   {
     title: "What I cover",
-    body: "Political campaign ground reports, travel vlogs, IRL streams, and day-to-day social media storytelling.",
+    body: "City walks, travel snippets, cafe conversations, and day-to-day life moments.",
   },
   {
     title: "Why now",
-    body: "This is the right time to build a strong on-ground voice and deliver promotion that feels real and human.",
+    body: "This phase is about slowing down, observing more, and sharing stories that feel real.",
   },
 ];
 
 const futurePlans = [
-  "On-ground political campaign coverage and field updates.",
-  "Social media promotion support for candidates and campaign teams.",
-  "Travel and IRL vlogging across cities and political events.",
-  "Consistent short-form and long-form content across platforms.",
+  "Weekly city-life stories and reels.",
+  "Short travel episodes from nearby getaways.",
+  "More collaborations with local creators.",
+  "Consistent short-form and long-form uploads.",
 ];
 
 const values = [
   {
     title: "Real over scripted",
-    body: "I document what is happening on the ground, not studio-only narratives.",
+    body: "I capture moments as they happen, not staged versions of them.",
   },
   {
     title: "Respect every voice",
-    body: "People, workers, volunteers, and local communities are represented with dignity.",
+    body: "People and places are represented with care and dignity.",
   },
   {
-    title: "Consistency in public",
-    body: "You will see regular updates from campaign trails, travel days, and live interactions.",
+    title: "Consistency",
+    body: "You will see regular updates from city days, travels, and live sessions.",
   },
 ];
 
 const timeline = [
   {
     title: "Now",
-    body: "Producing political and IRL content while expanding my network.",
+    body: "Publishing everyday stories while refining my creator rhythm.",
   },
   {
     title: "Next 90 days",
-    body: "Scaling campaign coverage, collaborations, and platform growth.",
+    body: "Growing collaborations and improving visual quality.",
   },
   {
     title: "This year",
-    body: "Becoming a trusted creator for political promotion and on-ground storytelling.",
+    body: "Building a trusted personal lifestyle journal from Bengaluru.",
   },
 ];
 
@@ -72,16 +72,12 @@ const socialIcons = {
 };
 
 const socialHoverStyles: Record<keyof typeof socialIcons, string> = {
-  YouTube:
-    "hover:border-red-400/60 hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-900/25",
-  Facebook:
-    "hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-blue-900/25",
+  YouTube: "hover:border-red-400/60 hover:bg-gradient-to-br hover:from-red-500/20 hover:to-red-900/25",
+  Facebook: "hover:border-blue-400/60 hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-blue-900/25",
   Instagram:
     "hover:border-pink-400/60 hover:bg-[linear-gradient(135deg,rgba(225,48,108,0.22),rgba(245,96,64,0.16),rgba(252,175,69,0.12))]",
-  Twitch:
-    "hover:border-violet-400/60 hover:bg-gradient-to-br hover:from-violet-500/20 hover:to-violet-900/25",
-  Kick:
-    "hover:border-lime-300/60 hover:bg-gradient-to-br hover:from-lime-400/20 hover:to-lime-900/25",
+  Twitch: "hover:border-violet-400/60 hover:bg-gradient-to-br hover:from-violet-500/20 hover:to-violet-900/25",
+  Kick: "hover:border-lime-300/60 hover:bg-gradient-to-br hover:from-lime-400/20 hover:to-lime-900/25",
 };
 
 const socialIconHoverStyles: Record<keyof typeof socialIcons, string> = {
@@ -110,28 +106,22 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(249,115,22,0.2),transparent_38%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.15),transparent_35%),radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.15),transparent_32%)]" />
 
       <section className="mx-auto grid max-w-6xl gap-10 px-6 pb-16 pt-36 md:grid-cols-2 md:items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--muted)] backdrop-blur">
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[var(--accent)]" />
-            Trouble-free storyteller
+            Bengaluru life log
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">
-            Sridhar Prakash: letting city streets write the story.
-          </h1>
+          <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">Sridhar Prakash: just exploring life, one day at a time.</h1>
           <p className="mt-6 max-w-xl text-base text-slate-200 md:text-lg">
-            Sridhar Prakash is a creator sharing political campaign coverage, field reports, travel stories, and IRL vlogs from across cities and public spaces.
+            A personal space for city stories, everyday moments, travel snippets, and creator updates from Bengaluru.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/volunteer"
-              onClick={() => handleCtaClick("join_volunteer_team")}
+              href="/about"
+              onClick={() => handleCtaClick("read_story")}
               className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
             >
-              Volunteer With Us
+              My Story
             </Link>
             <Link
               href="/book"
@@ -142,7 +132,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
             </Link>
             <Link
               href="/articles"
-              onClick={() => handleCtaClick("follow_build")}
+              onClick={() => handleCtaClick("follow_updates")}
               className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
             >
               Follow Updates
@@ -150,28 +140,15 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-4"
-        >
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-4">
           <div className="glass-card overflow-hidden rounded-3xl border border-white/15 bg-black/30">
             <div className="relative h-[340px] w-full md:h-[420px]">
-              <Image
-                src="/images/og-image.jpg"
-                alt="Portrait of Sridhar Prakash"
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src="/images/og-image.jpg" alt="Portrait of Sridhar Prakash" fill className="object-cover" priority />
             </div>
             <div className="p-5">
               <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Home Base</p>
-              <h2 className="mt-2 text-xl font-semibold text-white">Politics, travel, and IRL stories from the ground.</h2>
-              <p className="mt-2 text-sm text-slate-200">
-                This space tracks my campaign coverage work, creator collaborations, and day-to-day field content.
-              </p>
+              <h2 className="mt-2 text-xl font-semibold text-white">Bengaluru streets, cafes, and everyday scenes.</h2>
+              <p className="mt-2 text-sm text-slate-200">Quick stories from real days, shared with a relaxed creator vibe.</p>
             </div>
           </div>
         </motion.div>
@@ -180,9 +157,9 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur md:p-8">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Status</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Active now: chilling through road trips, hangouts, and quick-field edits.</h2>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Active now: road trips, hangouts, edits, and chai-fueled planning.</h2>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-            Just moving through cities, grabbing spontaneous voices and textures, and sharing them while the vibe is still fresh.
+            Moving through city corners, collecting textures and voices, and posting while the feeling is still fresh.
           </p>
         </div>
       </section>
@@ -277,19 +254,15 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.85),rgba(30,41,59,0.88))] p-8 md:p-12">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Open Invite</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">
-            Want to collaborate or volunteer for on-ground support?
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-            Join as a volunteer for campaign support, or connect for creator collaboration and social media promotion.
-          </p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">Want to collaborate or just say hello?</h2>
+          <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">If you have an idea, event, or simple collab concept, send a note and let us build it.</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="/volunteer"
-              onClick={() => handleCtaClick("open_invite_volunteer")}
+              href="/contact"
+              onClick={() => handleCtaClick("open_contact")}
               className="inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
             >
-              Join as Volunteer
+              Contact
             </Link>
             <Link
               href="/book"

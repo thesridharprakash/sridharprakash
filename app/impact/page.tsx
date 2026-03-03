@@ -1,45 +1,35 @@
-export const metadata = {
-  title: "Impact | Sridhar Prakash",
-  description:
-    "Key initiatives and measurable outcomes across public engagement, governance, and community development.",
+﻿export const metadata = {
+  title: "Highlights | Sridhar Prakash",
+  description: "Snapshots of projects, routines, and creative progress.",
 };
 
 const initiatives = [
   {
-    title: "Ward-Level Citizen Meetings",
-    detail: "Direct issue collection with local follow-up across Bengaluru neighborhoods.",
+    title: "Weekend City Walks",
+    detail: "Short walking routes across Bengaluru to collect visuals, ambient sound, and stories.",
   },
   {
-    title: "Volunteer Mobilization",
-    detail: "Structured on-ground support for outreach events and public service activities.",
+    title: "Creator Collabs",
+    detail: "Small collaborations with photographers, editors, and indie creators.",
   },
   {
-    title: "Policy Awareness Drives",
-    detail: "Accessible communication of governance updates and citizen rights.",
+    title: "Daily Output Rhythm",
+    detail: "Consistent posting and editing routines focused on quality over noise.",
   },
 ];
 
 export default function ImpactPage() {
   return (
-    <main className="min-h-screen bg-[#f8f5f2] pt-24 md:pt-32 pb-20 px-6 text-[#332f2c]">
-      <section className="max-w-5xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#2d2a27] text-center">
-          Public Impact
-        </h1>
-        <p className="text-center text-[#635c55] mt-6 max-w-2xl mx-auto">
-          A concise view of ongoing work and outcomes from community-first efforts.
-        </p>
+    <main className="min-h-screen bg-[#f8f5f2] px-6 pb-20 pt-24 text-[#332f2c] md:pt-32">
+      <section className="mx-auto max-w-5xl">
+        <h1 className="text-center font-serif text-4xl font-bold text-[#2d2a27] md:text-6xl">Life Highlights</h1>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-[#635c55]">A quick view of what I am building and documenting this season.</p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {initiatives.map((item) => (
-            <article
-              key={item.title}
-              className="bg-white border border-[#e5e0da] p-6 shadow-sm"
-            >
-              <h2 className="text-xl font-serif font-bold text-[#2d2a27] mb-3">
-                {item.title}
-              </h2>
-              <p className="text-sm text-[#635c55] leading-relaxed">{item.detail}</p>
+            <article key={item.title} className="border border-[#e5e0da] bg-white p-6 shadow-sm">
+              <h2 className="mb-3 font-serif text-xl font-bold text-[#2d2a27]">{item.title}</h2>
+              <p className="text-sm leading-relaxed text-[#635c55]">{item.detail}</p>
             </article>
           ))}
         </div>

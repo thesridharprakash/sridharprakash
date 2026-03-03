@@ -218,13 +218,13 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label htmlFor="contact-timeline" className="sr-only">
-                      Campaign Timeline (optional)
+                      Timeline (optional)
                     </label>
                     <input
                       id="contact-timeline"
                       suppressHydrationWarning
                       name="timeline"
-                      placeholder="Campaign Timeline (optional)"
+                      placeholder="Timeline (optional)"
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
@@ -239,7 +239,7 @@ export default function ContactPage() {
                     name="message"
                     required
                     rows={5}
-                    placeholder="Tell me about your political or social media campaign, expected deliverables, and goals."
+                    placeholder="Tell me about your idea, expected deliverables, and goals."
                     className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   />
                 </div>

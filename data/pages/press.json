@@ -1,13 +1,13 @@
 {
   "hero": {
-    "eyebrow": "Press & Mentions",
-    "title": "Interviews, media coverage, guest appearances, and milestones.",
-    "description": "A single place to track external mentions and public highlights. Replace placeholder entries below with verified links as new features are published."
+    "eyebrow": "Highlights",
+    "title": "Interviews, features, guest appearances, and milestones.",
+    "description": "A single place to track external mentions and creator highlights. Replace placeholder entries with verified links as new features are published."
   },
   "interviews": [
     {
       "title": "Interview slot available",
-      "outlet": "Podcast / Newsroom",
+      "outlet": "Podcast / Creator Show",
       "date": "Add date",
       "note": "Add your interview link and a one-line summary."
     },
@@ -15,47 +15,47 @@
       "title": "Creator conversation feature",
       "outlet": "YouTube / Digital Show",
       "date": "Add date",
-      "note": "Highlight topic: political storytelling, campaign coverage, or creator journey."
+      "note": "Highlight topic: city storytelling, travel, or creator journey."
     }
   ],
   "mediaCoverage": [
     {
-      "title": "Campaign coverage mention",
+      "title": "Lifestyle feature mention",
       "outlet": "News Portal",
       "date": "Add date",
-      "note": "Document third-party coverage of your on-ground reporting."
+      "note": "Document third-party coverage of your work."
     },
     {
-      "title": "Public event media recap",
+      "title": "Event media recap",
       "outlet": "Local Press",
       "date": "Add date",
       "note": "Add link to article/video mention."
     }
   ],
   "guestAppearances": [
-    "Panel discussions and youth townhalls",
+    "Podcast and YouTube guest sessions",
     "Campus and community conversations",
-    "Political event hosting and stage appearances"
+    "Event hosting and stage appearances"
   ],
   "awards": [
     "Add awards, recognitions, or nominations here",
     "Add platform milestones (subscribers/followers/watch-hours)",
-    "Add campaign outcomes or impact highlights"
+    "Add notable collaboration outcomes"
   ],
   "milestones": [
     {
-      "title": "Launched political + IRL storytelling focus",
+      "title": "Launched Bengaluru life storytelling focus",
       "date": "2026",
-      "detail": "Positioned the platform around on-ground campaign coverage and public conversations."
+      "detail": "Positioned the platform around city moments, travel edits, and honest creator updates."
     },
     {
-      "title": "Built multi-page campaign-ready website",
+      "title": "Built multi-page creator website",
       "date": "2026",
-      "detail": "Created dedicated pages for booking, volunteer onboarding, media portfolio, and field journal updates."
+      "detail": "Created dedicated pages for booking, gallery, journal updates, and collaborations."
     }
   ],
   "pressQueryCta": {
-    "label": "Submit Press Query",
+    "label": "Submit Query",
     "href": "/contact"
   }
 }

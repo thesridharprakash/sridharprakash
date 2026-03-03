@@ -25,7 +25,7 @@ export default function ArticlesPage() {
             Where Footsteps Become Stories
           </h1>
           <p className="mt-5 max-w-3xl text-sm text-slate-300 md:text-lg">
-            This journal tracks my political coverage, on-ground public conversations, travel logs, and social media experiments.
+            This journal tracks city walks, travel logs, everyday observations, and creator experiments.
           </p>
         </div>
       </section>

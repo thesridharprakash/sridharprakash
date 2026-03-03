@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLongRightIcon, Cog6ToothIcon, FireIcon, MapPinIcon } from "@heroicons/react/24/outline";
@@ -7,7 +7,7 @@ const storyFacts = [
   { label: "Born", value: "1991" },
   { label: "City", value: "Bengaluru, Karnataka" },
   { label: "Path", value: "On-Ground Storytelling" },
-  { label: "Chapter", value: "Political + IRL Coverage" },
+  { label: "Chapter", value: "Everyday Life Journal" },
 ];
 
 const journeySteps = [
@@ -23,7 +23,7 @@ const journeySteps = [
   },
   {
     title: "Current mission",
-    text: "I am actively covering political campaigns on the ground while continuing travel, IRL, and social media projects.",
+    text: "I am documenting daily life in and around Bengaluru while continuing travel and creator projects.",
     icon: FireIcon,
   },
 ];
@@ -42,13 +42,7 @@ export default function AboutPage() {
         >
           <div className="relative min-h-[560px] md:min-h-[620px]">
             <div className="absolute inset-0 bg-[linear-gradient(135deg,#0f172a,#111827)]" />
-            <video
-              className="absolute inset-0 h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
+            <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline>
               <source src="/videos/story-bg.mp4" type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.18),rgba(2,6,23,0.9))]" />
@@ -70,21 +64,21 @@ export default function AboutPage() {
                 Chilling, chasing storylines, and building a life worth filming.
               </h1>
               <p className="mt-5 max-w-3xl text-sm text-slate-200 md:text-lg">
-                I’m just a guy wandering cityscapes, capturing curious people, and turning those moments into loud, honest stories that feel like a late-night chat with friends.
+                I&apos;m just a guy wandering cityscapes, capturing curious people, and turning those moments into honest stories that feel like a late-night chat with friends.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/volunteer"
+                  href="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-[var(--accent-strong)]"
                 >
-                  Hangout & collab
+                  Say hello
                   <ArrowLongRightIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/press"
+                  href="/gallery"
                   className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white backdrop-blur transition hover:border-white"
                 >
-                  See what I’ve been up to
+                  See recent moments
                 </Link>
               </div>
             </div>
@@ -122,7 +116,7 @@ export default function AboutPage() {
             <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">What I do</p>
               <p className="mt-2 text-sm font-semibold text-white">
-                Creator focused on political campaign coverage, field reports, travel stories, and IRL content.
+                Creator focused on city stories, travel snippets, and relaxed everyday content.
               </p>
             </article>
             <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -158,10 +152,10 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
-        <div className="rounded-3xl border border-white/15 bg-[linear-gradient(130deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10 text-center">
+        <div className="rounded-3xl border border-white/15 bg-[linear-gradient(130deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Approach</p>
-          <p className="mt-4 max-w-3xl text-xl text-slate-200 md:text-2xl">
-            I’m just here to vibe, chase sunsets, and capture the voices that make every city feel alive. Bring your idea or your curiosity—I’ll turn it into something loud and true.
+          <p className="mt-4 max-w-4xl font-display text-2xl leading-tight text-slate-100 md:text-3xl">
+            I&apos;m here to chase sunsets, capture city voices, and keep life simple and real on camera.
           </p>
         </div>
       </section>

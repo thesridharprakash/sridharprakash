@@ -9,22 +9,22 @@ const siteUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.
 export const metadata: Metadata = {
   title: "Sridhar Prakash | Official Website",
   description:
-    "Official website of Sridhar Prakash featuring political campaign coverage, field stories, travel vlogs, and creator updates.",
+    "Official website of Sridhar Prakash featuring Bengaluru life updates, travel moments, and creator stories.",
   alternates: {
     canonical: "/",
   },
   keywords: [
     "Sridhar Prakash",
     "Sridhar Prakash official website",
-    "political campaign coverage",
-    "field reports",
-    "IRL vlogs",
+    "Bengaluru",
+    "city life",
+    "daily stories",
     "travel vlogs",
   ],
   openGraph: {
     title: "Sridhar Prakash | Official Website",
     description:
-      "Political campaign coverage, field stories, travel vlogs, and creator updates by Sridhar Prakash.",
+      "Bengaluru life updates, travel moments, and creator stories by Sridhar Prakash.",
     url: "/",
     siteName: "Sridhar Prakash",
     type: "website",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sridhar Prakash | Official Website",
     description:
-      "Political campaign coverage, field stories, travel vlogs, and creator updates by Sridhar Prakash.",
+      "Bengaluru life updates, travel moments, and creator stories by Sridhar Prakash.",
     images: ["/images/og-image.jpeg"],
   },
 };
@@ -51,7 +51,7 @@ export default async function HomePage() {
     sameAs,
     jobTitle: "Creator",
     description:
-      "Political campaign coverage creator sharing field reports, travel stories, and IRL vlogs.",
+      "Bengaluru creator sharing city life, travel moments, and everyday stories.",
   };
   const websiteJsonLd = {
     "@context": "https://schema.org",

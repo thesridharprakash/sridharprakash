@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Media Portfolio",
-    "title": "Campaign-ready creator content with energy, personality, and strong retention.",
-    "description": "This page features work across political campaign coverage, IRL field storytelling, and travel content built for audience attention and measurable impact.",
+    "title": "Creator-first content with energy, personality, and strong retention.",
+    "description": "This page features work across city stories, travel moments, and everyday lifestyle content.",
     "primaryCta": {
       "label": "Download 1-Page Media Kit (PDF)",
       "href": "/media-kit.pdf",
@@ -20,7 +20,7 @@
     },
     {
       "label": "Content Focus",
-      "value": "Politics, Campaigns, Travel, IRL"
+      "value": "Lifestyle, City Stories, Travel"
     },
     {
       "label": "Delivery Speed",
@@ -28,39 +28,39 @@
     },
     {
       "label": "Audience Mix",
-      "value": "Politically Active Youth + General Audience"
+      "value": "Young Adults + General Audience"
     }
   ],
   "featuredSeries": [
     {
-      "title": "Campaign Trail Diaries",
-      "type": "Political Coverage Series",
+      "title": "City Walk Diaries",
+      "type": "Lifestyle Series",
       "image": "/images/art1.jpg.png",
-      "description": "On-ground political campaign moments, local voices, and rally-day storytelling."
+      "description": "Street-side moments, local voices, and Bengaluru day-to-night storytelling."
     },
     {
-      "title": "City Voices: Election Season",
-      "type": "IRL Public Conversation",
+      "title": "Weekend Escape Notes",
+      "type": "Travel Mini Series",
       "image": "/images/img2.png",
-      "description": "Street interviews and city-level political pulse captured in short and long formats."
+      "description": "Quick journeys, simple edits, and relatable travel energy."
     },
     {
-      "title": "Road + Report",
-      "type": "Travel and Ground Report",
+      "title": "Road + Pause",
+      "type": "Travel and Daily Life",
       "image": "/images/hero.jpg",
-      "description": "Travel vlogging blended with on-location political updates and audience engagement."
+      "description": "Travel snippets blended with real-time observations and ambient sound."
     }
   ],
   "deliverables": [
-    "Political campaign reels and short-form social edits",
-    "IRL streams and on-ground campaign event coverage",
-    "Travel vlog integration with public-interest storytelling",
+    "Lifestyle reels and short-form social edits",
+    "Event and meetup coverage",
+    "Travel vlog integration",
     "Photo + thumbnail package for promotion rollouts"
   ],
-  "liveSectionHeading": "YouTube Live Coverage",
+  "liveSectionHeading": "YouTube Live Streams",
   "partnership": {
     "title": "Open to Partnerships",
-    "description": "I am currently open to collaborations with political campaign teams, public-interest initiatives, and brands that need on-ground storytelling. If you are looking for fast, audience-first content with strong retention, let’s build something together.",
+    "description": "I am currently open to collaborations with brands, local creators, and community projects that value real, on-ground storytelling.",
     "badges": [
       "Launch-ready deliverables",
       "Flexible creative formats",

@@ -28,7 +28,7 @@ export default function Footer() {
           <div>
             <p className="font-display text-2xl text-white">Sridhar Prakash</p>
             <p className="mt-3 max-w-sm text-sm text-slate-300">
-              Political campaign and IRL storyteller creating social media content, travel vlogs, and on-ground public coverage.
+              Bengaluru creator sharing city life, travel moments, and personal stories from everyday adventures.
             </p>
           </div>
 
@@ -37,9 +37,6 @@ export default function Footer() {
             <div className="mt-3 space-y-2 text-sm">
               <Link href="/about" className="block text-slate-300 transition hover:text-white">
                 Story
-              </Link>
-              <Link href="/press" className="block text-slate-300 transition hover:text-white">
-                Press
               </Link>
               <Link href="/events" className="block text-slate-300 transition hover:text-white">
                 Events
@@ -50,8 +47,11 @@ export default function Footer() {
               <Link href="/gallery" className="block text-slate-300 transition hover:text-white">
                 Gallery
               </Link>
-              <Link href="/volunteer" className="block text-slate-300 transition hover:text-white">
-                Volunteer
+              <Link href="/community" className="block text-slate-300 transition hover:text-white">
+                Community
+              </Link>
+              <Link href="/contact" className="block text-slate-300 transition hover:text-white">
+                Contact
               </Link>
             </div>
           </div>

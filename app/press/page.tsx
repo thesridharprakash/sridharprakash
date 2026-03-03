@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import pressContent from "@/data/pages/press.json";
 import type { PressPageContent, PressMention } from "@/types/pageContent";
@@ -116,10 +116,10 @@ export default function PressPage() {
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">General Inquiry</p>
           <h2 className="text-2xl font-semibold text-white">Need to reach out directly?</h2>
           <p className="text-sm text-slate-300">
-            Use this form for press kits, partnership ideas, or general questions that don’t fit the other channels. We respond within 24 hours.
+            Use this form for collaboration ideas or general questions. We respond within 24 hours.
           </p>
           <Link
-            href="/volunteer"
+            href="/contact"
             className="mx-auto rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-[var(--accent-strong)]"
           >
             Submit an inquiry
@@ -129,3 +129,4 @@ export default function PressPage() {
     </main>
   );
 }
+

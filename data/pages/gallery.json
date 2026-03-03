@@ -1,15 +1,15 @@
 {
   "hero": {
     "eyebrow": "Visual Archive",
-    "title": "Campaign trail gallery built for storytelling",
-    "subtitle": "Immersive visuals and tactile moments from rallies, town halls, and street-level conversations.",
-    "description": "Curated photography, video stills, and field notes collected while covering electoral work, community gathers, and travel that intersects with politics.",
+    "title": "City-life gallery built for storytelling",
+    "subtitle": "Immersive visuals and tactile moments from streets, cafes, and weekend rides.",
+    "description": "Curated photography, video stills, and short notes collected across Bengaluru and beyond.",
     "ctaPrimary": {
       "label": "Explore Collections",
       "href": "/gallery#collections"
     },
     "ctaSecondary": {
-      "label": "Book a Production Tour",
+      "label": "Book a Shoot",
       "href": "/book"
     },
     "backgroundImage": "/images/hero.jpg"
@@ -31,21 +31,21 @@
   "featuredCollections": [
     {
       "title": "Night Pulse: City Streets",
-      "description": "Long-exposure rooftop stills mixed with crowd-driven documentary frames from after-dark rallies.",
+      "description": "Long-exposure rooftop stills mixed with crowd-driven documentary frames from late evenings.",
       "image": "/images/art1.jpg.png",
-      "location": "Bengaluru & Mumbai",
+      "location": "Bengaluru and Mumbai",
       "pieces": "18 frames"
     },
     {
-      "title": "Roadshow Focus",
-      "description": "High-energy mobile edits capturing the rhythm of campaign vehicles, stage setups, and field crews.",
+      "title": "Roadside Energy",
+      "description": "High-energy mobile edits capturing moving scenes, quick stops, and in-between moments.",
       "image": "/images/img2.png",
-      "location": "Hyderabad → Mysuru",
+      "location": "Hyderabad to Mysuru",
       "pieces": "12 frames"
     },
     {
       "title": "Quiet Conversations",
-      "description": "Intimate portraits and voice captures from neighborhood town halls and local cafés.",
+      "description": "Intimate portraits and voice captures from neighborhood spaces and local cafes.",
       "image": "/images/og-image.jpg",
       "location": "Chennai, Kolkata, Delhi",
       "pieces": "9 frames"
@@ -54,49 +54,49 @@
   "immersiveStories": [
     {
       "title": "Live + Documentary",
-      "format": "Handheld video stills, field livestream pauses, and cinematic cutaways.",
-      "detail": "Each piece is graded for social-first formats while preserving cinematic depth so you can repurpose the footage across vertical + landscape platforms."
+      "format": "Handheld video stills, livestream pauses, and cinematic cutaways.",
+      "detail": "Each piece is graded for social-first formats while preserving cinematic depth."
     },
     {
       "title": "Field Notes",
-      "format": "Audio-backed still slides, annotated with location, subject, and public sentiment.",
-      "detail": "Every upload includes context—who was on stage, why the day mattered, and how the crowd reacted."
+      "format": "Audio-backed still slides, annotated with location and context.",
+      "detail": "Every upload includes short context for what happened and why it mattered in that moment."
     },
     {
       "title": "Portrait Series",
-      "format": "Minimalist portraits with structured lighting layered over textured gradients.",
-      "detail": "Use them for hero visuals, podcast covers, or campaign microsites in need of editorial polish."
+      "format": "Minimal portraits with textured gradients and natural light.",
+      "detail": "Useful for hero visuals, profile covers, and editorial-style posts."
     }
   ],
   "timeline": [
     {
-      "title": "Rally Micro-Doc",
+      "title": "Night Street Capsule",
       "subtitle": "Bengaluru, January 2026",
       "date": "Jan 14, 2026",
-      "note": "Six short-form edits released in hours, each paired with public reactions."
+      "note": "Six short-form edits released in hours, each paired with ambient city audio."
     },
     {
       "title": "Street Conversations",
       "subtitle": "Hyderabad, January 2026",
       "date": "Jan 20, 2026",
-      "note": "Headlined by ambient audio captures and close-up portraits of grassroots volunteers."
+      "note": "Built around close-up portraits and quick voice notes."
     },
     {
       "title": "Roadside Live Suite",
-      "subtitle": "Mysuru → Ooty, January 2026",
+      "subtitle": "Mysuru to Ooty, January 2026",
       "date": "Jan 26, 2026",
-      "note": "Multi-camera footage that blends candid rally energy with scenic travel coverage."
+      "note": "Multi-camera footage mixing candid energy with scenic travel visuals."
     },
     {
-      "title": "Early Voice Capsule",
+      "title": "Early Morning Capsule",
       "subtitle": "Chennai, February 2026",
       "date": "Feb 05, 2026",
-      "note": "Recorded with local advocates to prioritize storytelling grounded in place."
+      "note": "Captured quiet neighborhoods before sunrise with natural sound textures."
     }
   ],
   "cta": {
     "headline": "License the archive or book a custom shoot",
-    "detail": "I am booking select editorial collaborations this quarter. Send a short brief and I will respond with a tailored concept in under 24 hours.",
+    "detail": "I am booking select editorial collaborations this quarter. Send a short brief and I will respond with a tailored concept.",
     "primary": {
       "label": "Start a Collaboration",
       "href": "/book"

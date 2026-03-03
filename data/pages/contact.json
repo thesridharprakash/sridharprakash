@@ -1,39 +1,39 @@
 {
   "hero": {
-    "eyebrow": "Contact & Bookings",
-    "title": "Let us build social media campaigns people actually connect with.",
-    "description": "For political promotion, campaign coverage, event invites, and creator partnerships, reach out with your goals, timeline, and expected deliverables."
+    "eyebrow": "Contact & Collaborations",
+    "title": "Let's create simple, human stories people enjoy.",
+    "description": "For creator collaborations, travel shoots, event invites, and social content ideas, share your goals and timeline."
   },
   "highlights": [
     {
       "label": "Email",
       "title": "Email",
       "value": "thesridharprakash@gmail.com",
-      "description": "Click or copy to share campaign details, media kits, or partnership ideas."
+      "description": "Click or copy to share project details, references, or ideas."
     },
     {
       "label": "Response Window",
       "title": "Response Window",
       "value": "Within 24-48 hours",
-      "description": "Include budget range, campaign location, and timeline to help us prioritize your request."
+      "description": "Include your budget range and timeline for a faster response."
     },
     {
       "label": "Base Location",
       "title": "Base Location",
       "value": "Bengaluru, India",
-      "description": "Available for domestic and international travel for events, shoots, and on-ground coverage."
+      "description": "Available for city, domestic, and select international shoots."
     }
   ],
   "brief": {
     "label": "Quick Brief",
     "title": "Send collaboration details",
-    "description": "Share your budget, audience target, and expected deliverables so I can respond with a custom plan."
+    "description": "Share your budget, audience, and expected deliverables so I can respond with a clear plan."
   },
   "collaborationTypes": [
-    "Political campaign social media promotion",
-    "On-ground campaign trail coverage and reporting",
-    "IRL streaming and public event storytelling",
-    "Travel vlogging and creator-led outreach content"
+    "Lifestyle and city storytelling",
+    "Travel reels and vlog collaborations",
+    "Event coverage and creator appearances",
+    "Social media content strategy support"
   ],
   "socialHeading": "Social Channels",
   "socialCtaLabel": "View Creator Story",

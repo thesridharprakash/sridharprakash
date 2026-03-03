@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <section className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-semibold text-white">1. What data we collect</h2>
             <p className="mt-2">
-              We collect information you submit in forms, including name, email, mobile number, location, campaign details, and consent status. We also collect
+              We collect information you submit in forms, including name, email, mobile number, location, project details, and consent status. We also collect
               basic attribution metadata (such as `utm_*`, `gclid`, and `fbclid`) and limited technical data like IP address for spam prevention and rate
               limiting.
             </p>
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           <section className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-semibold text-white">2. Why we collect it</h2>
             <p className="mt-2">
-              Data is used to respond to booking, contact, and volunteer requests, coordinate campaign work, improve lead quality, and maintain service security.
+              Data is used to respond to booking, contact, and community requests, coordinate collaborations, improve lead quality, and maintain service security.
             </p>
           </section>
 
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
           <section className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <h2 className="text-lg font-semibold text-white">4. Retention and security</h2>
             <p className="mt-2">
-              We keep data only as long as needed for inquiry handling, campaign operations, legal compliance, and security monitoring. Reasonable technical and
+              We keep data only as long as needed for inquiry handling, project operations, legal compliance, and security monitoring. Reasonable technical and
               organizational safeguards are used to protect stored data.
             </p>
           </section>

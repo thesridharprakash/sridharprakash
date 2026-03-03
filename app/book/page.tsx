@@ -12,7 +12,7 @@ const bookData = bookContent as BookPageContent;
 const { hero, highlights, bookingTypes, bookingAreas, faqHeading, bookingFaqs, form } = bookData;
 const highlightIconMap = {
   Scheduling: CalendarDaysIcon,
-  "Campaign Fit": SparklesIcon,
+  "Project Fit": SparklesIcon,
   "Response Time": ClockIcon,
 };
 
@@ -48,7 +48,7 @@ export default function BookPage() {
       `Mobile: ${mobile || "-"}`,
       `Preferred date: ${preferredDate || "-"}`,
       `Preferred time: ${preferredTime || "-"}`,
-      `Campaign brief: ${brief}`,
+      `Project brief: ${brief}`,
     ].join("\n");
 
     setSubmitting(true);
@@ -333,7 +333,7 @@ export default function BookPage() {
                 </div>
                 <div>
                   <label htmlFor="book-brief" className="sr-only">
-                    Campaign Brief
+                    Project Brief
                   </label>
                   <textarea
                     id="book-brief"
@@ -341,7 +341,7 @@ export default function BookPage() {
                     name="brief"
                     required
                     rows={5}
-                    placeholder="Share campaign goals, deliverables, target audience, and deadlines."
+                    placeholder="Share your goals, deliverables, audience, and timelines."
                     className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   />
                 </div>

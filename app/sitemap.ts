@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absolute("/press"), changeFrequency: "monthly", priority: 0.7 },
     { url: absolute("/book"), changeFrequency: "monthly", priority: 0.6 },
     { url: absolute("/contact"), changeFrequency: "monthly", priority: 0.6 },
-    { url: absolute("/volunteer"), changeFrequency: "monthly", priority: 0.6 },
+    { url: absolute("/community"), changeFrequency: "monthly", priority: 0.6 },
     { url: absolute("/impact"), changeFrequency: "monthly", priority: 0.5 },
     { url: absolute("/privacy"), changeFrequency: "yearly", priority: 0.2 },
     { url: absolute("/terms"), changeFrequency: "yearly", priority: 0.2 },

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const adminSections = [
+  { label: "Admin", path: "/admin" },
   { label: "Articles", path: "/admin/articles" },
   { label: "Press", path: "/admin/press" },
   { label: "Events", path: "/admin/events" },
@@ -16,7 +17,10 @@ export default function AdminHeaderNav() {
   return (
     <nav className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em]">
       {adminSections.map((section) => {
-        const isActive = pathname?.startsWith(section.path);
+        const isActive =
+          section.path === "/admin"
+            ? pathname === "/admin"
+            : pathname?.startsWith(section.path);
         return (
           <Link
             key={section.path}
