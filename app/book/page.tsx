@@ -9,17 +9,95 @@ import bookContent from "@/data/pages/book.json";
 import type { BookPageContent } from "@/types/pageContent";
 
 const bookData = bookContent as BookPageContent;
-const { hero, highlights, bookingTypes, bookingAreas, faqHeading, bookingFaqs, form } = bookData;
+const { hero, highlights, bookingTypes, faqHeading, bookingFaqs, form } = bookData;
 const highlightIconMap = {
-  Scheduling: CalendarDaysIcon,
-  "Project Fit": SparklesIcon,
-  "Response Time": ClockIcon,
+  "Youth Platform": CalendarDaysIcon,
+  Seva: SparklesIcon,
+  "Follow Up": ClockIcon,
 };
+
+const yuvaMorchaPillars = [
+  {
+    title: "Nation First",
+    text: "BJP Yuva Morcha encourages young people to place national interest, public responsibility, and disciplined service at the center of their public life.",
+  },
+  {
+    title: "Seva On The Ground",
+    text: "Real leadership begins with listening, showing up, organizing responsibly, and helping people through practical local action.",
+  },
+  {
+    title: "Youth With Purpose",
+    text: "The platform gives young volunteers a way to build confidence, communication, teamwork, and civic awareness through meaningful participation.",
+  },
+  {
+    title: "Digital Responsibility",
+    text: "Young karyakartas can support verified communication, social media outreach, public updates, and technology-enabled citizen connection.",
+  },
+];
+
+const participationSteps = [
+  "Share your details and area of interest.",
+  "The team reviews your availability, skills, and preferred area.",
+  "You are connected with suitable seva, outreach, digital, or event coordination work.",
+];
+
+const districts = ["Bangalore Urban", "Bangalore Rural"];
+
+const taluksByDistrict: Record<string, string[]> = {
+  "Bangalore Urban": ["Bangalore North", "Bangalore South", "Bangalore East", "Anekal", "Yelahanka"],
+  "Bangalore Rural": ["Devanahalli (Rural)", "Doddaballapur (Rural)", "Hoskote", "Nelamangala"],
+};
+
+const assemblyConstituencies = [
+  "Anekal",
+  "B.T.M. Layout",
+  "Basavanagudi",
+  "Bommanahalli",
+  "Byatarayanapura",
+  "C.V. Raman Nagar",
+  "Dasarahalli",
+  "Govindarajanagar",
+  "Hebbal",
+  "Jayanagar",
+  "K.R. Pura",
+  "Mahadevapura",
+  "Malleshwaram",
+  "Padmanabhanagar",
+  "Pulakeshinagar",
+  "Rajarajeshwarinagar",
+  "Rajajinagar",
+  "Sarvagnanagar",
+  "Shanti Nagar",
+  "Shivajinagar",
+  "Vijayanagar",
+  "Yelahanka",
+  "Yeshwanthpur",
+  "Chickpet",
+  "Chamrajpet",
+  "Gandhinagar",
+];
+
+const bbmpZones = [
+  "East Zone",
+  "West Zone",
+  "South Zone",
+  "North Zone",
+  "Mahadevapura Zone",
+  "Bommanahalli Zone",
+  "RR Nagar Zone",
+  "Yelahanka Zone",
+  "Dasarahalli Zone",
+];
 
 export default function BookPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedTaluk, setSelectedTaluk] = useState("");
+  const [selectedAssembly, setSelectedAssembly] = useState("");
+
+  const talukOptions = selectedDistrict ? taluksByDistrict[selectedDistrict] ?? [] : [];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,23 +110,26 @@ export default function BookPage() {
     const mobile = (form.elements.namedItem("mobile") as HTMLInputElement).value;
     const brand = (form.elements.namedItem("brand") as HTMLInputElement).value;
     const type = (form.elements.namedItem("type") as HTMLSelectElement).value;
-    const area = (form.elements.namedItem("area") as HTMLSelectElement).value;
-    const preferredDate = (form.elements.namedItem("preferredDate") as HTMLInputElement).value;
-    const preferredTime = (form.elements.namedItem("preferredTime") as HTMLInputElement).value;
-    const budget = (form.elements.namedItem("budget") as HTMLInputElement).value;
+    const district = (form.elements.namedItem("district") as HTMLSelectElement).value;
+    const taluk = (form.elements.namedItem("taluk") as HTMLSelectElement).value;
+    const assembly = (form.elements.namedItem("assembly") as HTMLSelectElement).value;
+    const zone = (form.elements.namedItem("zone") as HTMLSelectElement).value;
+    const ward = (form.elements.namedItem("ward") as HTMLInputElement).value;
     const brief = (form.elements.namedItem("brief") as HTMLTextAreaElement).value;
     const consent = (form.elements.namedItem("consent") as HTMLInputElement).checked;
     const website = (form.elements.namedItem("website") as HTMLInputElement).value;
 
     const message = [
-      "[BOOKING REQUEST]",
-      `Booking type: ${type}`,
-      `Area: ${area || "-"}`,
-      `Brand / Company: ${brand || "-"}`,
+      "[YUVA MORCHA REQUEST]",
+      `Participation type: ${type}`,
+      `District: ${district || "-"}`,
+      `Taluk: ${taluk || "-"}`,
+      `Assembly Constituency: ${assembly || "-"}`,
+      `Zone: ${zone || "-"}`,
+      `Ward / Locality: ${ward || "-"}`,
+      `Organization / Role: ${brand || "-"}`,
       `Mobile: ${mobile || "-"}`,
-      `Preferred date: ${preferredDate || "-"}`,
-      `Preferred time: ${preferredTime || "-"}`,
-      `Project brief: ${brief}`,
+      `Message: ${brief}`,
     ].join("\n");
 
     setSubmitting(true);
@@ -66,19 +147,15 @@ export default function BookPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          leadType: "booking",
+          leadType: "yuva_morcha",
           name,
           email,
           mobile,
-          area,
+          area: [district, taluk, assembly, zone, ward].filter(Boolean).join(" | "),
           bookingType: type,
           brand,
-          preferredDate,
-          preferredTime,
           brief,
-          budget,
           consent,
-          timeline: preferredDate,
           message,
           website,
           attribution,
@@ -92,7 +169,7 @@ export default function BookPage() {
           status: response.status,
           reason: payload?.error || "unknown_error",
         });
-        setError(payload?.error || "Could not submit booking request. Please try again.");
+        setError(payload?.error || "Could not submit details. Please try again.");
         setSubmitting(false);
         return;
       }
@@ -105,7 +182,7 @@ export default function BookPage() {
       });
       setSubmitted(true);
     } catch (submitError) {
-      console.error("Booking submission failed", submitError);
+      console.error("Yuva Morcha submission failed", submitError);
       trackEvent("booking_submit_error", {
         form: "booking",
         reason: "network_error",
@@ -151,6 +228,38 @@ export default function BookPage() {
             </article>
           );
         })}
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-10">
+        <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10">
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Purpose</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">A youth platform for service, discipline, and public leadership.</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-7 text-slate-300 md:text-base">
+            BJP Yuva Morcha brings young people into constructive public work. The focus is not only participation, but preparation:
+            learning how to serve people, communicate clearly, coordinate responsibly, and stand with the community when work needs to be done.
+          </p>
+
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {yuvaMorchaPillars.map((pillar) => (
+              <article key={pillar.title} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h3 className="text-lg font-semibold text-white">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-300">{pillar.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-7 rounded-2xl border border-white/10 bg-black/20 p-5">
+            <p className="text-xs uppercase tracking-[0.18em] text-[var(--accent)]">How participation starts</p>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {participationSteps.map((step, index) => (
+                <div key={step} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Step {index + 1}</p>
+                  <p className="mt-2 text-sm font-medium leading-6 text-slate-100">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-10">
@@ -241,13 +350,13 @@ export default function BookPage() {
                   </div>
                   <div>
                     <label htmlFor="book-brand" className="sr-only">
-                      Brand or Company (optional)
+                      Organization or Role (optional)
                     </label>
                     <input
                       id="book-brand"
                       suppressHydrationWarning
                       name="brand"
-                      placeholder="Brand / Company (optional)"
+                      placeholder="Organization / Role (optional)"
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
@@ -255,7 +364,7 @@ export default function BookPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label htmlFor="book-type" className="sr-only">
-                      Booking Type
+                      Participation Type
                     </label>
                     <select
                       id="book-type"
@@ -272,68 +381,121 @@ export default function BookPage() {
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="book-area" className="sr-only">
-                      Project Area
+                    <label htmlFor="book-district" className="sr-only">
+                      District
                     </label>
                     <select
-                      id="book-area"
+                      id="book-district"
                       suppressHydrationWarning
-                      name="area"
-                      defaultValue=""
+                      name="district"
+                      required
+                      value={selectedDistrict}
+                      onChange={(event) => {
+                        setSelectedDistrict(event.target.value);
+                        setSelectedTaluk("");
+                      }}
                       className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     >
                       <option value="" disabled>
-                        Select Area
+                        Step 1: Select District
                       </option>
-                      {bookingAreas.map((area) => (
-                        <option key={area} value={area}>
-                          {area}
+                      {districts.map((district) => (
+                        <option key={district} value={district}>
+                          {district}
                         </option>
                       ))}
                     </select>
                   </div>
                 </div>
-                <div className="grid gap-4 md:grid-cols-3">
+
+                <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label htmlFor="book-preferred-date" className="sr-only">
-                      Preferred Date (optional)
+                    <label htmlFor="book-taluk" className="sr-only">
+                      Taluk
                     </label>
-                    <input
-                      id="book-preferred-date"
+                    <select
+                      id="book-taluk"
                       suppressHydrationWarning
-                      name="preferredDate"
-                      type="date"
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                    />
+                      name="taluk"
+                      required
+                      disabled={!selectedDistrict}
+                      value={selectedTaluk}
+                      onChange={(event) => setSelectedTaluk(event.target.value)}
+                      className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    >
+                      <option value="" disabled>
+                        Step 2: Select Taluk
+                      </option>
+                      {talukOptions.map((taluk) => (
+                        <option key={taluk} value={taluk}>
+                          {taluk}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
-                    <label htmlFor="book-preferred-time" className="sr-only">
-                      Preferred Time (optional)
+                    <label htmlFor="book-assembly" className="sr-only">
+                      Assembly Constituency
                     </label>
-                    <input
-                      id="book-preferred-time"
+                    <select
+                      id="book-assembly"
                       suppressHydrationWarning
-                      name="preferredTime"
-                      placeholder="Preferred Time (optional)"
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
-                    />
+                      name="assembly"
+                      required
+                      value={selectedAssembly}
+                      onChange={(event) => setSelectedAssembly(event.target.value)}
+                      className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    >
+                      <option value="" disabled>
+                        Step 3: Select Assembly Constituency
+                      </option>
+                      {assemblyConstituencies.map((assembly) => (
+                        <option key={assembly} value={assembly}>
+                          {assembly}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label htmlFor="book-zone" className="sr-only">
+                      Zone Optional
+                    </label>
+                    <select
+                      id="book-zone"
+                      suppressHydrationWarning
+                      name="zone"
+                      defaultValue=""
+                      className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                    >
+                      <option value="">Step 4: Select Zone (optional)</option>
+                      {bbmpZones.map((zone) => (
+                        <option key={zone} value={zone}>
+                          {zone}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
-                    <label htmlFor="book-budget" className="sr-only">
-                      Budget (optional)
+                    <label htmlFor="book-ward" className="sr-only">
+                      Ward
                     </label>
                     <input
-                      id="book-budget"
+                      id="book-ward"
                       suppressHydrationWarning
-                      name="budget"
-                      placeholder="Budget (optional, e.g. INR 60,000)"
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                      name="ward"
+                      disabled={!selectedAssembly}
+                      placeholder={selectedAssembly ? "Step 5: Enter Ward / Booth / Locality" : "Step 5: Select Assembly first"}
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
                 </div>
+
                 <div>
                   <label htmlFor="book-brief" className="sr-only">
-                    Project Brief
+                    Message
                   </label>
                   <textarea
                     id="book-brief"
@@ -341,7 +503,7 @@ export default function BookPage() {
                     name="brief"
                     required
                     rows={5}
-                    placeholder="Share your goals, deliverables, audience, and timelines."
+                    placeholder="Tell us why you want to join BJP Yuva Morcha, your area, skills, availability, or how you would like to support the team."
                     className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   />
                 </div>
@@ -355,7 +517,7 @@ export default function BookPage() {
                   />
                   <span>
                     I agree to the <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link> and{" "}
-                    <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms</Link>, and consent to being contacted about this booking request.
+                    <Link href="/terms" className="text-[var(--accent)] hover:underline">Terms</Link>, and consent to being contacted by the BJP Yuva Morcha team about this request.
                   </span>
                 </label>
                 <button

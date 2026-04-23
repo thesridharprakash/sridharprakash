@@ -10,15 +10,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.public.blob.vercel-storage.com" },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: "/media",
-        destination: "/events",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

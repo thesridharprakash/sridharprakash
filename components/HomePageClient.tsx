@@ -13,53 +13,53 @@ import type { YouTubeEventsPayload } from "@/lib/youtubeEvents";
 
 const storyBeats = [
   {
-    title: "New direction",
-    body: "I am documenting everyday life in Bengaluru with a simple, honest creator style.",
+    title: "Public leadership",
+    body: "This platform brings together Sridhar Prakash's public work, community initiatives, and updates for people who want to stay connected.",
   },
   {
-    title: "What I cover",
-    body: "City walks, travel snippets, cafe conversations, and day-to-day life moments.",
+    title: "Service focus",
+    body: "Seva, local problem-solving, public outreach, and youth participation are at the center of the work shown here.",
   },
   {
-    title: "Why now",
-    body: "This phase is about slowing down, observing more, and sharing stories that feel real.",
+    title: "Why this site matters",
+    body: "People should be able to follow current activity, join community efforts, and contact Sridhar Prakash without confusion.",
   },
 ];
 
 const futurePlans = [
-  "Weekly city-life stories and reels.",
-  "Short travel episodes from nearby getaways.",
-  "More collaborations with local creators.",
-  "Consistent short-form and long-form uploads.",
+  "Expand youth participation and volunteer-led community work.",
+  "Publish regular updates from events, meetings, and local outreach.",
+  "Highlight seva activities, field work, and citizen-focused initiatives.",
+  "Build a stronger direct connection between residents and Sridhar Prakash.",
 ];
 
 const values = [
   {
-    title: "Real over scripted",
-    body: "I capture moments as they happen, not staged versions of them.",
+    title: "Seva",
+    body: "Public work must be grounded in service, responsiveness, and discipline.",
   },
   {
-    title: "Respect every voice",
-    body: "People and places are represented with care and dignity.",
+    title: "Youth participation",
+    body: "Young people should have a clear role in service, outreach, and civic engagement.",
   },
   {
-    title: "Consistency",
-    body: "You will see regular updates from city days, travels, and live sessions.",
+    title: "Public connection",
+    body: "Residents should be able to track activities, initiatives, and communication in one place.",
   },
 ];
 
 const timeline = [
   {
     title: "Now",
-    body: "Publishing everyday stories while refining my creator rhythm.",
+    body: "Building an active platform for updates, participation, and community communication.",
   },
   {
     title: "Next 90 days",
-    body: "Growing collaborations and improving visual quality.",
+    body: "Organize more public programs, strengthen volunteer participation, and improve direct engagement.",
   },
   {
     title: "This year",
-    body: "Building a trusted personal lifestyle journal from Bengaluru.",
+    body: "Strengthen Sridhar Prakash's public-service presence through visible, consistent, and people-focused work.",
   },
 ];
 
@@ -105,15 +105,17 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
     <main className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(249,115,22,0.2),transparent_38%),radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.15),transparent_35%),radial-gradient(circle_at_70%_80%,rgba(16,185,129,0.15),transparent_32%)]" />
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-6 pb-16 pt-36 md:grid-cols-2 md:items-center">
+      <section className="mx-auto grid max-w-6xl gap-10 px-6 pb-16 pt-36 md:grid-cols-[1.05fr_0.95fr] md:items-start">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.18em] text-[var(--muted)] backdrop-blur">
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[var(--accent)]" />
-            Bengaluru life log
+            Public Service & Community Leadership
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">Sridhar Prakash: just exploring life, one day at a time.</h1>
+          <h1 className="font-display text-5xl font-semibold leading-[1.05] text-white md:text-7xl">
+            Inspired by Antyodaya, uplifting the last person, building an inclusive society.
+          </h1>
           <p className="mt-6 max-w-xl text-base text-slate-200 md:text-lg">
-            A personal space for city stories, everyday moments, travel snippets, and creator updates from Bengaluru.
+            Guided by core principles of Nationalism, Democracy, Integral Humanism, and value-based politics.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -121,34 +123,41 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
               onClick={() => handleCtaClick("read_story")}
               className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
             >
-              My Story
+              About
             </Link>
             <Link
-              href="/book"
-              onClick={() => handleCtaClick("start_collaboration")}
-              className="rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:translate-y-[-1px] hover:bg-[var(--accent-strong)]"
-            >
-              Work With Me
-            </Link>
-            <Link
-              href="/articles"
+              href="/gallery"
               onClick={() => handleCtaClick("follow_updates")}
               className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
             >
-              Follow Updates
+              Gallery
+            </Link>
+            <Link
+              href="/book"
+              onClick={() => handleCtaClick("join_yuva_morcha")}
+              className="rounded-full border border-[var(--accent)]/70 bg-[var(--accent)]/15 px-6 py-3 text-sm font-semibold text-[var(--accent)] backdrop-blur transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/25"
+            >
+              Yuva Morcha
             </Link>
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-4">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="space-y-4 md:pt-1">
           <div className="glass-card overflow-hidden rounded-3xl border border-white/15 bg-black/30">
-            <div className="relative h-[340px] w-full md:h-[420px]">
-              <Image src="/images/og-image.jpg" alt="Portrait of Sridhar Prakash" fill className="object-cover" priority />
+            <div className="relative h-[340px] w-full md:h-[500px]">
+              <Image
+                src="/images/og-image.jpg"
+                alt="Sridhar Prakash public service and community leadership"
+                fill
+                className="object-cover object-top"
+                priority
+              />
             </div>
             <div className="p-5">
-              <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Home Base</p>
-              <h2 className="mt-2 text-xl font-semibold text-white">Bengaluru streets, cafes, and everyday scenes.</h2>
-              <p className="mt-2 text-sm text-slate-200">Quick stories from real days, shared with a relaxed creator vibe.</p>
+              <p className="whitespace-pre-line text-sm font-medium leading-6 text-slate-100">
+                Nation First 🇮🇳 | Party Next 🤝 | Self Last 🙏
+                {"\n"}Serving the country above everything
+              </p>
             </div>
           </div>
         </motion.div>
@@ -156,10 +165,12 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur md:p-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Status</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Active now: road trips, hangouts, edits, and chai-fueled planning.</h2>
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Current Focus</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">
+            Active now: community outreach, youth engagement, public programs, and people-focused service.
+          </h2>
           <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
-            Moving through city corners, collecting textures and voices, and posting while the feeling is still fresh.
+            The goal is straightforward: stay visible on the ground, stay connected to residents, and keep people informed.
           </p>
         </div>
       </section>
@@ -170,7 +181,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">The Story</p>
-            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Why I am doing this now.</h2>
+            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Why this platform exists.</h2>
             <div className="mt-6 space-y-4">
               {storyBeats.map((beat) => (
                 <article key={beat.title} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -183,7 +194,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
 
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Next Up</p>
-            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What I am building next.</h2>
+            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What Sridhar Prakash is building next.</h2>
             <div className="mt-6 space-y-3">
               {futurePlans.map((plan) => (
                 <div key={plan} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -199,7 +210,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
         <div className="grid gap-6 md:grid-cols-3">
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6 md:col-span-2">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Core Values</p>
-            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">How I want to show up.</h2>
+            <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">How Sridhar Prakash works.</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {values.map((value) => (
                 <article key={value.title} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -211,7 +222,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
           </div>
           <div className="rounded-3xl border border-white/10 bg-black/25 p-6">
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Timeline</p>
-            <h2 className="mt-3 font-display text-3xl text-white">The build</h2>
+            <h2 className="mt-3 font-display text-3xl text-white">Roadmap</h2>
             <div className="mt-6 space-y-4">
               {timeline.map((item) => (
                 <article key={item.title} className="rounded-2xl border border-white/10 bg-black/20 p-4">
@@ -254,8 +265,10 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.85),rgba(30,41,59,0.88))] p-8 md:p-12">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Open Invite</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">Want to collaborate or just say hello?</h2>
-          <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">If you have an idea, event, or simple collab concept, send a note and let us build it.</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">Want to connect, collaborate, or share a local concern?</h2>
+          <p className="mt-4 max-w-2xl text-sm text-slate-300 md:text-base">
+            Connect with Sridhar Prakash for community work, event coordination, public outreach, or local concerns.
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/contact"
@@ -269,7 +282,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
               onClick={() => handleCtaClick("say_hello")}
               className="inline-flex rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
             >
-              Start Collaboration
+              Yuva Morcha
             </Link>
           </div>
         </div>

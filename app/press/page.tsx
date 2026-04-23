@@ -1,14 +1,17 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
+import mediaContent from "@/data/pages/media.json";
 import pressContent from "@/data/pages/press.json";
-import type { PressPageContent, PressMention } from "@/types/pageContent";
+import type { MediaPageContent, PressPageContent, PressMention } from "@/types/pageContent";
 
+const mediaData = mediaContent as MediaPageContent;
 const pressData = pressContent as PressPageContent;
 const { hero, interviews, mediaCoverage, guestAppearances, milestones, pressQueryCta } = pressData;
+const { deliverables, featuredSeries, mediaKit, partnership } = mediaData;
 const coverageItems: PressMention[] = [...interviews, ...mediaCoverage];
 
 export const metadata: Metadata = {
-  title: "Press | Sridhar Prakash",
+  title: "Press & Media | Sridhar Prakash",
   description: hero.description,
   alternates: {
     canonical: "/press",
@@ -16,9 +19,19 @@ export const metadata: Metadata = {
 };
 
 const badgeStyles: Record<string, string> = {
+  article: "border-[#ffd166]/30 bg-[#ffd166]/10 text-[#FFE29F]",
   text: "border-white/20 bg-white/10 text-slate-200",
   video: "border-[#5bf4ff]/30 bg-[#5bf4ff]/10 text-[#cfefff]",
+  audio: "border-[#a7f3d0]/30 bg-[#10b981]/10 text-[#bbf7d0]",
   image: "border-[#ffd166]/30 bg-[#ffd166]/10 text-[#FFE29F]",
+};
+
+const linkLabels: Record<string, string> = {
+  article: "Read article",
+  text: "Read update",
+  video: "Watch video",
+  audio: "Listen audio",
+  image: "View image",
 };
 
 export default function PressPage() {
@@ -41,6 +54,14 @@ export default function PressPage() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-16">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Coverage</p>
+            <h2 className="mt-2 text-3xl font-semibold text-white">Press mentions and media coverage.</h2>
+          </div>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{coverageItems.length} entries</p>
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
           {coverageItems.map((item, index) => (
             <article
@@ -69,7 +90,7 @@ export default function PressPage() {
                     rel="noreferrer"
                     className="text-white transition hover:text-[var(--accent)]"
                   >
-                    {item.mediaType === "video" ? "Watch video" : "Read article"}
+                    {linkLabels[item.mediaType ?? "text"] ?? "Open link"}
                   </Link>
                 ) : null}
                 {item.mediaUrl && item.mediaUrl !== item.link ? (
@@ -85,6 +106,62 @@ export default function PressPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-16">
+        <div className="rounded-3xl border border-white/15 bg-black/25 p-6 md:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Media Resources</p>
+              <h2 className="mt-2 text-3xl font-semibold text-white">Public communication and visual updates.</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
+                These admin-managed media items help keep public work, outreach activity, events, and community communication easy to follow.
+              </p>
+            </div>
+            <Link
+              href={partnership.ctaHref}
+              className="rounded-full border border-white/25 bg-white/5 px-5 py-2 text-sm font-semibold text-white transition hover:border-white"
+            >
+              {partnership.ctaLabel}
+            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            {mediaKit.map((item) => (
+              <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate-400">{item.label}</p>
+                <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
+            {featuredSeries.map((item) => (
+              <article key={item.title} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                <div
+                  className="h-40 bg-slate-900"
+                  style={{ backgroundImage: `url(${item.image})`, backgroundSize: "cover", backgroundPosition: "center" }}
+                />
+                <div className="p-5">
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--accent)]">{item.type}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{item.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5">
+            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Available References</p>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {deliverables.map((item) => (
+                <p key={item} className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-200">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -111,12 +188,13 @@ export default function PressPage() {
           ))}
         </div>
       </section>
+
       <section className="relative z-10 mx-auto max-w-5xl px-6 pb-24">
         <div className="content-card flex flex-col gap-4 p-6 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">General Inquiry</p>
-          <h2 className="text-2xl font-semibold text-white">Need to reach out directly?</h2>
+          <h2 className="text-2xl font-semibold text-white">Need to reach the team directly?</h2>
           <p className="text-sm text-slate-300">
-            Use this form for collaboration ideas or general questions. We respond within 24 hours.
+            Use this form for media queries, interview requests, public event details, or general questions.
           </p>
           <Link
             href="/contact"
@@ -129,4 +207,3 @@ export default function PressPage() {
     </main>
   );
 }
-

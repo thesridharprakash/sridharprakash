@@ -1,4 +1,5 @@
 ﻿import { NextResponse } from "next/server";
+import { isAdminBlobEnabled, uploadBlobFromBuffer } from "@/lib/adminBlobUpload";
 import { fetchWithRetry, sendTelegramMessage } from "@/lib/server/leadOps";
 
 export const runtime = "nodejs";
@@ -10,6 +11,11 @@ type CommunityPayload = {
   email?: string;
   area?: string;
   interest?: string;
+  concern?: string;
+  latitude?: string;
+  longitude?: string;
+  accuracy?: string;
+  locationUrl?: string;
   consent?: boolean;
   website?: string;
   attribution?: {
@@ -24,6 +30,8 @@ const GOOGLE_SCRIPT_URL =
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_STORE = new Map<string, number[]>();
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const allowedPhotoTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 function isValidMobile(mobile: string) {
   return /^[6-9][0-9]{9}$/.test(mobile);
@@ -35,6 +43,94 @@ function isValidEmail(email: string) {
 
 function sanitize(input: string, max = 200) {
   return input.replace(/\s+/g, " ").trim().slice(0, max);
+}
+
+function sanitizeBaseName(input: string) {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-") || "community-report";
+}
+
+function getExtensionFromType(type: string) {
+  if (type === "image/png") return "png";
+  if (type === "image/webp") return "webp";
+  return "jpg";
+}
+
+function isValidCoordinate(value: string, min: number, max: number) {
+  if (!value) return true;
+  const numeric = Number(value);
+  return Number.isFinite(numeric) && numeric >= min && numeric <= max;
+}
+
+async function parsePayload(request: Request) {
+  const contentType = request.headers.get("content-type") || "";
+
+  if (contentType.includes("multipart/form-data")) {
+    const formData = await request.formData();
+    const attributionText = String(formData.get("attribution") || "");
+    let attribution: CommunityPayload["attribution"] | undefined;
+
+    if (attributionText) {
+      try {
+        attribution = JSON.parse(attributionText) as CommunityPayload["attribution"];
+      } catch {
+        attribution = undefined;
+      }
+    }
+
+    return {
+      payload: {
+        name: String(formData.get("name") || ""),
+        mobile: String(formData.get("mobile") || ""),
+        email: String(formData.get("email") || ""),
+        area: String(formData.get("area") || ""),
+        interest: String(formData.get("interest") || ""),
+        concern: String(formData.get("concern") || ""),
+        latitude: String(formData.get("latitude") || ""),
+        longitude: String(formData.get("longitude") || ""),
+        accuracy: String(formData.get("accuracy") || ""),
+        locationUrl: String(formData.get("locationUrl") || ""),
+        consent: formData.get("consent") === "on" || formData.get("consent") === "true",
+        website: String(formData.get("website") || ""),
+        attribution,
+      } satisfies CommunityPayload,
+      photo: formData.get("photo"),
+    };
+  }
+
+  return {
+    payload: (await request.json()) as CommunityPayload,
+    photo: null,
+  };
+}
+
+async function uploadIssuePhoto(photo: FormDataEntryValue | null, name: string) {
+  if (!(photo instanceof File) || photo.size === 0) {
+    return "";
+  }
+
+  if (!allowedPhotoTypes.has(photo.type)) {
+    throw new Error("Only JPG, PNG, or WEBP photos are allowed.");
+  }
+
+  if (photo.size > MAX_PHOTO_BYTES) {
+    throw new Error("Photo must be less than 5 MB.");
+  }
+
+  if (!isAdminBlobEnabled()) {
+    throw new Error("Photo upload storage is not configured.");
+  }
+
+  const ext = getExtensionFromType(photo.type);
+  const baseName = sanitizeBaseName(name || "community-report");
+  const fileName = `${Date.now()}-${baseName}.${ext}`;
+  const data = Buffer.from(await photo.arrayBuffer());
+  const blob = await uploadBlobFromBuffer(`community/reports/${fileName}`, data, photo.type);
+  return blob.url;
 }
 
 function getClientIp(request: Request) {
@@ -61,7 +157,7 @@ function getAttributionValue(payload: CommunityPayload, key: "utm_source" | "utm
 
 export async function POST(request: Request) {
   try {
-    const payload = (await request.json()) as CommunityPayload;
+    const { payload, photo } = await parsePayload(request);
     const clientIp = getClientIp(request);
 
     if (isRateLimited(clientIp)) {
@@ -73,6 +169,12 @@ export async function POST(request: Request) {
     const email = sanitize(payload.email || "", 120).toLowerCase();
     const area = sanitize(payload.area || "", 120);
     const interest = sanitize(payload.interest || "", 120);
+    const concern = sanitize(payload.concern || "", 1200);
+    const latitude = sanitize(payload.latitude || "", 40);
+    const longitude = sanitize(payload.longitude || "", 40);
+    const accuracy = sanitize(payload.accuracy || "", 40);
+    const locationUrl =
+      latitude && longitude ? `https://www.google.com/maps?q=${latitude},${longitude}` : sanitize(payload.locationUrl || "", 240);
     const consent = Boolean(payload.consent);
     const website = sanitize(payload.website || "", 120);
 
@@ -92,9 +194,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
+    if (!isValidCoordinate(latitude, -90, 90) || !isValidCoordinate(longitude, -180, 180)) {
+      return NextResponse.json({ error: "Invalid location coordinates." }, { status: 400 });
+    }
+
     const utmSource = getAttributionValue(payload, "utm_source");
     const utmMedium = getAttributionValue(payload, "utm_medium");
     const utmCampaign = getAttributionValue(payload, "utm_campaign");
+    let photoUrl = "";
+
+    try {
+      photoUrl = await uploadIssuePhoto(photo, `${name}-${area || "community"}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Photo upload failed.";
+      return NextResponse.json({ error: message }, { status: 400 });
+    }
 
     const upstream = await fetchWithRetry(
       GOOGLE_SCRIPT_URL,
@@ -112,7 +226,13 @@ export async function POST(request: Request) {
           consentText: consent ? "Yes" : "No",
           budget: "",
           timeline: "",
-          message: `Interest: ${interest || "-"} | Consent: ${consent ? "Yes" : "No"}`,
+          message: `Interest: ${interest || "-"} | Concern: ${concern || "-"} | Location: ${locationUrl || "-"} | Photo: ${photoUrl || "-"} | Consent: ${consent ? "Yes" : "No"}`,
+          concern,
+          latitude,
+          longitude,
+          accuracy,
+          locationUrl,
+          photoUrl,
           utmSource,
           utmMedium,
           utmCampaign,
@@ -145,6 +265,10 @@ export async function POST(request: Request) {
           `Email: ${email || "-"}`,
           `Area: ${area || "-"}`,
           `Interest: ${interest || "-"}`,
+          `Concern: ${concern || "-"}`,
+          `Location: ${locationUrl || "-"}`,
+          `Accuracy: ${accuracy ? `${accuracy}m` : "-"}`,
+          `Photo: ${photoUrl || "-"}`,
           `UTM Source: ${utmSource || "-"}`,
           `UTM Medium: ${utmMedium || "-"}`,
           `UTM Campaign: ${utmCampaign || "-"}`,

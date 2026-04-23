@@ -119,7 +119,7 @@ export default async function ArticleDetail({ params }: PageProps) {
           <div className="mb-6 flex items-center justify-center space-x-3">
             <span className="h-px w-8 bg-orange-200" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">
-              field note
+              public update
             </span>
             <span className="h-px w-8 bg-orange-200" />
           </div>
@@ -213,7 +213,7 @@ export default async function ArticleDetail({ params }: PageProps) {
             className="group inline-flex items-center text-xs font-bold uppercase tracking-widest text-stone-400 transition-colors hover:text-orange-600"
           >
             <ChevronLeftIcon className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Field Journal
+            Back to Public Journal
           </Link>
           <ShareButton
             title={article.title}

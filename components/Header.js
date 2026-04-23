@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "/about", label: "Story" },
   { href: "/events", label: "Events" },
+  { href: "/press", label: "Press" },
   { href: "/articles", label: "Journal" },
   { href: "/gallery", label: "Gallery" },
   { href: "/community", label: "Community" },
@@ -116,7 +117,7 @@ export default function Header() {
             href="/book"
             className="rounded-full bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[var(--accent-strong)]"
           >
-            Work With Me
+            Yuva Morcha
           </Link>
         </nav>
 
@@ -166,7 +167,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="mt-3 block rounded-lg bg-[var(--accent)] px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-black"
             >
-              Work With Me
+              Yuva Morcha
             </Link>
           </nav>
         </div>

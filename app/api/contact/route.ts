@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 type ContactPayload = {
-  leadType?: "contact" | "booking";
+  leadType?: "contact" | "booking" | "yuva_morcha";
   name?: string;
   email?: string;
   mobile?: string;
@@ -90,7 +90,7 @@ function getAttributionValue(
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as ContactPayload;
-    const leadType = payload.leadType === "booking" ? "booking" : "contact";
+    const leadType = payload.leadType === "booking" || payload.leadType === "yuva_morcha" ? payload.leadType : "contact";
     const clientIp = getClientIp(request);
 
     if (isRateLimited(clientIp)) {
@@ -133,7 +133,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (leadType === "booking" && !isValidMobile(mobile)) {
+    if ((leadType === "booking" || leadType === "yuva_morcha") && !isValidMobile(mobile)) {
       return NextResponse.json(
         { error: "Please enter a valid 10-digit mobile number." },
         { status: 400 }
@@ -188,7 +188,7 @@ export async function POST(request: Request) {
 
     const telegramResult = await sendTelegramMessage(
       [
-        leadType === "booking" ? "New Booking Lead" : "New Contact Lead",
+        leadType === "booking" ? "New Booking Lead" : leadType === "yuva_morcha" ? "New Yuva Morcha Lead" : "New Contact Lead",
         `Name: ${name}`,
         `Email: ${email}`,
         `Mobile: ${mobile || "-"}`,

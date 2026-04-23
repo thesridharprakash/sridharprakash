@@ -206,13 +206,13 @@ export default function ContactPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label htmlFor="contact-budget" className="sr-only">
-                      Estimated Budget (optional)
+                      Request Type (optional)
                     </label>
                     <input
                       id="contact-budget"
                       suppressHydrationWarning
                       name="budget"
-                      placeholder="Estimated Budget (optional)"
+                      placeholder="Request Type (optional)"
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
@@ -224,14 +224,14 @@ export default function ContactPage() {
                       id="contact-timeline"
                       suppressHydrationWarning
                       name="timeline"
-                      placeholder="Timeline (optional)"
+                      placeholder="Area / Timeline (optional)"
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="contact-message" className="sr-only">
-                    Collaboration Message
+                    Message
                   </label>
                   <textarea
                     id="contact-message"
@@ -239,7 +239,7 @@ export default function ContactPage() {
                     name="message"
                     required
                     rows={5}
-                    placeholder="Tell me about your idea, expected deliverables, and goals."
+                    placeholder="Share your message, event details, local concern, or follow-up request."
                     className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   />
                 </div>
@@ -266,7 +266,7 @@ export default function ContactPage() {
                       : "bg-[var(--accent)] text-black hover:bg-[var(--accent-strong)]"
                   }`}
                 >
-                  {submitting ? "Sending..." : "Send Brief"}
+                  {submitting ? "Sending..." : "Send Message"}
                 </button>
                 {error ? (
                   <p className="text-sm text-red-400" role="alert">
@@ -286,8 +286,8 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-14">
         <div className="rounded-3xl border border-white/15 bg-[linear-gradient(135deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10">
-          <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Best Fit Collaborations</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Partnership categories I actively take on</h2>
+          <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Best For</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">What this contact form is best used for</h2>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {collaborationTypes.map((item) => (
               <p key={item} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">

@@ -19,13 +19,13 @@ export default function ArticlesPage() {
         <div className="max-w-4xl">
           <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
             <SparklesIcon className="h-4 w-4" />
-            Field Journal
+            Public Journal
           </p>
           <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">
-            Where Footsteps Become Stories
+            Updates, notes, and public-service reflections.
           </h1>
           <p className="mt-5 max-w-3xl text-sm text-slate-300 md:text-lg">
-            This journal tracks city walks, travel logs, everyday observations, and creator experiments.
+            Read updates from Sridhar Prakash on community work, youth participation, public events, and local issues that matter to people.
           </p>
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function ArticlesPage() {
       <section className="mx-auto max-w-6xl px-6 pb-24">
         {articles.length === 0 ? (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-sm text-slate-300">
-            No entries yet. Add a markdown file to `content/articles/*.md` to publish your first field note.
+            No entries yet. Add a markdown file to `content/articles/*.md` to publish the first public update.
           </div>
         ) : (
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -66,7 +66,7 @@ export default function ArticlesPage() {
                     </h2>
                     <p className="mt-3 line-clamp-3 text-sm text-slate-300">{art.summary}</p>
                     <div className="mt-5 border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-slate-300 group-hover:text-white">
-                      Open Field Note
+                      Read Update
                     </div>
                   </div>
                 </Link>

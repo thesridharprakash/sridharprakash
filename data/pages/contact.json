@@ -1,45 +1,45 @@
 {
   "hero": {
-    "eyebrow": "Contact & Collaborations",
-    "title": "Let's create simple, human stories people enjoy.",
-    "description": "For creator collaborations, travel shoots, event invites, and social content ideas, share your goals and timeline."
+    "eyebrow": "Contact",
+    "title": "Connect with Sridhar Prakash and his team.",
+    "description": "For public outreach, event coordination, community work, media requests, or local concerns, share your message here."
   },
   "highlights": [
     {
       "label": "Email",
       "title": "Email",
       "value": "thesridharprakash@gmail.com",
-      "description": "Click or copy to share project details, references, or ideas."
+      "description": "Use email for detailed requests, event notes, documents, or follow-up information."
     },
     {
       "label": "Response Window",
       "title": "Response Window",
       "value": "Within 24-48 hours",
-      "description": "Include your budget range and timeline for a faster response."
+      "description": "Include your area, request type, and any urgent details for a faster response."
     },
     {
       "label": "Base Location",
       "title": "Base Location",
       "value": "Bengaluru, India",
-      "description": "Available for city, domestic, and select international shoots."
+      "description": "Focused on Bengaluru North, Byatarayanapura, Doddabommasandra, and nearby communities."
     }
   ],
   "brief": {
-    "label": "Quick Brief",
-    "title": "Send collaboration details",
-    "description": "Share your budget, audience, and expected deliverables so I can respond with a clear plan."
+    "label": "Message",
+    "title": "Send your request",
+    "description": "Share the purpose of your message, relevant area, and any details needed for follow-up."
   },
   "collaborationTypes": [
-    "Lifestyle and city storytelling",
-    "Travel reels and vlog collaborations",
-    "Event coverage and creator appearances",
-    "Social media content strategy support"
+    "Public outreach and resident coordination",
+    "Community event invitations and updates",
+    "BJP Yuva Morcha and youth participation queries",
+    "Media, press, and public communication requests"
   ],
   "socialHeading": "Social Channels",
-  "socialCtaLabel": "View Creator Story",
+  "socialCtaLabel": "View About",
   "socialCtaHref": "/about",
   "success": {
-    "title": "Brief received",
-    "description": "Thanks for sharing the details. I will get back to you within 24-48 hours with next steps."
+    "title": "Message received",
+    "description": "Thanks for sharing the details. Sridhar Prakash's team will review it and respond with next steps."
   }
 }

@@ -4,6 +4,7 @@ import path from "path";
 import { NewspaperIcon, PhotoIcon, DocumentTextIcon, VideoCameraIcon } from "@heroicons/react/24/outline";
 import { readGalleryPosts } from "@/lib/galleryPosts";
 import { readPageContent } from "@/lib/pageContent";
+import { readPlannedEvents } from "@/lib/plannedEvents";
 import { readEventsArchive } from "@/lib/youtubeEvents";
 import type { PressPageContent } from "@/types/pageContent";
 
@@ -27,8 +28,8 @@ const adminSections = [
     icon: PhotoIcon,
   },
   {
-    title: "Events Archive",
-    description: "Store important past live streams so replay tiles remain visible on the Events page.",
+    title: "Events",
+    description: "Manage upcoming public programs and store important past live streams for the Events page.",
     path: "/admin/events",
     icon: VideoCameraIcon,
   },
@@ -59,11 +60,13 @@ export default async function AdminHomePage() {
   const articleCount = countArticleFiles();
   const pressCount = getPressCoverageCount();
   const galleryCount = readGalleryPosts().length;
+  const plannedEventsCount = readPlannedEvents().length;
   const eventsArchiveCount = readEventsArchive().length;
   const stats = [
     { label: "Journal entries", value: articleCount },
     { label: "Press/media items", value: pressCount },
     { label: "Gallery posts", value: galleryCount },
+    { label: "Upcoming events", value: plannedEventsCount },
     { label: "Event archive", value: eventsArchiveCount },
   ];
 
@@ -77,7 +80,7 @@ export default async function AdminHomePage() {
             You must be signed in before accessing any section. After signing in, you can open an editor for articles, press, and gallery content.
           </p>
         </header>
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 text-left shadow-xl sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 text-left shadow-xl sm:grid-cols-2 lg:grid-cols-5">
           {stats.map((stat) => (
             <div key={stat.label}>
               <p className="text-xs uppercase tracking-[0.35em] text-slate-400">{stat.label}</p>
@@ -99,7 +102,7 @@ export default async function AdminHomePage() {
                   <span>{section.title}</span>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-slate-300">{section.description}</p>
-                <div className="mt-6 text-xs uppercase tracking-[0.3em] text-[var(--accent)]">Edit Section →</div>
+                <div className="mt-6 text-xs uppercase tracking-[0.3em] text-[var(--accent)]">Edit Section -&gt;</div>
               </Link>
             );
           })}

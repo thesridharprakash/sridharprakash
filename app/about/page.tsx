@@ -1,31 +1,34 @@
 ﻿"use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLongRightIcon, Cog6ToothIcon, FireIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { ArrowLongRightIcon, FireIcon } from "@heroicons/react/24/outline";
 
 const storyFacts = [
-  { label: "Born", value: "1991" },
-  { label: "City", value: "Bengaluru, Karnataka" },
-  { label: "Path", value: "On-Ground Storytelling" },
-  { label: "Chapter", value: "Everyday Life Journal" },
+  { label: "Name", value: "Sridhar Prakash" },
+  { label: "Base", value: "Bengaluru, Karnataka" },
+  { label: "Area", value: "Byatarayanapura" },
+  { label: "Focus", value: "Seva, Youth & Community" },
 ];
 
 const journeySteps = [
   {
-    title: "Roots",
-    text: "Born in Bengaluru in 1991, where crowded roads and changing skies taught me to observe everything.",
-    icon: MapPinIcon,
+    title: "Vaktha - Prashikshan Mahabhiyan 2026",
+    text: "Trained karyakartas on social media, AI tools, NaMo App, and Saral App for effective digital engagement.",
   },
   {
-    title: "Creator focus",
-    text: "I create content around real people and public spaces, with an approach built on consistency and trust.",
-    icon: Cog6ToothIcon,
+    title: "BLA 2 - Booth 323, Doddabommasandra",
+    text: "Managed voter verification and electoral roll updates while supporting booth-level coordination with the Election Commission of India.",
   },
   {
-    title: "Current mission",
-    text: "I am documenting daily life in and around Bengaluru while continuing travel and creator projects.",
-    icon: FireIcon,
+    title: "Yuva Morcha President - Doddabommasandra",
+    text: "Led youth engagement, organizational activities, and grassroots campaigns.",
   },
+];
+
+const yuvaMorchaPrinciples = [
+  "Youth participation rooted in public service.",
+  "Local action guided by discipline, teamwork, and accountability.",
+  "Community outreach that keeps people informed and involved.",
 ];
 
 export default function AboutPage() {
@@ -53,32 +56,32 @@ export default function AboutPage() {
               transition={{ duration: 0.65, delay: 0.2 }}
               className="absolute right-4 top-4 z-20 whitespace-nowrap rounded-full border border-white/20 bg-black/35 px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-slate-100 md:right-6 md:top-6 md:px-4"
             >
-              Story Film | Current Chapter
+              Public Service | Current Chapter
             </motion.div>
 
-            <div className="absolute bottom-0 left-0 right-0 z-10 p-6 pt-40 md:p-10 md:pt-24 lg:pt-10">
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-5 pt-36 md:p-9 md:pt-24 lg:pt-10">
               <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">The Story</p>
-              <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-white md:text-7xl">
-                Born in Bengaluru, 1991.
+              <h1 className="mt-3 max-w-4xl font-display text-3xl leading-tight text-white sm:text-4xl md:text-6xl">
+                Sridhar Prakash.
                 <br />
-                Chilling, chasing storylines, and building a life worth filming.
+                Rooted in service, community, and responsible public leadership.
               </h1>
-              <p className="mt-5 max-w-3xl text-sm text-slate-200 md:text-lg">
-                I&apos;m just a guy wandering cityscapes, capturing curious people, and turning those moments into honest stories that feel like a late-night chat with friends.
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-200 md:text-base md:leading-7">
+                A public-service focused platform for community updates, local concerns, youth participation, and direct connection with people in Bengaluru.
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-[var(--accent-strong)]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[var(--accent-strong)] md:px-6 md:tracking-[0.22em]"
                 >
-                  Say hello
+                  Contact
                   <ArrowLongRightIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/gallery"
-                  className="rounded-full border border-white/35 bg-white/10 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white backdrop-blur transition hover:border-white"
+                  href="/book"
+                  className="rounded-full border border-[var(--accent)]/70 bg-[var(--accent)]/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)] backdrop-blur transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/25 md:px-6 md:tracking-[0.22em]"
                 >
-                  See recent moments
+                  Yuva Morcha
                 </Link>
               </div>
             </div>
@@ -106,31 +109,18 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-12">
         <div className="rounded-3xl border border-white/15 bg-black/25 p-6 md:p-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Search profile</p>
-          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Sridhar Prakash</h2>
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">Full name</p>
-              <p className="mt-2 text-sm font-semibold text-white">Sridhar Prakash</p>
-            </article>
-            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">What I do</p>
-              <p className="mt-2 text-sm font-semibold text-white">
-                Creator focused on city stories, travel snippets, and relaxed everyday content.
-              </p>
-            </article>
-            <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">City / State</p>
-              <p className="mt-2 text-sm font-semibold text-white">Bengaluru, Karnataka</p>
-            </article>
-          </div>
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Short Bio</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">A public-service voice rooted in Bengaluru.</h2>
+          <p className="mt-5 max-w-4xl text-sm leading-7 text-slate-300 md:text-base">
+            Sridhar Prakash works around Byatarayanapura and Bengaluru North with a focus on seva, youth participation, and community connection. His approach is direct and people-first: stay accessible, listen carefully, follow up on local concerns, and keep residents informed through consistent public work.
+          </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-12">
         <div className="mb-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl text-white md:text-4xl">Journey Markers</h2>
-          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Creator Storyline</p>
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted)]">Public Service Path</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -143,8 +133,8 @@ export default function AboutPage() {
               transition={{ delay: idx * 0.08, duration: 0.45 }}
               className="rounded-2xl border border-white/10 bg-black/25 p-6 transition hover:border-[var(--accent)]/50"
             >
-              <item.icon className="h-7 w-7 text-[var(--accent)]" />
-              <h3 className="mt-4 text-2xl font-semibold text-white">{item.title}</h3>
+              <FireIcon className="h-7 w-7 text-[var(--accent)]" />
+              <h3 className="mt-4 break-words text-xl font-semibold leading-tight text-white">{item.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.text}</p>
             </motion.article>
           ))}
@@ -155,26 +145,43 @@ export default function AboutPage() {
         <div className="rounded-3xl border border-white/15 bg-[linear-gradient(130deg,rgba(15,23,42,0.92),rgba(30,41,59,0.88))] p-8 md:p-10">
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Approach</p>
           <p className="mt-4 max-w-4xl font-display text-2xl leading-tight text-slate-100 md:text-3xl">
-            I&apos;m here to chase sunsets, capture city voices, and keep life simple and real on camera.
+            Guided by Antyodaya and Nation First, Sridhar Prakash believes public work should reach the last person and stay accountable to people.
           </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-14">
+        <div className="rounded-3xl border border-white/15 bg-black/25 p-6 md:p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Yuva Morcha Connection</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-4xl">Building youth participation through service.</h2>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 md:text-base">
+            The BJP Yuva Morcha team focuses on bringing young people into constructive community action, public outreach, and responsible local leadership.
+          </p>
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {yuvaMorchaPrinciples.map((item) => (
+              <article key={item} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm font-semibold leading-6 text-slate-100">{item}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="rounded-3xl border border-white/10 bg-black/20 p-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">Life log</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">Focus Areas</p>
           <div className="mt-4 grid gap-3 text-sm text-slate-300 md:grid-cols-3">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Today</p>
-              <p className="mt-2 font-semibold text-white">Coffee, chai, and a spontaneous drive out of the city.</p>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Service</p>
+              <p className="mt-2 font-semibold text-white">Supporting public concerns with discipline, follow-through, and direct communication.</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Tonight</p>
-              <p className="mt-2 font-semibold text-white">Editing ambient sound reels while the streetlights hum.</p>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Youth</p>
+              <p className="mt-2 font-semibold text-white">Encouraging young people to participate in community work and civic life.</p>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Tomorrow</p>
-              <p className="mt-2 font-semibold text-white">Drop a new voice story and see who swings by with a fresh idea.</p>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-slate-400">Connection</p>
+              <p className="mt-2 font-semibold text-white">Keeping residents informed through updates, events, and accessible communication.</p>
             </div>
           </div>
         </div>

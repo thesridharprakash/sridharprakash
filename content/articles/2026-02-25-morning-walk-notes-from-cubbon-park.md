@@ -1,6 +1,6 @@
-﻿---
-title: "Morning Walk Notes from Cubbon Park"
-summary: "A quiet Bengaluru morning, filtered light through old trees, and the small details that make slow walks worth repeating."
+---
+title: "Listening to Local Concerns in Bengaluru North"
+summary: "A public update on staying connected with residents, understanding local priorities, and keeping community communication active."
 date: "2026-02-25"
 img: "https://kx12hvmszib4finu.public.blob.vercel-storage.com/admin/articles/1772018936128-article-image-VCuAB8LMw3USVgX8S0n2ZPzGjog0WL.png"
 videoUrl: ""
@@ -9,12 +9,12 @@ category: "journal"
 status: "published"
 ---
 
-Some days begin loudly. This one started with soft footsteps, wet pathways, and a long stretch of shade in Cubbon Park.
+Public work begins with listening.
 
-I walked without a fixed route and noticed how much of the city reveals itself only when you slow down. A runner tying shoelaces near a bench. A father teaching his kid to balance on a cycle. A tea seller setting up before the crowd arrives.
+In Bengaluru North, residents raise concerns that may look small from outside but matter deeply in daily life: access, cleanliness, follow-up, coordination, and clear communication. These issues need patience and steady attention, not only announcements.
 
-None of it is dramatic. All of it is memorable.
+Sridhar Prakash's focus is to stay accessible, hear people directly, and keep the connection active between residents, volunteers, and local public work.
 
-By the time the sun got brighter, the park had shifted from silence to rhythm. Conversations, whistles, birds, and traffic in the distance blended into one soundtrack. That mix is what I love about Bengaluru mornings - calm, but never empty.
+This journal will continue to document community updates, outreach moments, and the practical steps being taken on the ground.
 
-I carried back a few photos, some ambient audio, and one clear reminder: if I keep chasing only big moments, I will miss the beautiful ordinary ones.
+The aim is simple: stay visible, stay responsive, and keep people informed.

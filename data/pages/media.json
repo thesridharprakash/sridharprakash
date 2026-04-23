@@ -1,72 +1,53 @@
 {
   "hero": {
-    "eyebrow": "Media Portfolio",
-    "title": "Creator-first content with energy, personality, and strong retention.",
-    "description": "This page features work across city stories, travel moments, and everyday lifestyle content.",
+    "eyebrow": "Media Resources",
+    "title": "Public updates, event visuals, and community communication.",
+    "description": "This section highlights public-service communication, visual updates, outreach moments, and media-ready material from Sridhar Prakash's work.",
     "primaryCta": {
       "label": "Download 1-Page Media Kit (PDF)",
       "href": "/media-kit.pdf",
       "download": true
     },
     "secondaryCta": {
-      "label": "Start a Collaboration",
-      "href": "/book"
+      "label": "Send Media Query",
+      "href": "/contact"
     }
   },
   "mediaKit": [
     {
       "label": "Primary Formats",
-      "value": "Reels, Shorts, Long-form"
+      "value": "Photos, Videos, Public Updates"
     },
     {
       "label": "Content Focus",
-      "value": "Lifestyle, City Stories, Travel"
+      "value": "Events, Seva, Community Work"
     },
     {
       "label": "Delivery Speed",
-      "value": "Draft in 48-72 hours"
+      "value": "Timely Public Communication"
     },
     {
       "label": "Audience Mix",
-      "value": "Young Adults + General Audience"
+      "value": "Residents, Youth, Media"
     }
   ],
-  "featuredSeries": [
-    {
-      "title": "City Walk Diaries",
-      "type": "Lifestyle Series",
-      "image": "/images/art1.jpg.png",
-      "description": "Street-side moments, local voices, and Bengaluru day-to-night storytelling."
-    },
-    {
-      "title": "Weekend Escape Notes",
-      "type": "Travel Mini Series",
-      "image": "/images/img2.png",
-      "description": "Quick journeys, simple edits, and relatable travel energy."
-    },
-    {
-      "title": "Road + Pause",
-      "type": "Travel and Daily Life",
-      "image": "/images/hero.jpg",
-      "description": "Travel snippets blended with real-time observations and ambient sound."
-    }
-  ],
+  "featuredSeries": [],
   "deliverables": [
-    "Lifestyle reels and short-form social edits",
-    "Event and meetup coverage",
-    "Travel vlog integration",
-    "Photo + thumbnail package for promotion rollouts"
+    "Public event photos and video updates",
+    "Community outreach coverage",
+    "Press and media reference links",
+    "Shareable visual updates for public communication"
   ],
   "liveSectionHeading": "YouTube Live Streams",
   "partnership": {
-    "title": "Open to Partnerships",
-    "description": "I am currently open to collaborations with brands, local creators, and community projects that value real, on-ground storytelling.",
+    "title": "Open to Media Queries",
+    "description": "For press queries, public event coverage, interview requests, or media references, contact the team with clear details.",
     "badges": [
-      "Launch-ready deliverables",
-      "Flexible creative formats",
-      "Rapid turnaround"
+      "Public-service focus",
+      "Verified event context",
+      "Responsive follow-up"
     ],
-    "ctaLabel": "Start a Collaboration",
-    "ctaHref": "/book"
+    "ctaLabel": "Send Media Query",
+    "ctaHref": "/contact"
   }
 }

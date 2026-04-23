@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Sridhar Prakash for creator partnerships, travel shoots, and casual collaborations.",
+    "Contact Sridhar Prakash for public outreach, community work, event coordination, media requests, and local concerns.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
     title: "Contact | Sridhar Prakash",
     description:
-      "Contact Sridhar Prakash for creator partnerships, travel shoots, and casual collaborations.",
+      "Contact Sridhar Prakash for public outreach, community work, event coordination, media requests, and local concerns.",
     url: "/contact",
     images: ["/images/og-image.jpg"],
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact | Sridhar Prakash",
     description:
-      "Contact Sridhar Prakash for creator partnerships, travel shoots, and casual collaborations.",
+      "Contact Sridhar Prakash for public outreach, community work, event coordination, media requests, and local concerns.",
     images: ["/images/og-image.jpg"],
   },
 };

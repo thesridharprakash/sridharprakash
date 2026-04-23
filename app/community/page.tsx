@@ -9,6 +9,32 @@ export default function Volunteer() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [interest, setInterest] = useState("Volunteer for seva activities");
+  const [locationStatus, setLocationStatus] = useState<string | null>(null);
+  const [location, setLocation] = useState<{ latitude: string; longitude: string; accuracy: string } | null>(null);
+  const isSharingConcern = interest === "Share a local concern";
+
+  function handleUseLocation() {
+    if (!navigator.geolocation) {
+      setLocationStatus("Location is not supported on this device.");
+      return;
+    }
+
+    setLocationStatus("Fetching location...");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude.toFixed(6);
+        const longitude = position.coords.longitude.toFixed(6);
+        const accuracy = Math.round(position.coords.accuracy).toString();
+        setLocation({ latitude, longitude, accuracy });
+        setLocationStatus("Location added to this request.");
+      },
+      () => {
+        setLocationStatus("Could not fetch location. You can still type the location in the message.");
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -19,12 +45,22 @@ export default function Volunteer() {
     const form = e.currentTarget;
 
     const attribution = getAttributionContext();
+    const formData = new FormData(form);
+    formData.set("attribution", JSON.stringify(attribution));
+    if (location) {
+      formData.set("latitude", location.latitude);
+      formData.set("longitude", location.longitude);
+      formData.set("accuracy", location.accuracy);
+      formData.set("locationUrl", `https://www.google.com/maps?q=${location.latitude},${location.longitude}`);
+    }
+
     const data = {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       mobile: (form.elements.namedItem("mobile") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       area: (form.elements.namedItem("area") as HTMLInputElement).value,
       interest: (form.elements.namedItem("interest") as HTMLSelectElement).value,
+      concern: (form.elements.namedItem("concern") as HTMLTextAreaElement).value,
       consent: (form.elements.namedItem("consent") as HTMLInputElement).checked,
       website: (form.elements.namedItem("website") as HTMLInputElement).value,
       attribution,
@@ -40,8 +76,7 @@ export default function Volunteer() {
     try {
       const response = await fetch("/api/community", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -85,12 +120,12 @@ export default function Volunteer() {
           className="max-w-4xl"
         >
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">Community Circle</p>
-          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">Join the collab and meetup circle.</h1>
+          <h1 className="mt-4 font-display text-5xl leading-tight text-white md:text-7xl">Join Sridhar Prakash&apos;s community network.</h1>
           <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">
-            If you enjoy storytelling, city walks, and creative shoots, this is where we connect.
+            Take part in seva, youth participation, public outreach, and constructive local work across Bengaluru.
           </p>
           <p className="mt-2 max-w-2xl text-sm text-slate-400">
-            This form also handles quick partnership questions, so feel free to share your idea even if you are not joining as a regular collaborator.
+            Use this form to volunteer for community programs, support public outreach, or share a local concern that needs follow-up.
           </p>
         </motion.div>
       </section>
@@ -99,18 +134,18 @@ export default function Volunteer() {
         {[
           {
             icon: UserGroupIcon,
-            title: "City Walk Crew",
-            text: "Join local meetups and help map hidden corners, cafe spots, and street stories.",
+            title: "Community Volunteers",
+            text: "Join people working together on disciplined, people-first community activity.",
           },
           {
             icon: HandRaisedIcon,
-            title: "Shoot Support",
-            text: "Assist with simple field shoots, checklists, and behind-the-scenes coordination.",
+            title: "Seva Volunteers",
+            text: "Support public programs, local outreach, resident coordination, and follow-up work.",
           },
           {
             icon: BuildingOffice2Icon,
-            title: "Digital Assist",
-            text: "Support quick edits, social posting ideas, and audience conversations.",
+            title: "Public Updates",
+            text: "Help keep residents informed through clear communication, event updates, and verified information.",
           },
         ].map((item, index) => (
           <motion.article
@@ -131,8 +166,8 @@ export default function Volunteer() {
         <div className="rounded-3xl border border-white/15 bg-black/25 p-8 md:p-10">
           {!submitted ? (
             <>
-              <h2 className="font-display text-3xl text-white md:text-4xl">Community form</h2>
-              <p className="mt-3 text-sm text-slate-300 md:text-base">Share your details and how you would like to contribute.</p>
+              <h2 className="font-display text-3xl text-white md:text-4xl">Community participation form</h2>
+              <p className="mt-3 text-sm text-slate-300 md:text-base">Share your details and how you would like to connect with Sridhar Prakash&apos;s team.</p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                 <input suppressHydrationWarning name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
@@ -192,7 +227,7 @@ export default function Volunteer() {
                       id="volunteer-area"
                       suppressHydrationWarning
                       name="area"
-                      placeholder="City / Area"
+                      placeholder="Area / Ward"
                       className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                     />
                   </div>
@@ -206,21 +241,78 @@ export default function Volunteer() {
                     id="volunteer-interest"
                     suppressHydrationWarning
                     name="interest"
+                    value={interest}
+                    onChange={(event) => setInterest(event.target.value)}
                     className="w-full rounded-xl border border-white/15 bg-[#081025] px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
                   >
-                    <option>City meetup volunteer</option>
-                    <option>Shoot and coordination support</option>
-                    <option>Social media support</option>
-                    <option>Editing and production support</option>
-                    <option>General collaboration inquiry</option>
+                    <option>Volunteer for seva activities</option>
+                    <option>Support public outreach</option>
+                    <option>Share a local concern</option>
+                    <option>Help with digital updates</option>
+                    <option>Event coordination support</option>
                   </select>
                 </div>
+
+                {isSharingConcern ? (
+                  <>
+                    <div>
+                      <label htmlFor="volunteer-concern" className="sr-only">
+                        Local Concern or Message
+                      </label>
+                      <textarea
+                        id="volunteer-concern"
+                        suppressHydrationWarning
+                        name="concern"
+                        rows={5}
+                        maxLength={1200}
+                        placeholder="Type your local concern, request, or message here"
+                        className="min-h-32 w-full resize-y rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                      />
+                      <p className="mt-2 text-xs text-slate-500">Please include the location and a short description.</p>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-start">
+                      <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">Location</p>
+                        <p className="mt-2 text-sm text-slate-400">
+                          {location
+                            ? `Added: ${location.latitude}, ${location.longitude} (approx. ${location.accuracy}m)`
+                            : "Add your current location if the issue is tied to a specific place."}
+                        </p>
+                        {locationStatus ? <p className="mt-2 text-xs text-[var(--accent)]">{locationStatus}</p> : null}
+                      </div>
+                      <button
+                        suppressHydrationWarning
+                        type="button"
+                        onClick={handleUseLocation}
+                        className="rounded-full border border-[var(--accent)]/70 bg-[var(--accent)]/15 px-5 py-3 text-sm font-semibold text-[var(--accent)] transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/25"
+                      >
+                        Use my location
+                      </button>
+                    </div>
+
+                    <div>
+                      <label htmlFor="volunteer-photo" className="sr-only">
+                        Upload Photo
+                      </label>
+                      <input
+                        id="volunteer-photo"
+                        suppressHydrationWarning
+                        name="photo"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white file:mr-4 file:rounded-full file:border-0 file:bg-[var(--accent)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-black placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
+                      />
+                      <p className="mt-2 text-xs text-slate-500">Optional: upload one JPG, PNG, or WEBP photo up to 5 MB.</p>
+                    </div>
+                  </>
+                ) : null}
 
                 <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
                   <input suppressHydrationWarning type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 accent-[var(--accent)]" />
                   <span>
                     I agree to the <a href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</a> and{" "}
-                    <a href="/terms" className="text-[var(--accent)] hover:underline">Terms</a>, and consent to being contacted about this inquiry.
+                    <a href="/terms" className="text-[var(--accent)] hover:underline">Terms</a>, and consent to being contacted by Sridhar Prakash&apos;s team about this request.
                   </span>
                 </label>
 
@@ -233,7 +325,7 @@ export default function Volunteer() {
                     submitting ? "cursor-not-allowed bg-white/20 text-slate-200" : "bg-[var(--accent)] text-black hover:bg-[var(--accent-strong)]"
                   }`}
                 >
-                  {submitting ? "Sending..." : "Submit Request"}
+                  {submitting ? "Sending..." : "Submit Details"}
                 </motion.button>
 
                 {error ? (
@@ -246,8 +338,8 @@ export default function Volunteer() {
           ) : (
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center" role="status" aria-live="polite" aria-atomic="true">
               <CheckCircleIcon className="mx-auto h-16 w-16 text-[var(--accent)]" />
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">Request received</h2>
-              <p className="mt-3 text-sm text-slate-300 md:text-base">Thank you. We will reach out shortly with next steps.</p>
+              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">Details received</h2>
+              <p className="mt-3 text-sm text-slate-300 md:text-base">Thank you. Sridhar Prakash&apos;s team will reach out shortly with next steps.</p>
             </motion.div>
           )}
         </div>

@@ -1,61 +1,55 @@
 {
   "hero": {
-    "eyebrow": "Highlights",
-    "title": "Interviews, features, guest appearances, and milestones.",
-    "description": "A single place to track external mentions and creator highlights. Replace placeholder entries with verified links as new features are published."
+    "eyebrow": "Press & Media",
+    "title": "Coverage, public communication, and community updates.",
+    "description": "A single place to track press mentions, interviews, media coverage, public updates, and important milestones from Sridhar Prakash's work in Bengaluru."
   },
   "interviews": [
     {
       "title": "Interview slot available",
-      "outlet": "Podcast / Creator Show",
+      "outlet": "News / Digital Channel",
       "date": "Add date",
-      "note": "Add your interview link and a one-line summary."
+      "note": "Add interview links, public statements, or conversation summaries here."
     },
     {
-      "title": "Creator conversation feature",
-      "outlet": "YouTube / Digital Show",
+      "title": "Public conversation feature",
+      "outlet": "YouTube / Digital Platform",
       "date": "Add date",
-      "note": "Highlight topic: city storytelling, travel, or creator journey."
+      "note": "Highlight topics such as public service, youth participation, community work, and civic issues."
     }
   ],
   "mediaCoverage": [
     {
-      "title": "Lifestyle feature mention",
-      "outlet": "News Portal",
-      "date": "Add date",
-      "note": "Document third-party coverage of your work."
-    },
-    {
       "title": "Event media recap",
       "outlet": "Local Press",
       "date": "Add date",
-      "note": "Add link to article/video mention."
+      "note": "Add links to public event reports, videos, photos, or media mentions."
     }
   ],
   "guestAppearances": [
-    "Podcast and YouTube guest sessions",
-    "Campus and community conversations",
-    "Event hosting and stage appearances"
+    "News, digital, and YouTube conversations",
+    "Campus, youth, and community discussions",
+    "Public programs and stage appearances"
   ],
   "awards": [
-    "Add awards, recognitions, or nominations here",
-    "Add platform milestones (subscribers/followers/watch-hours)",
-    "Add notable collaboration outcomes"
+    "Add awards, recognitions, or organizational responsibilities here",
+    "Add BJP Yuva Morcha and community milestones",
+    "Add notable public-service outcomes"
   ],
   "milestones": [
     {
-      "title": "Launched Bengaluru life storytelling focus",
+      "title": "Built a public-service update platform",
       "date": "2026",
-      "detail": "Positioned the platform around city moments, travel edits, and honest creator updates."
+      "detail": "Positioned the website around community updates, public events, youth participation, and local concerns."
     },
     {
-      "title": "Built multi-page creator website",
+      "title": "Added community, events, gallery, and BJP Yuva Morcha sections",
       "date": "2026",
-      "detail": "Created dedicated pages for booking, gallery, journal updates, and collaborations."
+      "detail": "Created dedicated pages for upcoming events, visual updates, public journal entries, community reporting, and BJP Yuva Morcha participation."
     }
   ],
   "pressQueryCta": {
-    "label": "Submit Query",
+    "label": "Send Media Query",
     "href": "/contact"
   }
 }

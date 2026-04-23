@@ -49,7 +49,7 @@ export default async function GalleryPostPage({ params }: { params: Params }) {
           <div className="mb-6 flex items-center justify-center space-x-3">
             <span className="h-px w-8 bg-orange-200" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600">
-              gallery story
+              gallery update
             </span>
             <span className="h-px w-8 bg-orange-200" />
           </div>

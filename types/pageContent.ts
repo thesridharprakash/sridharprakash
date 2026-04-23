@@ -109,7 +109,7 @@ export type PressMention = {
   date: string;
   note: string;
   link?: string;
-  mediaType?: "text" | "video" | "image";
+  mediaType?: "article" | "text" | "video" | "audio" | "image";
   mediaUrl?: string;
   previewImage?: string;
 };

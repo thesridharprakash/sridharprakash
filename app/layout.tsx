@@ -24,19 +24,19 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in"),
   title: {
-    default: "Sridhar Prakash | Bengaluru Life Journal",
+    default: "Sridhar Prakash | Bengaluru",
     template: "%s | Sridhar Prakash",
   },
   applicationName: "Sridhar Prakash",
   description:
-    "Personal website of Sridhar Prakash, a Bengaluru creator sharing city life, travel moments, and everyday stories.",
+    "Official website of Sridhar Prakash, featuring public service updates, community initiatives, events, and local leadership from Bengaluru.",
   keywords: [
     "Sridhar Prakash",
-    "Bengaluru creator",
-    "city stories",
-    "travel vlogs",
-    "life journal",
-    "everyday moments",
+    "Byatarayanapura Assembly Constituency",
+    "Bengaluru North",
+    "public service",
+    "community leadership",
+    "community outreach",
   ],
   authors: [{ name: "Sridhar Prakash" }],
   creator: "Sridhar Prakash",

@@ -1,109 +1,109 @@
 {
   "hero": {
     "eyebrow": "Visual Archive",
-    "title": "City-life gallery built for storytelling",
-    "subtitle": "Immersive visuals and tactile moments from streets, cafes, and weekend rides.",
-    "description": "Curated photography, video stills, and short notes collected across Bengaluru and beyond.",
+    "title": "Public work, community moments, and event highlights",
+    "subtitle": "Photos and visual updates from outreach, youth engagement, public programs, and local community work.",
+    "description": "A curated archive of Sridhar Prakash's public-service activity across Bengaluru North and nearby community spaces.",
     "ctaPrimary": {
-      "label": "Explore Collections",
-      "href": "/gallery#collections"
+      "label": "Explore Updates",
+      "href": "/gallery#updates"
     },
     "ctaSecondary": {
-      "label": "Book a Shoot",
-      "href": "/book"
+      "label": "Contact",
+      "href": "/contact"
     },
     "backgroundImage": "/images/hero.jpg"
   },
   "stats": [
     {
-      "label": "Moments captured",
+      "label": "Community updates",
       "value": "120+"
     },
     {
-      "label": "Cities visited",
+      "label": "Public programs",
       "value": "24"
     },
     {
-      "label": "Publish-ready edits",
+      "label": "Recent highlights",
       "value": "48 hours"
     }
   ],
   "featuredCollections": [
     {
-      "title": "Night Pulse: City Streets",
-      "description": "Long-exposure rooftop stills mixed with crowd-driven documentary frames from late evenings.",
+      "title": "Community Outreach",
+      "description": "Frames from local interactions, public meetings, and resident-focused outreach.",
       "image": "/images/art1.jpg.png",
-      "location": "Bengaluru and Mumbai",
+      "location": "Bengaluru North",
       "pieces": "18 frames"
     },
     {
-      "title": "Roadside Energy",
-      "description": "High-energy mobile edits capturing moving scenes, quick stops, and in-between moments.",
+      "title": "Youth Engagement",
+      "description": "Visual updates from youth participation, volunteer coordination, and public-service activity.",
       "image": "/images/img2.png",
-      "location": "Hyderabad to Mysuru",
+      "location": "Byatarayanapura",
       "pieces": "12 frames"
     },
     {
-      "title": "Quiet Conversations",
-      "description": "Intimate portraits and voice captures from neighborhood spaces and local cafes.",
+      "title": "Public Programs",
+      "description": "Highlights from events, meetings, and community-facing programs.",
       "image": "/images/og-image.jpg",
-      "location": "Chennai, Kolkata, Delhi",
+      "location": "Doddabommasandra",
       "pieces": "9 frames"
     }
   ],
   "immersiveStories": [
     {
-      "title": "Live + Documentary",
-      "format": "Handheld video stills, livestream pauses, and cinematic cutaways.",
-      "detail": "Each piece is graded for social-first formats while preserving cinematic depth."
+      "title": "Event Coverage",
+      "format": "Photos, livestream stills, and public-program highlights.",
+      "detail": "Each update preserves context so residents can understand what happened and why it matters."
     },
     {
-      "title": "Field Notes",
-      "format": "Audio-backed still slides, annotated with location and context.",
-      "detail": "Every upload includes short context for what happened and why it mattered in that moment."
+      "title": "Field Updates",
+      "format": "Location-tagged stills with short notes from the ground.",
+      "detail": "Useful for documenting outreach, local concerns, and follow-up work."
     },
     {
-      "title": "Portrait Series",
-      "format": "Minimal portraits with textured gradients and natural light.",
-      "detail": "Useful for hero visuals, profile covers, and editorial-style posts."
+      "title": "Community Frames",
+      "format": "People-first visuals from meetings, campaigns, and service activities.",
+      "detail": "Built to keep public work visible, accessible, and easy to share."
     }
   ],
   "timeline": [
     {
-      "title": "Night Street Capsule",
-      "subtitle": "Bengaluru, January 2026",
+      "title": "Community Interaction Meet",
+      "subtitle": "Byatarayanapura, 2026",
       "date": "Jan 14, 2026",
-      "note": "Six short-form edits released in hours, each paired with ambient city audio."
+      "note": "Shared visual updates from resident conversations and local priorities."
     },
     {
-      "title": "Street Conversations",
-      "subtitle": "Hyderabad, January 2026",
+      "title": "Youth Volunteer Orientation",
+      "subtitle": "Doddabommasandra, 2026",
       "date": "Jan 20, 2026",
-      "note": "Built around close-up portraits and quick voice notes."
+      "note": "Documented youth participation and coordination for community work."
     },
     {
-      "title": "Roadside Live Suite",
-      "subtitle": "Mysuru to Ooty, January 2026",
+      "title": "Public Service Review",
+      "subtitle": "Bengaluru North, 2026",
       "date": "Jan 26, 2026",
-      "note": "Multi-camera footage mixing candid energy with scenic travel visuals."
+      "note": "Captured highlights from civic issue reviews and citizen feedback."
     },
     {
-      "title": "Early Morning Capsule",
-      "subtitle": "Chennai, February 2026",
+      "title": "Outreach Follow-up",
+      "subtitle": "Bengaluru, 2026",
       "date": "Feb 05, 2026",
-      "note": "Captured quiet neighborhoods before sunrise with natural sound textures."
+      "note": "Updated residents through photos, notes, and shareable public records."
     }
   ],
   "cta": {
-    "headline": "License the archive or book a custom shoot",
-    "detail": "I am booking select editorial collaborations this quarter. Send a short brief and I will respond with a tailored concept.",
+    "headline": "Share a community update or public concern",
+    "detail": "Send details about an event, local concern, or community moment that should be documented.",
     "primary": {
-      "label": "Start a Collaboration",
-      "href": "/book"
+      "label": "Contact",
+      "href": "/contact"
     },
     "secondary": {
-      "label": "Email the archive",
-      "href": "mailto:hello@sridharprakash.in"
+      "label": "Yuva Morcha",
+      "href": "/book"
     }
   }
 }

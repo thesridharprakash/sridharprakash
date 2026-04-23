@@ -28,7 +28,7 @@ export default function Footer() {
           <div>
             <p className="font-display text-2xl text-white">Sridhar Prakash</p>
             <p className="mt-3 max-w-sm text-sm text-slate-300">
-              Bengaluru creator sharing city life, travel moments, and personal stories from everyday adventures.
+              Stories, events, community updates, and public work from Sridhar Prakash in Bengaluru.
             </p>
           </div>
 
@@ -41,6 +41,9 @@ export default function Footer() {
               <Link href="/events" className="block text-slate-300 transition hover:text-white">
                 Events
               </Link>
+              <Link href="/press" className="block text-slate-300 transition hover:text-white">
+                Press
+              </Link>
               <Link href="/articles" className="block text-slate-300 transition hover:text-white">
                 Journal
               </Link>
@@ -49,6 +52,9 @@ export default function Footer() {
               </Link>
               <Link href="/community" className="block text-slate-300 transition hover:text-white">
                 Community
+              </Link>
+              <Link href="/book" className="block text-slate-300 transition hover:text-white">
+                Yuva Morcha
               </Link>
               <Link href="/contact" className="block text-slate-300 transition hover:text-white">
                 Contact

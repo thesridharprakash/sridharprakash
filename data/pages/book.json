@@ -1,74 +1,82 @@
 {
   "hero": {
-    "eyebrow": "Direct Booking",
-    "title": "Book lifestyle shoots, travel stories, and creator collaborations.",
-    "description": "Share your project timeline, goals, and preferred date. This booking form goes directly to my team.",
+    "eyebrow": "BJP Yuva Morcha",
+    "title": "Join the BJP Yuva Morcha movement.",
+    "description": "A focused space for young people who want to grow through seva, discipline, national commitment, civic awareness, and constructive community work.",
     "ctaLabel": "Prefer Email Instead",
-    "ctaHref": "mailto:thesridharprakash@gmail.com?subject=Booking%20Request"
+    "ctaHref": "mailto:thesridharprakash@gmail.com?subject=Yuva%20Morcha%20Request"
   },
   "highlights": [
     {
-      "label": "Scheduling",
-      "title": "Scheduling",
-      "description": "Tell us your preferred date and time window."
+      "label": "Youth Participation",
+      "title": "Youth Platform",
+      "description": "Step into organized public life with a youth platform built around service, teamwork, and responsibility."
     },
     {
-      "label": "Project Fit",
-      "title": "Project Fit",
-      "description": "Choose your requirement so we can respond with an exact collaboration plan."
+      "label": "On-Ground Seva",
+      "title": "Seva",
+      "description": "Support community programs, outreach drives, resident coordination, and people-first follow-up activities."
     },
     {
-      "label": "Response Time",
-      "title": "Response Time",
-      "description": "Expected response within 24-48 hours."
+      "label": "Team Follow-Up",
+      "title": "Follow Up",
+      "description": "Submitted requests are reviewed by the team and followed up with clear next steps."
     }
   ],
   "bookingTypes": [
-    "Lifestyle content collaboration",
-    "Travel vlog shoot",
-    "Public event appearance",
-    "Brand reel campaign",
-    "Social media strategy support",
+    "Join BJP Yuva Morcha team",
+    "Volunteer for seva activities",
+    "Swachh Bharat activity",
+    "Blood donation drive",
+    "Tree plantation drive",
+    "Fit India movement",
+    "Cultural or religious events",
+    "Support public outreach",
+    "Digital and social media support",
+    "Event coordination support",
     "Other"
   ],
   "bookingAreas": [
-    "Bengaluru",
-    "Karnataka (outside Bengaluru)",
-    "Other city in India",
-    "International",
-    "Not decided yet"
+    "All Mandalas in Bengaluru",
+    "Bengaluru North Mandalas",
+    "Bengaluru South Mandalas",
+    "Bengaluru Central Mandalas",
+    "Byatarayanapura Mandal",
+    "Doddabommasandra Mandal",
+    "Other Bengaluru Mandal",
+    "Not sure yet"
   ],
-  "faqHeading": "Booking policies and expectations",
+  "faqHeading": "BJP Yuva Morcha participation",
   "bookingFaqs": [
     {
-      "question": "How quickly will I get a response after submitting?",
-      "answer": "Booking inquiries are typically reviewed within 24-48 hours. Urgent requests should mention the exact event date and deadline in the brief."
+      "question": "Who can use this form?",
+      "answer": "Young people, volunteers, residents, and supporters who want to connect with the BJP Yuva Morcha team can share their details here."
     },
     {
-      "question": "What deliverables are included?",
-      "answer": "Deliverables depend on the package and project type, and can include reels/shorts, long-form edits, photo sets, and rollout support."
+      "question": "What kind of work can I help with?",
+      "answer": "You can support seva activities, public outreach, youth engagement, event coordination, digital communication, civic awareness, and resident-focused follow-up work."
     },
     {
-      "question": "Do you travel for projects?",
-      "answer": "Yes. Bengaluru, Karnataka, pan-India, and international travel are available. Travel, stay, and local logistics are scoped before confirmation."
+      "question": "Do I need previous experience?",
+      "answer": "No. The team can guide interested volunteers based on their area, availability, skills, and comfort with on-ground, organizational, or digital work."
     },
     {
-      "question": "How does payment work?",
-      "answer": "Projects are confirmed with an advance payment, with remaining amounts tied to milestones or final delivery. Invoice and payment schedule are shared before kickoff."
+      "question": "How will the team contact me?",
+      "answer": "After submission, the BJP Yuva Morcha team will review the details and contact you using the mobile number or email provided."
     },
     {
-      "question": "What is your revision policy?",
-      "answer": "Each package includes a defined revision window. Minor edits are covered within scope; major creative changes or extra rounds are treated as additional work."
+      "question": "Can I share a local issue here?",
+      "answer": "Use the Community page for detailed local concern reporting with location and photo upload. This page is mainly for BJP Yuva Morcha participation."
     }
   ],
   "form": {
-    "heading": "Booking request form",
+    "heading": "BJP Yuva Morcha participation form",
     "introLinkLabel": "Prefer Email Instead",
-    "introLinkHref": "mailto:thesridharprakash@gmail.com?subject=Booking%20Request",
-    "buttonLabel": "Submit Booking Request",
-    "successTitle": "Booking request received",
-    "successDescription": "Thank you. We will reach out within 24-48 hours with next steps and collaboration options.",
-    "successLinkLabel": "View Gallery",
-    "successLinkHref": "/gallery"
+    "introLinkHref": "mailto:thesridharprakash@gmail.com?subject=Yuva%20Morcha%20Request",
+    "buttonLabel": "Submit Details",
+    "successTitle": "Details received",
+    "successDescription": "Thank you. The BJP Yuva Morcha team will review your details and reach out with next steps.",
+    "successLinkLabel": "View Community Page",
+    "successLinkHref": "/community"
   }
 }

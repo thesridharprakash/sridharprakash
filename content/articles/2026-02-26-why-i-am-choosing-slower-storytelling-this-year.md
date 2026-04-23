@@ -1,6 +1,6 @@
-﻿---
-title: "Why I Am Choosing Slower Storytelling This Year"
-summary: "Fast uploads are useful, but this year I am building a calmer process: fewer rushed edits, more meaningful moments, and cleaner stories."
+---
+title: "Why Consistent Public Updates Matter"
+summary: "A reflection on keeping residents informed through clear updates, event coverage, and transparent communication."
 date: "2026-02-26"
 img: "/images/og-image.jpg"
 videoUrl: ""
@@ -9,17 +9,12 @@ category: "journal"
 status: "published"
 ---
 
-For a long time, I treated speed as the main measure of progress.
+Public service needs consistent communication.
 
-Shoot fast. Edit fast. Publish fast. Repeat.
+People should not have to search everywhere to understand what work is happening, what events are being organized, or how they can participate. A clear public update helps residents stay informed and helps volunteers stay aligned.
 
-It works for numbers, but it does not always work for meaning. I started noticing that the clips I liked most were the ones where I had taken an extra ten minutes: better framing, cleaner audio, clearer intent.
+This journal is being shaped as a place for those updates: community work, youth engagement, public meetings, event coverage, and reflections from the ground.
 
-So this year I am shifting to slower storytelling.
+The goal is not noise. The goal is clarity.
 
-That does not mean fewer ideas. It means better attention. I want each post to feel complete, even if it is short. I want each travel note to include sound, context, and mood - not just visuals.
-
-The goal is simple: build a body of work that still feels honest after months, not just exciting for one day.
-
-If you follow this journal, you will see that shift. Less noise, more clarity.
-
+When updates are regular and easy to understand, people can follow the work, share feedback, and stay connected to the larger mission of seva and responsible public leadership.

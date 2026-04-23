@@ -167,12 +167,12 @@ export default function YouTubeEventsSection({
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Events</p>
             <h2 className="mt-2 font-display text-3xl text-white md:text-4xl">
-              {mode === "page" ? "Live and past stream events" : "Catch ongoing and past streams"}
+              {mode === "page" ? "Live and past public events" : "Catch public events and replays"}
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-slate-300">
               {mode === "page"
-                ? "Watch the current live stream here when available, and replay recent events from the same page."
-                : "Live now shows up automatically. Recent streams are saved as event tiles so visitors can catch up."}
+                ? "Watch current live coverage here when available, and replay recent public meetings, outreach programs, and community updates from the same page."
+                : "Live coverage appears automatically. Recent public events are saved as tiles so visitors can stay informed."}
             </p>
           </div>
           <Link
@@ -286,7 +286,7 @@ export default function YouTubeEventsSection({
 
         <div className="mt-6">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <h3 className="text-lg font-semibold text-white">{mode === "page" ? "Event tiles" : "Recent event tiles"}</h3>
+            <h3 className="text-lg font-semibold text-white">{mode === "page" ? "Event library" : "Recent event updates"}</h3>
             {mode === "page" && data?.updatedAt ? (
               <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">Updates every minute (visible tabs only)</p>
             ) : null}
@@ -294,7 +294,7 @@ export default function YouTubeEventsSection({
 
           {visibleEvents.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-slate-300">
-              <p>{loading ? "Loading event feed..." : data?.error ?? "No event tiles yet. Go live once and they will appear here."}</p>
+              <p>{loading ? "Loading event feed..." : data?.error ?? "No event updates yet. Live and replay streams will appear here once available."}</p>
               <Link
                 href={channelUrl}
                 target="_blank"
@@ -373,7 +373,7 @@ export default function YouTubeEventsSection({
                       <div className="absolute bottom-3 right-3">
                         <ShareButton
                           title={event.title}
-                          description={`Watch ${event.status === "live" ? "the live stream" : "this event replay"} on Sridhar Prakash Events`}
+                          description={`Watch ${event.status === "live" ? "this live public event" : "this public event replay"} on Sridhar Prakash Events`}
                           url={absoluteUrl(sharePath)}
                           iconOnly
                           ariaLabel={`Share ${event.title}`}

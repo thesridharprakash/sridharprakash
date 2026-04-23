@@ -7,24 +7,24 @@ export const revalidate = 60;
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
 
 export const metadata: Metadata = {
-  title: "Sridhar Prakash | Official Website",
+  title: "Sridhar Prakash | Public Service, Community & Leadership",
   description:
-    "Official website of Sridhar Prakash featuring Bengaluru life updates, travel moments, and creator stories.",
+    "Official website of Sridhar Prakash, featuring public service updates, community initiatives, events, and local leadership from Bengaluru.",
   alternates: {
     canonical: "/",
   },
   keywords: [
     "Sridhar Prakash",
-    "Sridhar Prakash official website",
-    "Bengaluru",
-    "city life",
-    "daily stories",
-    "travel vlogs",
+    "Byatarayanapura Assembly Constituency",
+    "Bengaluru North",
+    "public service",
+    "community leadership",
+    "community outreach",
   ],
   openGraph: {
-    title: "Sridhar Prakash | Official Website",
+    title: "Sridhar Prakash | Public Service, Community & Leadership",
     description:
-      "Bengaluru life updates, travel moments, and creator stories by Sridhar Prakash.",
+      "Public service updates, community initiatives, and local leadership from Sridhar Prakash in Bengaluru.",
     url: "/",
     siteName: "Sridhar Prakash",
     type: "website",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sridhar Prakash | Official Website",
+    title: "Sridhar Prakash | Public Service, Community & Leadership",
     description:
-      "Bengaluru life updates, travel moments, and creator stories by Sridhar Prakash.",
+      "Public service updates, community initiatives, and local leadership from Sridhar Prakash in Bengaluru.",
     images: ["/images/og-image.jpeg"],
   },
 };
@@ -49,9 +49,9 @@ export default async function HomePage() {
     url: siteUrl,
     image: `${siteUrl}/images/og-image.jpeg`,
     sameAs,
-    jobTitle: "Creator",
+    homeLocation: "Bengaluru, Karnataka, India",
     description:
-      "Bengaluru creator sharing city life, travel moments, and everyday stories.",
+      "Public service, community initiatives, and local leadership updates from Sridhar Prakash in Bengaluru.",
   };
   const websiteJsonLd = {
     "@context": "https://schema.org",
