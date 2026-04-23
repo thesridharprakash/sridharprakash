@@ -5,7 +5,16 @@ import { createAdminSessionToken, getSessionTtl, SESSION_COOKIE_NAME } from "@/l
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
-const ADMIN_COOKIE_DOMAIN = process.env.ADMIN_COOKIE_DOMAIN?.trim() || undefined;
+function normalizeCookieDomain(value?: string) {
+  const normalized = value
+    ?.replace(/^https?:\/\//, "")
+    .replace(/\/.*$/, "")
+    .trim()
+    .toLowerCase();
+  return normalized || undefined;
+}
+
+const ADMIN_COOKIE_DOMAIN = normalizeCookieDomain(process.env.ADMIN_COOKIE_DOMAIN);
 
 export async function POST(request: Request) {
   const payload = (await request.json().catch(() => null)) as { secret?: string; otp?: string } | null;

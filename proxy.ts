@@ -6,6 +6,16 @@ const PUBLIC_ADMIN_PATH = "/admin/login";
 const PUBLIC_API_PATHS = new Set(["/api/admin/session", "/api/admin/mfa/setup"]);
 const ADMIN_CANONICAL_HOST = process.env.ADMIN_CANONICAL_HOST?.trim().toLowerCase() || "";
 
+function normalizeHost(value: string) {
+  return value
+    .replace(/^https?:\/\//, "")
+    .replace(/\/.*$/, "")
+    .trim()
+    .toLowerCase();
+}
+
+const NORMALIZED_ADMIN_CANONICAL_HOST = normalizeHost(ADMIN_CANONICAL_HOST);
+
 async function hasValidSession(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE_NAME)?.value ?? null;
   return await verifyAdminSessionToken(token);
@@ -15,9 +25,14 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const requestHost = request.headers.get("host")?.trim().toLowerCase() || "";
 
-  if (ADMIN_CANONICAL_HOST && pathname.startsWith("/admin") && requestHost && requestHost !== ADMIN_CANONICAL_HOST) {
+  if (
+    NORMALIZED_ADMIN_CANONICAL_HOST &&
+    pathname.startsWith("/admin") &&
+    requestHost &&
+    requestHost !== NORMALIZED_ADMIN_CANONICAL_HOST
+  ) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.host = ADMIN_CANONICAL_HOST;
+    redirectUrl.host = NORMALIZED_ADMIN_CANONICAL_HOST;
     return NextResponse.redirect(redirectUrl, 307);
   }
 

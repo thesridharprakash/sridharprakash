@@ -2,7 +2,16 @@ import { NextResponse } from "next/server";
 import { SESSION_COOKIE_NAME } from "@/lib/adminSessionConfig";
 
 export const runtime = "nodejs";
-const ADMIN_COOKIE_DOMAIN = process.env.ADMIN_COOKIE_DOMAIN?.trim() || undefined;
+function normalizeCookieDomain(value?: string) {
+  const normalized = value
+    ?.replace(/^https?:\/\//, "")
+    .replace(/\/.*$/, "")
+    .trim()
+    .toLowerCase();
+  return normalized || undefined;
+}
+
+const ADMIN_COOKIE_DOMAIN = normalizeCookieDomain(process.env.ADMIN_COOKIE_DOMAIN);
 
 export async function POST() {
   const response = NextResponse.json({ ok: true });
