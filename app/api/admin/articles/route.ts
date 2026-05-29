@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { adminLog } from "@/lib/adminLogger";
 import { assertAdminMfa, assertAdminSecret } from "@/lib/adminAuth";
@@ -46,6 +47,13 @@ function sanitizeText(input: string, max: number) {
 
 function isValidDate(input: string) {
   return /^\d{4}-\d{2}-\d{2}$/.test(input);
+}
+
+function revalidateArticleRoutes(slug: string) {
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${slug}`);
+  revalidatePath("/admin/articles");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function POST(request: Request) {
@@ -157,6 +165,7 @@ export async function POST(request: Request) {
     } else {
       fs.writeFileSync(filePath, markdown, "utf8");
     }
+    revalidateArticleRoutes(safeSlug);
     adminLog("publish-success", { slug: safeSlug, status, file: filePath });
 
     return NextResponse.json({
@@ -226,6 +235,7 @@ export async function DELETE(request: Request) {
     } else {
       fs.unlinkSync(filePath);
     }
+    revalidateArticleRoutes(safeSlug);
   } catch (error) {
     adminLog("article-delete-error", { slug: safeSlug, error: String(error) });
     const storageError = getAdminStorageWriteErrorMessage(error, "Article");

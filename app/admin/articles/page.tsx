@@ -1,6 +1,8 @@
 import ArticlesIndexClient from "@/app/admin/articles/ArticlesIndexClient";
 import { getAllArticles } from "@/app/articles/lib";
 
+export const dynamic = "force-dynamic";
+
 export default function AdminArticlesPage() {
   const entries = getAllArticles({ includeDrafts: true });
 
