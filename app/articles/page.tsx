@@ -7,6 +7,8 @@ import {
 import ShareButton from "@/components/ShareButton";
 import { getAllArticles } from "./lib";
 
+export const dynamic = "force-dynamic";
+
 export default function ArticlesPage() {
   const articles = getAllArticles();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";

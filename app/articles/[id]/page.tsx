@@ -8,6 +8,8 @@ import html from "remark-html";
 import ShareButton from "@/components/ShareButton";
 import { getAllArticleSlugs, getArticleBySlug } from "../lib";
 
+export const dynamic = "force-dynamic";
+
 function getYouTubeEmbedUrl(input?: string) {
   if (!input) return "";
   try {

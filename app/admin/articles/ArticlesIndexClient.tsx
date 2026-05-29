@@ -1,6 +1,6 @@
- "use client";
+"use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { remark } from "remark";
@@ -52,6 +52,10 @@ export default function ArticlesIndexClient({ articles }: Props) {
   const [previewLoading, setPreviewLoading] = useState(false);
   const [previewError, setPreviewError] = useState<string | null>(null);
 
+  const authFetch = useCallback((url: string, init: RequestInit = {}) => {
+    return fetch(url, { credentials: "include", ...init });
+  }, []);
+
   const publishedCount = useMemo(
     () => items.filter((article) => article.status === "published").length,
     [items]
@@ -63,7 +67,7 @@ export default function ArticlesIndexClient({ articles }: Props) {
     setLoadingSlug(slug);
     setError(null);
     try {
-      const response = await fetch(`/api/admin/articles?slug=${encodeURIComponent(slug)}`, {
+      const response = await authFetch(`/api/admin/articles?slug=${encodeURIComponent(slug)}`, {
         method: "DELETE",
       });
       const payload = (await response.json().catch(() => null)) as
@@ -102,7 +106,7 @@ export default function ArticlesIndexClient({ articles }: Props) {
     setPreviewError(null);
 
     try {
-      const response = await fetch(`/api/admin/articles/detail?slug=${encodeURIComponent(article.slug)}`);
+      const response = await authFetch(`/api/admin/articles/detail?slug=${encodeURIComponent(article.slug)}`);
       const payload = (await response.json().catch(() => null)) as
         | {
             ok?: boolean;
