@@ -7,6 +7,7 @@ import { readPageContent } from "@/lib/pageContent";
 import { readPlannedEvents } from "@/lib/plannedEvents";
 import { readEventsArchive } from "@/lib/youtubeEvents";
 import type { PressPageContent } from "@/types/pageContent";
+import AdminProtectedShell from "@/app/admin/AdminProtectedShell";
 
 const adminSections = [
   {
@@ -71,6 +72,7 @@ export default async function AdminHomePage() {
   ];
 
   return (
+    <AdminProtectedShell>
     <main className="min-h-screen bg-black/80 py-16 text-white">
       <section className="mx-auto max-w-5xl space-y-6 px-6">
         <header className="space-y-2 text-center">
@@ -109,5 +111,6 @@ export default async function AdminHomePage() {
         </div>
       </section>
     </main>
+    </AdminProtectedShell>
   );
 }
