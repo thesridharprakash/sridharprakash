@@ -11,6 +11,10 @@ function getAttributionFromSearchParams(searchParams: {
   get: (key: string) => string | null;
 }): Record<string, string> {
   const keys = [
+    "source",
+    "campaign",
+    "medium",
+    "ref",
     "utm_source",
     "utm_medium",
     "utm_campaign",

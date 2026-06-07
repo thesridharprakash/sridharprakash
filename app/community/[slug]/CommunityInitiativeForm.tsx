@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import CampaignFields from "@/components/CampaignFields";
 import { getAttributionContext, trackEvent } from "@/lib/analytics";
 import type { CommunityInitiative } from "../initiatives";
 
@@ -93,6 +94,7 @@ export default function CommunityInitiativeForm({ initiative }: CommunityInitiat
   return (
     <form onSubmit={handleSubmit} className="space-y-4 rounded-3xl border border-white/15 bg-black/30 p-5 shadow-2xl shadow-black/20 backdrop-blur md:p-8">
       <input suppressHydrationWarning name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <CampaignFields />
       <input type="hidden" name="initiativeSlug" value={initiative.slug} />
       <input type="hidden" name="interest" value={initiative.interest} />
 

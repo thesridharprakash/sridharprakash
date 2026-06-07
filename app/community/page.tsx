@@ -10,10 +10,11 @@ import {
   MegaphoneIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
+import ShareButton from "@/components/ShareButton";
 import { communityInitiatives } from "./initiatives";
 
 export const metadata: Metadata = {
-  title: "Community Participation",
+  title: "Community Participation | Volunteer with Sridhar Prakash",
   description:
     "Choose a dedicated community participation page for seva volunteering, public outreach, local concerns, digital updates, event coordination, or blood donation initiatives.",
   keywords: [
@@ -39,13 +40,29 @@ const iconMap = {
 };
 
 const participationLinks = [
-  ...communityInitiatives.map((initiative) => ({
+  ...communityInitiatives
+    .filter((initiative) => initiative.slug !== "local-concern")
+    .map((initiative) => ({
     href: `/community/${initiative.slug}`,
     slug: initiative.slug,
-    title: initiative.title,
+    title:
+      initiative.slug === "seva-volunteers"
+        ? "Seva Activities"
+        : initiative.slug === "public-outreach"
+          ? "Public Outreach"
+          : initiative.slug === "event-coordination"
+            ? "Event Support"
+            : "Digital Support",
     eyebrow: initiative.eyebrow,
     description: initiative.subtitle,
   })),
+  {
+    href: "/book",
+    slug: "youth-participation",
+    title: "Youth Participation",
+    eyebrow: "Youth Participation",
+    description: "Join youth-focused seva, discipline, civic awareness, and constructive community work.",
+  },
   {
     href: "/blood-donation",
     slug: "blood-donation",
@@ -69,6 +86,13 @@ export default function CommunityPage() {
           <p className="mt-6 max-w-2xl text-base text-slate-300 md:text-lg">
             Select a community participation option below. Each option now has a dedicated page and focused registration form.
           </p>
+          <div className="mt-5">
+            <ShareButton
+              title="Community Participation"
+              description="Join community participation initiatives with Sridhar Prakash."
+              url={`${process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in"}/community`}
+            />
+          </div>
         </div>
       </section>
 
@@ -88,7 +112,7 @@ export default function CommunityPage() {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {participationLinks.map((item) => {
-            const Icon = item.slug === "blood-donation" ? HeartIcon : iconMap[item.slug as keyof typeof iconMap];
+            const Icon = item.slug === "blood-donation" ? HeartIcon : item.slug === "youth-participation" ? UserGroupIcon : iconMap[item.slug as keyof typeof iconMap];
 
             return (
               <Link

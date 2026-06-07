@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import CampaignFields from "@/components/CampaignFields";
 import { getAttributionContext, trackEvent } from "@/lib/analytics";
 
 const participationOptions = [
@@ -12,6 +13,7 @@ const participationOptions = [
   "I can support awareness campaigns",
   "I can provide medical support",
 ];
+const whatsappUpdatesUrl = process.env.NEXT_PUBLIC_WHATSAPP_URL || "";
 
 function getDateInputValue(date: Date) {
   const year = date.getFullYear();
@@ -100,8 +102,18 @@ export default function BloodDonationForm() {
         <CheckCircleIcon className="mx-auto h-16 w-16 text-[var(--accent)]" />
         <h2 className="mt-4 font-display text-3xl text-white">Registration received</h2>
         <p className="mt-3 text-sm text-slate-300 md:text-base">
-          Thank you for joining the Blood Donation Initiative. Our team will contact you regarding upcoming camps and volunteer opportunities.
+          Thank you for registering. Our team will contact you about upcoming blood donation camps.
         </p>
+        {whatsappUpdatesUrl ? (
+          <a
+            href={whatsappUpdatesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[var(--accent-strong)]"
+          >
+            Join Blood Donation Updates on WhatsApp
+          </a>
+        ) : null}
       </motion.div>
     );
   }
@@ -109,6 +121,7 @@ export default function BloodDonationForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 rounded-3xl border border-white/15 bg-black/30 p-5 shadow-2xl shadow-black/20 backdrop-blur md:p-8">
       <input suppressHydrationWarning name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <CampaignFields />
 
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -163,12 +176,13 @@ export default function BloodDonationForm() {
         </div>
         <div>
           <label htmlFor="blood-donation-area" className="mb-2 block text-sm font-medium text-slate-300">
-            Area / Locality <span className="text-slate-500">(optional)</span>
+            Area / Locality <span className="text-[var(--accent)]">*</span>
           </label>
           <input
             id="blood-donation-area"
             suppressHydrationWarning
             name="area"
+            required
             autoComplete="address-level2"
             placeholder="Area / Locality"
             className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/30"
@@ -270,7 +284,7 @@ export default function BloodDonationForm() {
           submitting ? "cursor-not-allowed bg-white/20 text-slate-200" : "bg-[var(--accent)] text-black hover:bg-[var(--accent-strong)]"
         }`}
       >
-        {submitting ? "Registering..." : "Register Interest"}
+        {submitting ? "Registering..." : "Register My Interest"}
       </motion.button>
 
       {error ? (

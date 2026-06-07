@@ -8,6 +8,7 @@ import Analytics from "../components/Analytics";
 import MotionProvider from "../components/MotionProvider";
 import ScrollToTopClient from "../components/ScrollToTopClient";
 import AccentBackground from "../components/AccentBackground";
+import QuickActionBar from "../components/QuickActionBar";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -47,11 +48,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Sridhar Prakash",
-    images: ["/images/og-image.jpeg"],
+    images: ["/images/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/images/og-image.jpeg"],
+    images: ["/images/og-image.jpg"],
   },
 };
 
@@ -74,6 +75,7 @@ export default function RootLayout({
           <div id="main-content" tabIndex={-1}>
             {children}
           </div>
+          <QuickActionBar />
           <ScrollToTopClient />
           <Footer />
         </MotionProvider>

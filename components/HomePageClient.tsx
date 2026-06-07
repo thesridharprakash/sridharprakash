@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaTwitch } from "react-icons/fa6";
 import { SiKick } from "react-icons/si";
+import { CheckCircleIcon, EyeIcon, HandRaisedIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { socialProfiles } from "@/constants/socials";
 import { trackEvent } from "@/lib/analytics";
 import YouTubeEventsSection from "@/components/YouTubeEventsSection";
@@ -60,6 +61,29 @@ const timeline = [
   {
     title: "This year",
     body: "Strengthen Sridhar Prakash's public-service presence through visible, consistent, and people-focused work.",
+  },
+];
+
+const trustCards = [
+  {
+    icon: HandRaisedIcon,
+    title: "Public Service Focus",
+    body: "Built around seva, local problem-solving, youth participation, and direct community connection.",
+  },
+  {
+    icon: EyeIcon,
+    title: "Transparent Initiatives",
+    body: "Community activities, events, and volunteer opportunities are presented clearly for public participation.",
+  },
+  {
+    icon: CheckCircleIcon,
+    title: "Easy Participation",
+    body: "Residents can join initiatives, register for blood donation, volunteer, or raise local concerns through simple forms.",
+  },
+  {
+    icon: RocketLaunchIcon,
+    title: "Action-Oriented Platform",
+    body: "Every page should guide visitors toward a useful action: join, register, report, attend, or connect.",
   },
 ];
 
@@ -176,6 +200,29 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
       </section>
 
       <YouTubeEventsSection mode="home" initialData={initialEventsData} />
+
+      <section className="mx-auto max-w-6xl px-6 pb-16">
+        <div className="rounded-3xl border border-white/10 bg-black/25 p-6 md:p-8">
+          <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Trust & Participation</p>
+          <h2 className="mt-3 font-display text-3xl text-white md:text-5xl">Why People Connect With This Platform</h2>
+          <div className="mt-7 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {trustCards.map((card, index) => (
+              <motion.article
+                key={card.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:border-[var(--accent)]/45 hover:bg-[var(--accent)]/[0.06]"
+              >
+                <card.icon className="h-7 w-7 text-[var(--accent)]" aria-hidden="true" />
+                <h3 className="mt-4 text-lg font-semibold text-white">{card.title}</h3>
+                <p className="mt-2 text-sm text-slate-300">{card.body}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <div className="grid gap-6 md:grid-cols-2">

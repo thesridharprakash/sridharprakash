@@ -7,9 +7,9 @@ export const revalidate = 60;
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
 
 export const metadata: Metadata = {
-  title: "Sridhar Prakash | Public Service, Community & Leadership",
+  title: "Sridhar Prakash | Public Service & Community Leadership in Bengaluru",
   description:
-    "Official website of Sridhar Prakash, featuring public service updates, community initiatives, events, and local leadership from Bengaluru.",
+    "Official platform of Sridhar Prakash for public service updates, community initiatives, volunteer opportunities, events, and local leadership in Bengaluru.",
   alternates: {
     canonical: "/",
   },
@@ -22,20 +22,20 @@ export const metadata: Metadata = {
     "community outreach",
   ],
   openGraph: {
-    title: "Sridhar Prakash | Public Service, Community & Leadership",
+    title: "Sridhar Prakash | Public Service & Community Leadership in Bengaluru",
     description:
-      "Public service updates, community initiatives, and local leadership from Sridhar Prakash in Bengaluru.",
+      "Official platform of Sridhar Prakash for public service updates, community initiatives, volunteer opportunities, events, and local leadership in Bengaluru.",
     url: "/",
     siteName: "Sridhar Prakash",
     type: "website",
-    images: ["/images/og-image.jpeg"],
+    images: ["/images/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sridhar Prakash | Public Service, Community & Leadership",
+    title: "Sridhar Prakash | Public Service & Community Leadership in Bengaluru",
     description:
-      "Public service updates, community initiatives, and local leadership from Sridhar Prakash in Bengaluru.",
-    images: ["/images/og-image.jpeg"],
+      "Official platform of Sridhar Prakash for public service updates, community initiatives, volunteer opportunities, events, and local leadership in Bengaluru.",
+    images: ["/images/og-image.jpg"],
   },
 };
 
@@ -47,7 +47,7 @@ export default async function HomePage() {
     "@type": "Person",
     name: "Sridhar Prakash",
     url: siteUrl,
-    image: `${siteUrl}/images/og-image.jpeg`,
+    image: `${siteUrl}/images/og-image.jpg`,
     sameAs,
     homeLocation: "Bengaluru, Karnataka, India",
     description:

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ShareButton from "@/components/ShareButton";
 import YouTubeEventsSection from "@/components/YouTubeEventsSection";
 import { readPlannedEvents } from "@/lib/plannedEvents";
 import { getYouTubeEventsPayload } from "@/lib/youtubeEvents";
@@ -7,12 +8,26 @@ import { getYouTubeEventsPayload } from "@/lib/youtubeEvents";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Events",
+  title: "Community Events & Public Service Programs | Sridhar Prakash",
   description: "Watch live and past public events, community updates, and outreach streams by Sridhar Prakash.",
   alternates: {
     canonical: "/events",
   },
+  openGraph: {
+    title: "Community Events & Public Service Programs | Sridhar Prakash",
+    description: "Follow community events, public service programs, outreach meetings, and live replays.",
+    url: "/events",
+    images: ["/images/og-image.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Community Events & Public Service Programs | Sridhar Prakash",
+    description: "Follow community events, public service programs, outreach meetings, and live replays.",
+    images: ["/images/og-image.jpg"],
+  },
 };
+
+const siteUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
 
 type EventsPageProps = {
   searchParams?: Promise<{
@@ -43,6 +58,20 @@ function formatEventTime(event: { time?: string; startTime?: string; endTime?: s
   return startTime || endTime || "";
 }
 
+function calendarUrl(event: { title: string; description: string; date: string; endDate?: string; location: string }) {
+  const start = event.date.replace(/-/g, "");
+  const endDate = event.endDate || event.date;
+  const end = endDate.replace(/-/g, "");
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: event.title,
+    dates: `${start}/${end}`,
+    details: event.description,
+    location: event.location,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 function formatClockTime(value?: string) {
   if (!value) return "";
   const [hoursText, minutesText] = value.split(":");
@@ -71,9 +100,32 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
       return !Number.isNaN(eventDate.getTime()) && !Number.isNaN(eventEndDate.getTime()) && eventEndDate >= today;
     })
     .sort((a, b) => new Date(`${a.date}T00:00:00`).getTime() - new Date(`${b.date}T00:00:00`).getTime());
+  const eventJsonLd = upcomingEvents.map((event) => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    description: event.description,
+    startDate: event.date,
+    endDate: event.endDate || event.date,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    location: {
+      "@type": "Place",
+      name: event.location,
+      address: event.location,
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "Sridhar Prakash Community Platform",
+      url: siteUrl,
+    },
+  }));
 
   return (
     <main className="relative overflow-hidden text-[var(--foreground)]">
+      {eventJsonLd.map((item) => (
+        <script key={item.name} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }} />
+      ))}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_12%,rgba(239,68,68,0.16),transparent_34%),radial-gradient(circle_at_8%_82%,rgba(56,189,248,0.14),transparent_38%)]" />
 
       <section className="relative z-10 mx-auto max-w-5xl px-6 pb-8 pt-28 text-center">
@@ -107,14 +159,22 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
               <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {upcomingEvents.map((event) => (
                   <article key={`${event.date}-${event.title}`} className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                      {formatPlannedEventRange(event)}
-                    </p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">{event.category || "Community Outreach"}</p>
                     <h3 className="mt-3 text-xl font-semibold text-white">{event.title}</h3>
+                    <p className="mt-2 text-sm font-medium text-slate-200">{formatPlannedEventRange(event)}</p>
                     <p className="mt-2 text-sm leading-6 text-slate-300">{event.description}</p>
                     <div className="mt-4 space-y-1 border-t border-white/10 pt-4 text-sm text-slate-300">
-                      {formatEventTime(event) ? <p>{formatEventTime(event)}</p> : null}
-                      {event.location ? <p>{event.location}</p> : null}
+                      {formatEventTime(event) ? <p>Time: {formatEventTime(event)}</p> : null}
+                      {event.location ? <p>Location: {event.location}</p> : null}
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <Link href={`/events/register?event=${encodeURIComponent(event.title)}`} className="rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-black transition hover:bg-[var(--accent-strong)]">
+                          Register
+                        </Link>
+                        <ShareButton title={event.title} description={event.description} url={`${siteUrl}/events`} />
+                        <Link href={calendarUrl(event)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition hover:border-white">
+                          Add to Calendar
+                        </Link>
+                      </div>
                       {event.mapUrl ? (
                         <Link
                           href={event.mapUrl}
@@ -131,7 +191,7 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
               </div>
             ) : (
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-300">
-                No upcoming events have been announced yet. New programs can be added through the events data file.
+                Upcoming events will be announced soon. Join the community network to receive updates.
               </div>
             )}
           </div>

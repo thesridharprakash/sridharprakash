@@ -6,6 +6,7 @@ const plannedEventsFile = path.join(process.cwd(), "data", "events.json");
 
 export type PlannedEventRecord = {
   title: string;
+  category?: string;
   description: string;
   date: string;
   endDate?: string;
@@ -23,6 +24,7 @@ function normalizePlannedEvent(item: Partial<PlannedEventRecord>): PlannedEventR
 
   return {
     title,
+    category: String(item.category ?? "").trim(),
     description: String(item.description ?? "").trim(),
     date,
     endDate: String(item.endDate ?? "").trim(),

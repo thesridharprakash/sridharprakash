@@ -12,6 +12,12 @@ type BloodDonationPayload = {
   bloodGroup?: string;
   lastBloodDonationDate?: string;
   participation?: string[];
+  source?: string;
+  campaign?: string;
+  medium?: string;
+  ref?: string;
+  pageUrl?: string;
+  userAgent?: string;
   consent?: boolean;
   website?: string;
   attribution?: {
@@ -109,6 +115,12 @@ async function parsePayload(request: Request) {
       bloodGroup: String(formData.get("bloodGroup") || ""),
       lastBloodDonationDate: String(formData.get("lastBloodDonationDate") || ""),
       participation: formData.getAll("participation").map(String),
+      source: String(formData.get("source") || ""),
+      campaign: String(formData.get("campaign") || ""),
+      medium: String(formData.get("medium") || ""),
+      ref: String(formData.get("ref") || ""),
+      pageUrl: String(formData.get("pageUrl") || ""),
+      userAgent: String(formData.get("userAgent") || ""),
       consent: formData.get("consent") === "on" || formData.get("consent") === "true",
       website: String(formData.get("website") || ""),
       attribution,
@@ -136,6 +148,12 @@ export async function POST(request: Request) {
     const participation = (Array.isArray(payload.participation) ? payload.participation : [])
       .map((option) => sanitize(String(option), 100))
       .filter((option) => allowedParticipation.has(option));
+    const source = sanitize(payload.source || "", 120);
+    const campaign = sanitize(payload.campaign || "", 160);
+    const medium = sanitize(payload.medium || "", 120);
+    const ref = sanitize(payload.ref || "", 240);
+    const pageUrl = sanitize(payload.pageUrl || "", 300);
+    const userAgent = sanitize(payload.userAgent || request.headers.get("user-agent") || "", 300);
     const consent = Boolean(payload.consent);
     const website = sanitize(payload.website || "", 120);
 
@@ -143,8 +161,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true }, { status: 200 });
     }
 
-    if (!name || !mobile || !consent) {
-      return NextResponse.json({ error: "Name, mobile number, and consent are required." }, { status: 400 });
+    if (!name || !mobile || !area || !consent) {
+      return NextResponse.json({ error: "Name, mobile number, area, and consent are required." }, { status: 400 });
     }
 
     if (!isValidMobile(mobile)) {
@@ -174,8 +192,11 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
           leadType: "blood_donation",
+          submissionType: "blood_donation_submissions",
+          submission_type: "blood_donation_submissions",
           category: "Blood Donation Initiative",
           name,
+          phone: mobile,
           email,
           mobile,
           area,
@@ -189,7 +210,15 @@ export async function POST(request: Request) {
           utmSource,
           utmMedium,
           utmCampaign,
+          source: source || utmSource,
+          campaign: campaign || utmCampaign,
+          medium: medium || utmMedium,
+          ref,
+          pageUrl,
+          page_url: pageUrl,
+          userAgent,
           ip: clientIp,
+          created_at: new Date().toISOString(),
           submittedAt: new Date().toISOString(),
         }),
         cache: "no-store",
@@ -220,6 +249,11 @@ export async function POST(request: Request) {
           `Blood Group: ${bloodGroup || "-"}`,
           `Last Blood Donation Date: ${lastBloodDonationDate || "-"}`,
           `Participation: ${participation.join(", ") || "-"}`,
+          `Source: ${source || utmSource || "-"}`,
+          `Campaign: ${campaign || utmCampaign || "-"}`,
+          `Medium: ${medium || utmMedium || "-"}`,
+          `Ref: ${ref || "-"}`,
+          `Page URL: ${pageUrl || "-"}`,
           `UTM Source: ${utmSource || "-"}`,
           `UTM Medium: ${utmMedium || "-"}`,
           `UTM Campaign: ${utmCampaign || "-"}`,
