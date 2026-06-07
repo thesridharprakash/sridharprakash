@@ -16,6 +16,10 @@ type CommunityPayload = {
   longitude?: string;
   accuracy?: string;
   locationUrl?: string;
+  bloodDonationSupport?: string[];
+  bloodGroup?: string;
+  lastBloodDonationDate?: string;
+  preferredParticipationArea?: string;
   consent?: boolean;
   website?: string;
   attribution?: {
@@ -32,6 +36,16 @@ const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_STORE = new Map<string, number[]>();
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
 const allowedPhotoTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+const bloodDonationInterest = "Blood Donation Initiatives";
+const allowedBloodDonationSupport = new Set([
+  "I am willing to donate blood",
+  "I can volunteer during camps",
+  "I can help organize a camp",
+  "I can assist with donor registration",
+  "I can provide medical support",
+  "I can support awareness campaigns",
+]);
+const allowedBloodGroups = new Set(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]);
 
 function isValidMobile(mobile: string) {
   return /^[6-9][0-9]{9}$/.test(mobile);
@@ -94,6 +108,10 @@ async function parsePayload(request: Request) {
         longitude: String(formData.get("longitude") || ""),
         accuracy: String(formData.get("accuracy") || ""),
         locationUrl: String(formData.get("locationUrl") || ""),
+        bloodDonationSupport: formData.getAll("bloodDonationSupport").map(String),
+        bloodGroup: String(formData.get("bloodGroup") || ""),
+        lastBloodDonationDate: String(formData.get("lastBloodDonationDate") || ""),
+        preferredParticipationArea: String(formData.get("preferredParticipationArea") || ""),
         consent: formData.get("consent") === "on" || formData.get("consent") === "true",
         website: String(formData.get("website") || ""),
         attribution,
@@ -155,6 +173,14 @@ function getAttributionValue(payload: CommunityPayload, key: "utm_source" | "utm
   return payload.attribution?.last_touch?.[key] || payload.attribution?.first_touch?.[key] || "";
 }
 
+function isValidPastDate(value: string) {
+  if (value === "") return true;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+
+  const parsedDate = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(parsedDate.getTime()) && parsedDate.toISOString().slice(0, 10) === value && value <= new Date().toISOString().slice(0, 10);
+}
+
 export async function POST(request: Request) {
   try {
     const { payload, photo } = await parsePayload(request);
@@ -175,6 +201,13 @@ export async function POST(request: Request) {
     const accuracy = sanitize(payload.accuracy || "", 40);
     const locationUrl =
       latitude && longitude ? `https://www.google.com/maps?q=${latitude},${longitude}` : sanitize(payload.locationUrl || "", 240);
+    const isBloodDonationInterest = interest === bloodDonationInterest;
+    const bloodDonationSupport = (Array.isArray(payload.bloodDonationSupport) ? payload.bloodDonationSupport : [])
+      .map((option) => sanitize(String(option), 100))
+      .filter((option) => allowedBloodDonationSupport.has(option));
+    const bloodGroup = sanitize(payload.bloodGroup || "", 4);
+    const lastBloodDonationDate = sanitize(payload.lastBloodDonationDate || "", 10);
+    const preferredParticipationArea = sanitize(payload.preferredParticipationArea || "", 120);
     const consent = Boolean(payload.consent);
     const website = sanitize(payload.website || "", 120);
 
@@ -196,6 +229,14 @@ export async function POST(request: Request) {
 
     if (!isValidCoordinate(latitude, -90, 90) || !isValidCoordinate(longitude, -180, 180)) {
       return NextResponse.json({ error: "Invalid location coordinates." }, { status: 400 });
+    }
+
+    if (bloodGroup && !allowedBloodGroups.has(bloodGroup)) {
+      return NextResponse.json({ error: "Please select a valid blood group." }, { status: 400 });
+    }
+
+    if (!isValidPastDate(lastBloodDonationDate)) {
+      return NextResponse.json({ error: "Last blood donation date must be a valid date that is not in the future." }, { status: 400 });
     }
 
     const utmSource = getAttributionValue(payload, "utm_source");
@@ -222,17 +263,22 @@ export async function POST(request: Request) {
           mobile,
           area,
           interest,
+          category: isBloodDonationInterest ? "Blood Donation Camp" : "",
           consent,
           consentText: consent ? "Yes" : "No",
           budget: "",
           timeline: "",
-          message: `Interest: ${interest || "-"} | Concern: ${concern || "-"} | Location: ${locationUrl || "-"} | Photo: ${photoUrl || "-"} | Consent: ${consent ? "Yes" : "No"}`,
+          message: `Interest: ${interest || "-"} | Blood donation support: ${bloodDonationSupport.join(", ") || "-"} | Blood group: ${bloodGroup || "-"} | Last blood donation: ${lastBloodDonationDate || "-"} | Preferred participation area: ${preferredParticipationArea || "-"} | Concern: ${concern || "-"} | Location: ${locationUrl || "-"} | Photo: ${photoUrl || "-"} | Consent: ${consent ? "Yes" : "No"}`,
           concern,
           latitude,
           longitude,
           accuracy,
           locationUrl,
           photoUrl,
+          bloodDonationSupport,
+          bloodGroup,
+          lastBloodDonationDate,
+          preferredParticipationArea,
           utmSource,
           utmMedium,
           utmCampaign,
@@ -265,6 +311,11 @@ export async function POST(request: Request) {
           `Email: ${email || "-"}`,
           `Area: ${area || "-"}`,
           `Interest: ${interest || "-"}`,
+          `Category: ${isBloodDonationInterest ? "Blood Donation Camp" : "-"}`,
+          `Blood Donation Support: ${bloodDonationSupport.join(", ") || "-"}`,
+          `Blood Group: ${bloodGroup || "-"}`,
+          `Last Blood Donation Date: ${lastBloodDonationDate || "-"}`,
+          `Preferred Participation Area: ${preferredParticipationArea || "-"}`,
           `Concern: ${concern || "-"}`,
           `Location: ${locationUrl || "-"}`,
           `Accuracy: ${accuracy ? `${accuracy}m` : "-"}`,
