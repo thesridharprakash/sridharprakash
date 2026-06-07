@@ -78,7 +78,7 @@ export default function AboutPage() {
                   <ArrowLongRightIcon className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/book"
+                  href="/yuva-morcha"
                   className="rounded-full border border-[var(--accent)]/70 bg-[var(--accent)]/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)] backdrop-blur transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/25 md:px-6 md:tracking-[0.22em]"
                 >
                   Yuva Morcha

@@ -62,6 +62,10 @@ export default function CommunityInitiativeForm({ initiative }: CommunityInitiat
         source: attribution.last_touch.utm_source || attribution.first_touch.utm_source || "direct",
         campaign: attribution.last_touch.utm_campaign || attribution.first_touch.utm_campaign || "",
       });
+      trackEvent("community_form_submission", {
+        form: "community_initiative",
+        initiative: initiative.slug,
+      });
       setSubmitted(true);
     } catch {
       trackEvent("community_initiative_submit_error", {

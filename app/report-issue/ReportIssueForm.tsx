@@ -37,6 +37,7 @@ export default function ReportIssueForm() {
 
       setReference(payload?.reference || "");
       trackEvent("issue_report_submit_success", { form: "issue_report" });
+      trackEvent("report_issue_submission", { form: "issue_report" });
     } catch {
       setError("Network error. Please try again.");
       setSubmitting(false);

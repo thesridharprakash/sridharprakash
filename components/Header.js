@@ -114,7 +114,7 @@ export default function Header() {
           })}
 
           <Link
-            href="/book"
+            href="/yuva-morcha"
             className="rounded-full bg-[var(--accent)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[var(--accent-strong)]"
           >
             Yuva Morcha
@@ -163,7 +163,7 @@ export default function Header() {
               );
             })}
             <Link
-              href="/book"
+              href="/yuva-morcha"
               onClick={() => setOpen(false)}
               className="mt-3 block rounded-lg bg-[var(--accent)] px-3 py-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-black"
             >

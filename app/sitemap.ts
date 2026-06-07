@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absolute("/events"), changeFrequency: "daily", priority: 0.8 },
     { url: absolute("/events/register"), changeFrequency: "monthly", priority: 0.4 },
     { url: absolute("/press"), changeFrequency: "monthly", priority: 0.7 },
-    { url: absolute("/book"), changeFrequency: "monthly", priority: 0.6 },
+    { url: absolute("/yuva-morcha"), changeFrequency: "monthly", priority: 0.6 },
     { url: absolute("/contact"), changeFrequency: "monthly", priority: 0.6 },
     { url: absolute("/community"), changeFrequency: "monthly", priority: 0.6 },
     { url: absolute("/blood-donation"), changeFrequency: "monthly", priority: 0.8 },

@@ -53,7 +53,7 @@ export default function Footer() {
               <Link href="/community" className="block text-slate-300 transition hover:text-white">
                 Community
               </Link>
-              <Link href="/book" className="block text-slate-300 transition hover:text-white">
+              <Link href="/yuva-morcha" className="block text-slate-300 transition hover:text-white">
                 Yuva Morcha
               </Link>
               <Link href="/contact" className="block text-slate-300 transition hover:text-white">

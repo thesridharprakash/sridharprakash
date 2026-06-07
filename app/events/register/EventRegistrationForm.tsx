@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import CampaignFields from "@/components/CampaignFields";
+import { trackEvent } from "@/lib/analytics";
 
 export default function EventRegistrationForm() {
   const searchParams = useSearchParams();
@@ -24,6 +25,7 @@ export default function EventRegistrationForm() {
       setSubmitting(false);
       return;
     }
+    trackEvent("event_registration", { form: "event_registration", event: eventTitle });
     setSubmitted(true);
   }
 

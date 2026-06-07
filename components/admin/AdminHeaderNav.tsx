@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const adminSections = [
   { label: "Admin", path: "/admin" },
+  { label: "Analytics", path: "/admin/analytics" },
   { label: "Articles", path: "/admin/articles" },
   { label: "Press", path: "/admin/press" },
   { label: "Events", path: "/admin/events" },

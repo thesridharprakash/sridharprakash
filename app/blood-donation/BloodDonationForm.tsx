@@ -78,6 +78,7 @@ export default function BloodDonationForm() {
         source: attribution.last_touch.utm_source || attribution.first_touch.utm_source || "direct",
         campaign: attribution.last_touch.utm_campaign || attribution.first_touch.utm_campaign || "",
       });
+      trackEvent("blood_donation_registration", { form: "blood_donation" });
       setSubmitted(true);
     } catch {
       trackEvent("blood_donation_submit_error", {

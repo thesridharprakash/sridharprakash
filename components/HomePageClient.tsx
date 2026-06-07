@@ -157,7 +157,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
               Gallery
             </Link>
             <Link
-              href="/book"
+              href="/yuva-morcha"
               onClick={() => handleCtaClick("join_yuva_morcha")}
               className="rounded-full border border-[var(--accent)]/70 bg-[var(--accent)]/15 px-6 py-3 text-sm font-semibold text-[var(--accent)] backdrop-blur transition hover:border-[var(--accent)] hover:bg-[var(--accent)]/25"
             >
@@ -325,7 +325,7 @@ export default function HomePageClient({ initialEventsData = null }: HomePageCli
               Contact
             </Link>
             <Link
-              href="/book"
+              href="/yuva-morcha"
               onClick={() => handleCtaClick("say_hello")}
               className="inline-flex rounded-full border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white"
             >

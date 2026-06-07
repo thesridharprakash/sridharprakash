@@ -1,7 +1,7 @@
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { NewspaperIcon, PhotoIcon, DocumentTextIcon, VideoCameraIcon } from "@heroicons/react/24/outline";
+import { ChartBarIcon, NewspaperIcon, PhotoIcon, DocumentTextIcon, VideoCameraIcon } from "@heroicons/react/24/outline";
 import { readGalleryPosts } from "@/lib/galleryPosts";
 import { readPageContent } from "@/lib/pageContent";
 import { readPlannedEvents } from "@/lib/plannedEvents";
@@ -10,6 +10,12 @@ import type { PressPageContent } from "@/types/pageContent";
 import AdminProtectedShell from "@/app/admin/AdminProtectedShell";
 
 const adminSections = [
+  {
+    title: "Analytics",
+    description: "Review aggregate visits, page views, campaign sources, form submissions, and WhatsApp clicks.",
+    path: "/admin/analytics",
+    icon: ChartBarIcon,
+  },
   {
     title: "Articles",
     description: "Publish, edit, and preview journal entries with the same workflow you already use.",

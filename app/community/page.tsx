@@ -57,7 +57,7 @@ const participationLinks = [
     description: initiative.subtitle,
   })),
   {
-    href: "/book",
+    href: "/yuva-morcha",
     slug: "youth-participation",
     title: "Youth Participation",
     eyebrow: "Youth Participation",

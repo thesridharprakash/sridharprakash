@@ -96,6 +96,7 @@ export default function ContactPage() {
         source: attribution.last_touch.utm_source || attribution.first_touch.utm_source || "direct",
         campaign: attribution.last_touch.utm_campaign || attribution.first_touch.utm_campaign || "",
       });
+      trackEvent("contact_form_submission", { form: "contact" });
       setSubmitted(true);
     } catch (submitError) {
       console.error("Contact submission failed", submitError);
