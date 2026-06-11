@@ -4,6 +4,11 @@ import ShareButton from "@/components/ShareButton";
 import BloodDonationForm from "./BloodDonationForm";
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.sridharprakash.in";
+const bloodDonationUrl = "https://www.sridharprakash.in/blood-donation";
+const bloodDonationImageUrl = "https://www.sridharprakash.in/images/blood-donation-og-v2.jpg";
+const bloodDonationTitle = "Join the Blood Donation Initiative";
+const bloodDonationDescription =
+  "Support life-saving blood donation efforts by registering as a donor, volunteer, or organizer in Bengaluru.";
 const faqs = [
   {
     question: "Who can register for blood donation?",
@@ -28,9 +33,10 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "Blood Donation Initiative Bengaluru | Register as Donor or Volunteer",
-  description:
-    "Register your interest to donate blood, volunteer at blood donation camps, or support community health initiatives in Bengaluru.",
+  title: {
+    absolute: bloodDonationTitle,
+  },
+  description: bloodDonationDescription,
   keywords: [
     "Blood Donation Bengaluru",
     "Blood Donation Camp",
@@ -39,29 +45,27 @@ export const metadata: Metadata = {
     "blood donor registration Bengaluru",
   ],
   alternates: {
-    canonical: "/blood-donation",
+    canonical: bloodDonationUrl,
   },
   openGraph: {
-    title: "Join the Blood Donation Initiative",
-    description:
-      "Support life-saving blood donation efforts by registering as a donor, volunteer, or organizer in Bengaluru.",
-    url: "/blood-donation",
+    title: bloodDonationTitle,
+    description: bloodDonationDescription,
+    url: bloodDonationUrl,
     type: "website",
     images: [
       {
-        url: "/images/blood%20donation.png",
+        url: bloodDonationImageUrl,
         width: 1200,
         height: 630,
-        alt: "World Blood Donor Day blood donation camp registration",
+        alt: "World Blood Donor Day - Blood Donation Camp",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Join the Blood Donation Initiative",
-    description:
-      "Support life-saving blood donation efforts by registering as a donor, volunteer, or organizer.",
-    images: ["/images/blood%20donation.png"],
+    title: bloodDonationTitle,
+    description: bloodDonationDescription,
+    images: [bloodDonationImageUrl],
   },
 };
 
