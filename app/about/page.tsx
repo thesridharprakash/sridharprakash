@@ -20,8 +20,8 @@ const journeySteps = [
     text: "Managed voter verification and electoral roll updates while supporting booth-level coordination with the Election Commission of India.",
   },
   {
-    title: "Yuva Morcha President - Doddabommasandra",
-    text: "Led youth engagement, organizational activities, and grassroots campaigns.",
+    title: "BJP Karyakarta – Doddabommasandra",
+    text: "Actively engaged in community outreach, public service initiatives, and grassroots organizational activities.",
   },
 ];
 

@@ -47,14 +47,21 @@ export const metadata: Metadata = {
       "Support life-saving blood donation efforts by registering as a donor, volunteer, or organizer in Bengaluru.",
     url: "/blood-donation",
     type: "website",
-    images: ["/images/og-image.jpg"],
+    images: [
+      {
+        url: "/images/blood%20donation.png",
+        width: 1200,
+        height: 630,
+        alt: "World Blood Donor Day blood donation camp registration",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Join the Blood Donation Initiative",
     description:
       "Support life-saving blood donation efforts by registering as a donor, volunteer, or organizer.",
-    images: ["/images/og-image.jpg"],
+    images: ["/images/blood%20donation.png"],
   },
 };
 
