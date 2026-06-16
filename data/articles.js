@@ -1,15 +1,13 @@
-const articles = [
+﻿const articles = [
   {
-    title: "Why Public Service Matters",
-    summary:
-      "My perspective on governance, responsibility, and citizen-first leadership.",
+    title: "Why Slow Mornings Matter",
+    summary: "A personal note on routines, focus, and starting the day with less noise.",
     date: "12 August 2024",
     link: "https://docs.google.com/document/d/XXXXXXXX/view",
   },
   {
-    title: "My Vision for Bengaluru",
-    summary:
-      "Urban development, clean governance, and grassroots solutions.",
+    title: "Small Trips, Big Reset",
+    summary: "How nearby travel helps creativity, energy, and perspective.",
     date: "5 September 2024",
     link: "https://docs.google.com/document/d/YYYYYYYY/view",
   },

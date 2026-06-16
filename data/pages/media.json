@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "eyebrow": "Media Resources",
+    "title": "Public updates, event visuals, and community communication.",
+    "description": "This section highlights public-service communication, visual updates, outreach moments, and media-ready material from Sridhar Prakash's work.",
+    "primaryCta": {
+      "label": "Download 1-Page Media Kit (PDF)",
+      "href": "/media-kit.pdf",
+      "download": true
+    },
+    "secondaryCta": {
+      "label": "Send Media Query",
+      "href": "/contact"
+    }
+  },
+  "mediaKit": [
+    {
+      "label": "Primary Formats",
+      "value": "Photos, Videos, Public Updates"
+    },
+    {
+      "label": "Content Focus",
+      "value": "Events, Seva, Community Work"
+    },
+    {
+      "label": "Delivery Speed",
+      "value": "Timely Public Communication"
+    },
+    {
+      "label": "Audience Mix",
+      "value": "Residents, Youth, Media"
+    }
+  ],
+  "featuredSeries": [],
+  "deliverables": [
+    "Public event photos and video updates",
+    "Community outreach coverage",
+    "Press and media reference links",
+    "Shareable visual updates for public communication"
+  ],
+  "liveSectionHeading": "YouTube Live Streams",
+  "partnership": {
+    "title": "Open to Media Queries",
+    "description": "For press queries, public event coverage, interview requests, or media references, contact the team with clear details.",
+    "badges": [
+      "Public-service focus",
+      "Verified event context",
+      "Responsive follow-up"
+    ],
+    "ctaLabel": "Send Media Query",
+    "ctaHref": "/contact"
+  }
+}

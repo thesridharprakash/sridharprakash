@@ -1,4 +1,4 @@
-export type Article = {
+﻿export type Article = {
   title: string;
   summary: string;
   date: string;
@@ -7,9 +7,8 @@ export type Article = {
 
 const articles: Article[] = [
   {
-    title: "Why Public Service Still Matters",
-    summary:
-      "A reflection on principled governance and citizen-first leadership.",
+    title: "Why Everyday Stories Work",
+    summary: "A reflection on documenting ordinary moments with clarity and care.",
     date: "12 September 2025",
     link: "https://docs.google.com/document/d/XXXX",
   },

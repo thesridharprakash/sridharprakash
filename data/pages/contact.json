@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Connect with Sridhar Prakash and his team.",
+    "description": "For public outreach, event coordination, community work, media requests, or local concerns, share your message here."
+  },
+  "highlights": [
+    {
+      "label": "Email",
+      "title": "Email",
+      "value": "thesridharprakash@gmail.com",
+      "description": "Use email for detailed requests, event notes, documents, or follow-up information."
+    },
+    {
+      "label": "Response Window",
+      "title": "Response Window",
+      "value": "Within 24-48 hours",
+      "description": "Include your area, request type, and any urgent details for a faster response."
+    },
+    {
+      "label": "Base Location",
+      "title": "Base Location",
+      "value": "Bengaluru, India",
+      "description": "Focused on Bengaluru North, Byatarayanapura, Doddabommasandra, and nearby communities."
+    }
+  ],
+  "brief": {
+    "label": "Message",
+    "title": "Send your request",
+    "description": "Share the purpose of your message, relevant area, and any details needed for follow-up."
+  },
+  "collaborationTypes": [
+    "Public outreach and resident coordination",
+    "Community event invitations and updates",
+    "BJP Yuva Morcha and youth participation queries",
+    "Media, press, and public communication requests"
+  ],
+  "socialHeading": "Social Channels",
+  "socialCtaLabel": "View About",
+  "socialCtaHref": "/about",
+  "success": {
+    "title": "Message received",
+    "description": "Thanks for sharing the details. Sridhar Prakash's team will review it and respond with next steps."
+  }
+}

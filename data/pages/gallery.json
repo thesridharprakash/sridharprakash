@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "eyebrow": "Visual Archive",
+    "title": "Public work, community moments, and event highlights",
+    "subtitle": "Photos and visual updates from outreach, youth engagement, public programs, and local community work.",
+    "description": "A curated archive of Sridhar Prakash's public-service activity across Bengaluru North and nearby community spaces.",
+    "ctaPrimary": {
+      "label": "Explore Updates",
+      "href": "/gallery#updates"
+    },
+    "ctaSecondary": {
+      "label": "Contact",
+      "href": "/contact"
+    },
+    "backgroundImage": "/images/hero.jpg"
+  },
+  "stats": [
+    {
+      "label": "Community updates",
+      "value": "120+"
+    },
+    {
+      "label": "Public programs",
+      "value": "24"
+    },
+    {
+      "label": "Recent highlights",
+      "value": "48 hours"
+    }
+  ],
+  "featuredCollections": [
+    {
+      "title": "Community Outreach",
+      "description": "Frames from local interactions, public meetings, and resident-focused outreach.",
+      "image": "/images/art1.jpg.png",
+      "location": "Bengaluru North",
+      "pieces": "18 frames"
+    },
+    {
+      "title": "Youth Engagement",
+      "description": "Visual updates from youth participation, volunteer coordination, and public-service activity.",
+      "image": "/images/img2.png",
+      "location": "Byatarayanapura",
+      "pieces": "12 frames"
+    },
+    {
+      "title": "Public Programs",
+      "description": "Highlights from events, meetings, and community-facing programs.",
+      "image": "/images/og-image.jpg",
+      "location": "Doddabommasandra",
+      "pieces": "9 frames"
+    }
+  ],
+  "immersiveStories": [
+    {
+      "title": "Event Coverage",
+      "format": "Photos, livestream stills, and public-program highlights.",
+      "detail": "Each update preserves context so residents can understand what happened and why it matters."
+    },
+    {
+      "title": "Field Updates",
+      "format": "Location-tagged stills with short notes from the ground.",
+      "detail": "Useful for documenting outreach, local concerns, and follow-up work."
+    },
+    {
+      "title": "Community Frames",
+      "format": "People-first visuals from meetings, campaigns, and service activities.",
+      "detail": "Built to keep public work visible, accessible, and easy to share."
+    }
+  ],
+  "timeline": [
+    {
+      "title": "Community Interaction Meet",
+      "subtitle": "Byatarayanapura, 2026",
+      "date": "Jan 14, 2026",
+      "note": "Shared visual updates from resident conversations and local priorities."
+    },
+    {
+      "title": "Youth Volunteer Orientation",
+      "subtitle": "Doddabommasandra, 2026",
+      "date": "Jan 20, 2026",
+      "note": "Documented youth participation and coordination for community work."
+    },
+    {
+      "title": "Public Service Review",
+      "subtitle": "Bengaluru North, 2026",
+      "date": "Jan 26, 2026",
+      "note": "Captured highlights from civic issue reviews and citizen feedback."
+    },
+    {
+      "title": "Outreach Follow-up",
+      "subtitle": "Bengaluru, 2026",
+      "date": "Feb 05, 2026",
+      "note": "Updated residents through photos, notes, and shareable public records."
+    }
+  ],
+  "cta": {
+    "headline": "Share a community update or public concern",
+    "detail": "Send details about an event, local concern, or community moment that should be documented.",
+    "primary": {
+      "label": "Contact",
+      "href": "/contact"
+    },
+    "secondary": {
+      "label": "Yuva Morcha",
+      "href": "/book"
+    }
+  }
+}
